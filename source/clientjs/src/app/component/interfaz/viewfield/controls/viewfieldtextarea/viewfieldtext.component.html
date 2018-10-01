@@ -1,0 +1,14 @@
+<div class="viewfieldcontent" *ngIf='viewField.viewFieldType!=eViewFieldTypes.Password'>
+    <!--Edition mode-->
+    <dx-text-box [(value)]="viewField.data" (onChange)="onChange()"></dx-text-box>
+    <small [hidden]="!viewField.hasError" class="text-danger">
+        {{viewField.textError}}
+    </small>
+</div>
+<div class="viewfieldcontent" *ngIf='viewField.viewFieldType==eViewFieldTypes.Password'>
+    <!--Edition mode-->
+    <dx-text-box mode="password" [(value)]="viewField.data" (onChange)="onChange()"></dx-text-box>
+    <small [hidden]="!viewField.hasError" class="text-danger">
+        {{viewField.textError}}
+    </small>
+</div>

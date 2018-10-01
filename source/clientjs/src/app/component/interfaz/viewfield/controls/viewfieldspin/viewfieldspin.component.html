@@ -1,0 +1,8 @@
+<div class="viewfieldcontent" >
+    <!--Edition mode-->
+    <dx-number-box class="vieweditsingleline" [(value)]="viewField.data" showSpinButtons="true" (onValueChanged)="onChange()"
+       [min]="min" [max]="max" ></dx-number-box>
+    <small [hidden]="!viewField.hasError" class="text-danger">
+            {{viewField.textError}}
+    </small>
+</div>

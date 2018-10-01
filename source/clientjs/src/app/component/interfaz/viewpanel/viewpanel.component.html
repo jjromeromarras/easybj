@@ -1,0 +1,17 @@
+<div *ngIf="panel.currentVisible">
+	<h5 *ngIf="panel.title!='' && showTitle">{{panel.title}}</h5>
+
+
+	<div *ngFor="let rows of rowsControl" class="row">
+		<div *ngFor="let control of panel.controls">
+			<div [ngSwitch]="control.type" [ngClass]="control.controlClass" *ngIf="control.rownumber==rows && control.currentVisible">
+				<div *ngSwitchCase="eViewControlTypes.Panel">
+					<app-viewpanel [panel]="control" [colSpanParent]="panel.colCount" [viewMode]="viewMode" [fullscreen]='fullscreen' [showTitle]='true'></app-viewpanel>
+				</div>
+				<app-viewpagecontrol *ngSwitchCase="eViewControlTypes.PageControl" [viewMode]="viewMode" [fullscreen]='fullscreen'></app-viewpagecontrol>
+				<app-viewfield *ngSwitchDefault [viewField]="control" [viewMode]="viewMode" ></app-viewfield>
+			</div>
+		</div>
+
+	</div>
+</div>

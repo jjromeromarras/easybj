@@ -1,0 +1,21 @@
+<dx-tab-panel #tabPanel [dataSource]="panels" [selectedIndex]="0" [loop]="false" [deferRendering]="false" [animationEnabled]="true"
+    [swipeEnabled]="false">
+    <div *dxTemplate="let page of 'title'">
+        <span>{{page.title}}</span>
+    </div>
+    <div *dxTemplate="let page of 'item'">
+        <table>
+            <td *ngFor="let group of page.groups">
+                <table BORDER>
+                    <tr>
+                        <th COLSPAN=5>{{group.title}}</th>
+                    </tr>
+                    <tr>
+                        <app-toolbargroup [group]='group'></app-toolbargroup>
+                    </tr>
+                </table>
+            </td>
+        </table>
+    </div>
+
+</dx-tab-panel>

@@ -1,0 +1,15 @@
+<div class="viewfieldcontent" *ngIf='viewMode==eViewModes.Read'>
+    <!--Read mode-->
+    <span>{{displayValue}}</span>
+</div>
+<div *ngIf='viewMode==eViewModes.Edit'>
+    <dx-date-box *ngIf="viewField.viewFieldType==eViewFieldTypes.Date" [(value)]="viewField.data" type="date"
+        (onValueChanged)="onChange()"></dx-date-box>
+    <dx-date-box *ngIf="viewField.viewFieldType==eViewFieldTypes.DateTime" [(value)]="viewField.data" type="datetime"
+        (onValueChanged)="onChange()"></dx-date-box>
+    <dx-date-box *ngIf="viewField.viewFieldType==eViewFieldTypes.Time" [(value)]="viewField.data" type="time"
+        (onValueChanged)="onChange()"></dx-date-box>
+    <small [hidden]="!viewField.hasError" class="text-danger">
+        {{viewField.textError}}
+    </small>
+</div>

@@ -1,0 +1,35 @@
+import { Component, Input, SimpleChange } from '@angular/core';
+import { eViewFieldTypes } from '../../../model/interfaz/enums/eviewfieldtypes';
+import { ViewField } from '../../../model/interfaz/view/controls/viewfield';
+import { eViewModes, eViewModesHtml } from '../../../model/interfaz/enums/eviewmodes';
+import { Config } from '../../../services/config.service';
+
+@Component({
+    selector: 'app-viewfield',
+    templateUrl: './viewfield.component.html'
+})
+export class ViewFieldComponent {
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // INPUT/OUTPUT FIELDS
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Input() viewField: ViewField;
+    @Input() viewMode: eViewModes;
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // PUBLIC FIELDS
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    eViewModes = eViewModesHtml;        // Access to enumeration from html  
+    eViewFieldTypes = eViewFieldTypes;  // Access to enumeration from html
+    labelText: string;
+    displayExpressionLOV: string;
+    valueExpressionLOV: string;
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CONSTRUCTOR
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    constructor(private config: Config) {
+
+    }
+    ngOnChanges(changes: { [propkey: string]: SimpleChange }) {
+        this.labelText = this.viewField.title + ':';
+    }
+}

@@ -1,0 +1,6 @@
+<td *ngFor="let action of group.actions">
+    <button  style="width: 100px; height: 80px" (click)='onClick(action)'>
+            <img src="{{action.image}}" alt="Mecalux Application Info">
+            <br>{{action.title}}
+    </button>
+</td>

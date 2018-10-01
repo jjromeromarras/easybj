@@ -1,0 +1,11 @@
+<dx-tab-panel #tabPanel [dataSource]="pages" [selectedIndex]="0" [loop]="false" [deferRendering]="false" [animationEnabled]="true"
+    [swipeEnabled]="false">
+    <div *dxTemplate="let page of 'title'">
+        <span *ngIf="page.currentVisible">{{page.title}}</span>
+    </div>
+    <div *dxTemplate="let page of 'item'">
+        <div *ngIf="page.currentVisible" class="tabpanel-item">
+            <app-viewpanel [panel]='page' [colSpanParent]="pagecontrol.colSpan" [viewMode]='viewMode' [fullscreen]='fullscreen'></app-viewpanel>
+        </div>
+    </div>
+</dx-tab-panel>

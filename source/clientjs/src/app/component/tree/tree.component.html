@@ -1,0 +1,17 @@
+<table style="width: 100%">
+    <th>
+        Navigation
+    </th>
+    <tr>
+        <dx-tree-view #tree [dataSource]="tenantdata" itemTemplate="itemTemplate"
+        
+        (onItemExpanded)="onSelectionChanged($event)">
+            <dxo-selection mode="single">
+                <!-- "multiple" | "none" -->
+            </dxo-selection>
+            <div *dxTemplate="let itemObj of 'itemTemplate'">
+                <i>{{itemObj.text}}</i>
+            </div>
+        </dx-tree-view>
+    </tr>
+</table>

@@ -1,0 +1,11 @@
+<div class="viewfieldcontent lovfields">
+    <!--Edition mode-->
+    <dx-select-box #selectBox  [dataSource]="dataSource"
+        [displayExpr]="displayExpressionLOV" [valueExpr]="valueExpressionLOV" [(value)]="viewField.data" [searchEnabled]="searchEnabled"
+        (onSelectionChanged)="onChange($event)" [deferRendering]="!renderOnCreate"  [showClearButton]="!viewField.isRequired">
+    </dx-select-box>
+
+    <small [hidden]="!viewField.hasError" class="text-danger">
+        {{viewField.textError}}
+    </small>
+</div>

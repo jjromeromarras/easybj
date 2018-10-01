@@ -1,0 +1,39 @@
+<div >
+    <!-- Title -->
+    <label>
+        {{labelText}}
+        <em class="dxflRequired_Mecalux" *ngIf='viewField.isRequired'>*</em>
+    </label>    
+</div>
+
+<div [ngSwitch]="viewField.viewFieldType">
+    <app-viewfieldtext *ngSwitchCase="eViewFieldTypes.TextBox" [viewField]="viewField" 
+        [viewMode]="viewMode"></app-viewfieldtext>
+    <app-viewfieldtext *ngSwitchCase="eViewFieldTypes.Password" [viewField]="viewField" 
+        [viewMode]="viewMode"></app-viewfieldtext>
+    <app-viewfieldtextarea *ngSwitchCase="eViewFieldTypes.MultilineTextBox" [viewField]="viewField"
+        [viewMode]="viewMode"></app-viewfieldtextarea>
+    <app-viewfieldboolean *ngSwitchCase="eViewFieldTypes.Boolean" [viewField]="viewField" 
+        [viewMode]="viewMode"></app-viewfieldboolean>
+    <app-viewfieldspin *ngSwitchCase="eViewFieldTypes.Decimal" [viewField]="viewField" 
+        [viewMode]="viewMode"></app-viewfieldspin>
+    <app-viewfieldspin *ngSwitchCase="eViewFieldTypes.Integer" [viewField]="viewField" 
+        [viewMode]="viewMode"></app-viewfieldspin>
+    <app-viewfieldspin *ngSwitchCase="eViewFieldTypes.DecimalSpin" [viewField]="viewField"
+        [viewMode]="viewMode"></app-viewfieldspin>
+    <app-viewfieldspin *ngSwitchCase="eViewFieldTypes.IntegerSpin" [viewField]="viewField" 
+        [viewMode]="viewMode"></app-viewfieldspin>
+    <app-viewfielddatetime *ngSwitchCase="eViewFieldTypes.Date" [viewField]="viewField" 
+        [viewMode]="viewMode"></app-viewfielddatetime>
+    <app-viewfielddatetime *ngSwitchCase="eViewFieldTypes.DateTime" [viewField]="viewField" 
+        [viewMode]="viewMode"></app-viewfielddatetime>
+    <app-viewfielddatetime *ngSwitchCase="eViewFieldTypes.Time" [viewField]="viewField" 
+        [viewMode]="viewMode"></app-viewfielddatetime>
+    <app-viewfieldselectbox *ngSwitchCase="eViewFieldTypes.DropDownList" [viewField]="viewField"
+        [viewMode]="viewMode" [isVisible]="viewField?.currentVisible" [isReq]="viewField?.isRequired"></app-viewfieldselectbox>
+    <app-viewfieldselectbox *ngSwitchCase="eViewFieldTypes.AutoCompleteLookup" [viewField]="viewField" [readyMode]="true"
+        [viewMode]="viewMode" [isVisible]="viewField?.currentVisible" [isReq]="viewField?.isRequired"></app-viewfieldselectbox>
+    <div *ngSwitchDefault>
+        <span>{{viewField.showValue}}</span>
+    </div>
+</div>

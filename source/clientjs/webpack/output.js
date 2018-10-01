@@ -1,0 +1,9 @@
+'use strict';
+
+let path = require('path');
+
+module.exports = {
+  path: path.join(process.cwd(), 'build'),
+  filename: '[name].min.js',
+  chunkFilename: '[id].chunk.js'
+};

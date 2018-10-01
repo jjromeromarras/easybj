@@ -1,0 +1,5 @@
+<div>
+    <div *ngFor="let panel of  viewpanels" class="rightpartviewedit-content" style="justify-content:center">
+        <app-viewpanel [panel]="panel" [viewMode]="viewMode" [fullscreen]='fullscreen' colSpanParent="1" [showTitle]='true'></app-viewpanel>
+    </div>
+</div>

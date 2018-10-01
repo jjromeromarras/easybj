@@ -1,0 +1,49 @@
+import { Component, Input, SimpleChange } from '@angular/core';
+import { ViewField } from '../../../../../model/interfaz/view/controls/viewfield';
+import { eViewModes, eViewModesHtml } from '../../../../../model/interfaz/enums/eviewmodes';
+import { eViewFieldTypes } from '../../../../../model/interfaz/enums/eviewfieldtypes';
+import { Config } from '../../../../../services/config.service';
+
+@Component({
+    selector: 'app-viewfieldspin',
+    templateUrl: './viewfieldspin.component.html'
+})
+
+export class ViewFieldSpinComponent {
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // INPUT/OUTPUT FIELDS
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Input() viewField: ViewField;
+    @Input() readyMode: Boolean;
+    @Input() viewMode: eViewModes;
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // PUBLIC FIELDS
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    eViewModes = eViewModesHtml;        // Access to enumeration from html
+    eViewFieldTypes = eViewFieldTypes;  // Access to enumeration from html
+    public min: number;
+    public max: number;
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // CONSTRUCTOR
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    constructor(private config: Config) {
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // NG METHODS
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ngOnChanges(changes: { [propkey: string]: SimpleChange }) {
+        for (let propName in changes) {
+            if (propName == 'viewField') {
+                this.viewField.hasError = false;
+                this.viewField.textError = '';
+            }
+        }
+    }
+
+    onChange() {
+        this.viewField.hasError = false;
+        this.viewField.textError = '';
+    }
+}

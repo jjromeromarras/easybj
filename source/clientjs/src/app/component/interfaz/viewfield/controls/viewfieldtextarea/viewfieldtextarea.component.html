@@ -1,0 +1,7 @@
+<div class="viewfieldcontent" >
+    <!--Edition mode-->
+    <dx-text-area [(value)]="viewField.data" (onChange)="onChange()"></dx-text-area>
+    <small [hidden]="!viewField.hasError" class="text-danger">
+              {{viewField.textError}}
+    </small>
+</div>

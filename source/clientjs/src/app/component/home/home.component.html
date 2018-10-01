@@ -1,0 +1,15 @@
+<TABLE BORDER style="width: 100%">
+    <TR>
+        <TH COLSPAN=5>
+            <app-toolbar [panels]="pages"></app-toolbar>
+        </TH>
+    </TR>
+    <TR style="height: 800px;">
+        <TD style="width: 15%; vertical-align: top;"><app-tree></app-tree></TD>
+        <TD style="width: 100%; vertical-align: top;"><app-workarea></app-workarea></TD>        
+    </TR>
+</TABLE>
+
+<app-application *ngIf='shownewapplication' [title]='opapplication' [application]="selectapp"
+    (save)="onApplicationCreationSaved($event)" (cancel)="onApplicationCreationCanceled()"></app-application>
+

@@ -1,0 +1,7 @@
+<div>
+    <!--Edition mode-->
+    <dx-check-box [(value)]="viewField.data" (onValueChanged)="onChange()"></dx-check-box>
+    <small [hidden]="!viewField.hasError" class="text-danger">
+        {{viewField.textError}}
+    </small>
+</div>
