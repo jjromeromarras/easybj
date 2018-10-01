@@ -1,2 +1,5 @@
 /source/clientjs/release-builds
 /source/clientjs/node_modules
+build
+source/clientjs/package-lock.json
+source/clientjs/.vscode/settings.json
