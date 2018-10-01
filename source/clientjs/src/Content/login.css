@@ -1,0 +1,139 @@
+.logincontainer {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    position: absolute;
+    top: 0px;
+}
+.login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 820px;
+    margin: -300px 0px 0px -435px;
+}
+.logintop{
+    text-align: center;
+}
+.formLayoutContainer {
+    float: left;
+    padding-left: 50px;
+    width: 50%;
+    margin: 20px auto 0 auto;
+    width: 350px;
+}
+.loginbottom {
+    clear: both;
+    border-top: 1px solid #ddd;
+    margin-top: 75px;
+    float: left;
+    width: 100%;
+}
+.loginbottom p{
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+.loginbottom img{
+    vertical-align: -10%;
+    margin-right: 10px;
+}
+.leftlogindiv {
+    width: auto;
+    float: left;
+    margin-top: 60px;
+}
+.leftloginimagen {
+    width: 400px;
+}
+.login-form{
+    margin-top: 20px
+}
+.login-input{
+    margin-bottom: 20px;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 1001;
+    display:block;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.overlay.loadingSplash {
+    visibility: visible;
+    opacity: .85;
+}
+.overlay.loadingSplash img {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+}
+.overlay.hideSplash{ 
+    opacity: 0;
+    visibility: hidden;
+}
+.overlay img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -60px;
+    margin-left: -60px;
+}
+.counter {
+    margin: 15px;
+    font-weight: bold;
+    float: right;
+}
+@media (max-height: 860px) {
+    .login{
+        margin: -226px 0px 0px -410px;
+    }
+}
+@media (max-width: 860px) {
+    .leftlogindiv{
+        display: none;
+    }
+    .login {
+        width: 350px;
+        margin: -196px 0px 0px -175px;
+    }
+    .logintop{
+        margin-bottom: 10px;
+    }
+    .formLayoutContainer{
+        padding: 0px;
+        margin: 0px;
+    }
+    .loginbottom{
+        margin-top: 25px;
+    }
+}
+
+@media (max-width: 375px) {
+    .login {
+        width: 250px;
+        margin-left: -125px;
+    }
+    .formLayoutContainer{
+        width: 250px;
+    }
+}
+.SecurityErrorMessageStyle {
+    display: block;
+    text-align: center;
+    clear: both;
+    border: 1px solid #ec5e11;
+    background-color: #fbe9df;
+    padding: 15px 0px;
+    margin-top: 20px;
+    color: #ec5e11;
+    font-weight: bold;
+}

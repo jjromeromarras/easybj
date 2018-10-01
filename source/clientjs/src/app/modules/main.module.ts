@@ -25,7 +25,8 @@ import { ViewPanelComponent } from '../component/interfaz/viewpanel/viewpanel.co
 import { ViewPageControlComponent } from '../component/interfaz/viewpagecontrol/viewpagecontrol.component';
 import { EntityEditorComponent } from '../component/interfaz/entityeditor/entityeditor.component';
 import { ErrorHandlerService } from '../services/errorHandler/errorHandler.service';
-import { BroadcasterService } from "ng-broadcaster";
+import { BroadcasterService } from 'ng-broadcaster';
+import { LoginComponent } from '../component/login/login.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { BroadcasterService } from "ng-broadcaster";
     ViewPanelComponent,
     ViewPageControlComponent,
     EntityEditorComponent,
-    ApplicationComponent
+    ApplicationComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule, DevExtremeModule, BrowserAnimationsModule, HttpModule, AgmCoreModule,

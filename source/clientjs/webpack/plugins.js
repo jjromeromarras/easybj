@@ -19,6 +19,7 @@ module.exports = [
   new CopyWebpackPlugin([
     { from: 'index.html' },
     { from: 'script', to: 'script' },
+    { from: '../config/main.dev.js', to: 'main.js' },
     { from: '../node_modules/core-js/client/shim.min.js', to: 'node_modules/core-js/client/shim.min.js' },
     { from: '../node_modules/jquery/dist/jquery.js', to: 'node_modules/jquery/dist/jquery.js' },
     { from: '../node_modules/reflect-metadata/Reflect.js', to: 'node_modules/reflect-metadata/Reflect.js' },
@@ -31,7 +32,11 @@ module.exports = [
     { from: '../node_modules/reflect-metadata/Reflect.js.map', to: 'node_modules/reflect-metadata/Reflect.js.map' },
     { from: '../node_modules/ng-pick-datetime/assets/style/picker.min.css', to: 'node_modules/ng-pick-datetime/assets/style/picker.min.css' },
     { from: '../node_modules/ng-pick-datetime/assets/font/*', to: 'node_modules/ng-pick-datetime/assets/font/*' },
-
+    { from: 'ApplicationResources/img', to: 'ApplicationResources/img' },
+    { from: 'Content/style.css', to: 'Content/style.css' },
+    { from: 'Content/main.css', to: 'Content/main.css' },
+    { from: 'Content/bootstrap.min.css', to: 'Content/bootstrap.min.css' },
+    { from: 'Content/login.css', to: 'Content/login.css' }
   ]),
   new ExtractTextPlugin('style.bundle.css'),
 

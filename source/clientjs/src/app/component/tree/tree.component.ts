@@ -26,7 +26,7 @@ export class TreeComponent {
     public tenantdata = [{
         id: '1',
         text: 'Organization',
-        expanded: true,
+        expanded: false,
         items: [
             { id: '1_1', text: 'Jobs (0)',  expanded: true },
             { id: '1_2', text: 'MenuItems (0)',  expanded: true },

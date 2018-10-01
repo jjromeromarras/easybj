@@ -1,0 +1,33 @@
+<div class="logincontainer">
+    <div class="login">
+        <div class="logintop">
+            <img src="ApplicationResources/img/logo_header.jpg" class="logocabeceraimagen" />
+        </div>
+        <div class="leftlogindiv">
+            <img src="ApplicationResources/img/image_login.jpg" class="leftloginimagen" />
+        </div>
+        <div class="formLayoutContainer">
+            <form #f="ngForm" novalidate class="dxflFormLayout_Mecalux login-form" (submit)="onLogIn(f.valid)">
+                <div class="login-input">
+                    <label for="Usuario">User:</label>
+                    <em class="dxflRequired_Mecalux">*</em>
+                    <input name="user" class="dxeEditArea_Mecalux dxeEditAreaSys" type="text" [(ngModel)]="login.user" required minlength="1"
+                        #user="ngModel" />
+                </div>
+                <div class="login-input">
+                    <label for="Password">Password:</label>
+                    <em class="dxflRequired_Mecalux">*</em>
+                    <input name="password" class="dxeEditArea_Mecalux dxeEditAreaSys" type="password" [(ngModel)]="login.password" required minlength="1"
+                        #password="ngModel" />
+                </div>
+                <button type="submit" style="margin-right:10px" class="btn">Accept</button>
+                <button type="reset" class="btn" (click)="onReset()">Cancel</button>
+            </form>
+        </div>
+        <div class="loginbottom">
+            <p>
+                <img src="ApplicationResources/img/logo_footer.jpg" class="logopieimagen" /> Copyright &copy; {{currentTime|date:['yyyy']}}
+            </p>
+        </div>
+    </div>
+</div>
