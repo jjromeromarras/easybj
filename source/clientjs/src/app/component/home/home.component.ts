@@ -21,11 +21,11 @@ export class HomeComponent {
     public shownewapplication: boolean;
     public opapplication: string;    
     public selectapp: Application;
+    public showlanguages: boolean;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PRIVATE FIELDS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private subscriber: any;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CONSTRUCTOR
@@ -33,6 +33,7 @@ export class HomeComponent {
     constructor(public config: Config, private messageeventservice: BroadcasterService) {
         this.pages = [];
         this.shownewapplication = false;
+        this.showlanguages = false;
         this.SetInitialMenu();
     }
 
@@ -79,6 +80,9 @@ export class HomeComponent {
         btnlanguages.title = "Management languages";
         btnlanguages.sequence = 1;
         btnlanguages.image = 'ApplicationResources/img/R298gestionar_idiomas_32x32.png';
+        btnlanguages.executeAction = (params: any) => {
+            this.executeShowLangauges(params);
+        };
         languagesgroup.actions.push(btnlanguages);
         projectpage.groups.push(languagesgroup);
 
@@ -112,7 +116,7 @@ export class HomeComponent {
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // PRIVATE METHODS APPLICATION
+    // PRIVATE METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private executeNewApplication(params: any) {
         this.shownewapplication = true;    
@@ -120,6 +124,13 @@ export class HomeComponent {
         this.opapplication='New Application'    
     }
 
+    private executeShowLangauges(params: any) {
+        this.showlanguages = true;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // HTML
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     onApplicationCreationSaved($event) {
         this.shownewapplication = false;
         this.config.applications.push(this.selectapp);
@@ -129,6 +140,10 @@ export class HomeComponent {
 
     onApplicationCreationCanceled($event) {
         this.shownewapplication = false;
+    }
+
+    onCloseLanguage($event) {
+        this.showlanguages = false;
     }
 
 }

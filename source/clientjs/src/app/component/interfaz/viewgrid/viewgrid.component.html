@@ -1,0 +1,20 @@
+<dx-data-grid #viewListGrid class="viewlistgridclass" [columns]="columnDefs" [dataSource]='gridDataSource'
+    [columnChooser]='{
+    enabled: true,
+    height:500,
+    width: 400,
+    mode: "select",
+    emptyPanelText: "A place to hide the columns"}'
+    [paging]='{
+            pageSize: 50
+        }' 
+    [allowColumnReordering]='true' [pager]='{
+            visible: true,
+            showPageSizeSelector: true,
+            allowedPageSizes: [50, 100, 200],
+            showInfo: true
+        }'
+    [sorting]="{ mode: 'multiple' }" [allowColumnResizing]='true' [columnAutoWidth]='false' [wordWrapEnabled]='false'
+    [filterRow]='{ visible: true }' [remoteOperations]="{sorting: true, paging: true,filtering:true}"
+    (onSelectionChanged)="onSelectionChanged($event)" >
+</dx-data-grid>

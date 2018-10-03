@@ -13,3 +13,4 @@
 <app-application *ngIf='shownewapplication' [title]='opapplication' [application]="selectapp"
     (save)="onApplicationCreationSaved($event)" (cancel)="onApplicationCreationCanceled()"></app-application>
 
+<app-languages *ngIf='showlanguages' (close)='onCloseLanguage()'></app-languages>

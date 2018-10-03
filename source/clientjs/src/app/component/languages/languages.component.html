@@ -1,0 +1,8 @@
+<div>
+    <dx-popup [showTitle]="true" [title]="title" [height]='auto' [(visible)]="visible" (onHiding)="onHiding($event)">
+        <div *dxTemplate="let data of 'content'">
+            <app-toolbar [panels]="pages"></app-toolbar>
+            <app-viewgrid [columnDefs]="colData" [gridDataSource]='config.languages' ></app-viewgrid>
+        </div>
+    </dx-popup>
+</div>
