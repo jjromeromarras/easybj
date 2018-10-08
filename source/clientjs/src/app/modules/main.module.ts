@@ -27,6 +27,11 @@ import { EntityEditorComponent } from '../component/interfaz/entityeditor/entity
 import { ErrorHandlerService } from '../services/errorHandler/errorHandler.service';
 import { BroadcasterService } from 'ng-broadcaster';
 import { LoginComponent } from '../component/login/login.component';
+import { LanguagesComponent } from '../component/languages/languages.component';
+import { ViewGridComponent } from '../component/interfaz/viewgrid/viewgrid.component';
+import { DialogComponent } from '../component/interfaz/dialog/dialog.component';
+import { ViewGroupsComponent } from '../component/viewgroups/viewgroups.component';
+
 
 @NgModule({
   declarations: [
@@ -48,7 +53,11 @@ import { LoginComponent } from '../component/login/login.component';
     ViewPageControlComponent,
     EntityEditorComponent,
     ApplicationComponent,
-    LoginComponent
+    ViewGridComponent,
+    LanguagesComponent,
+    LoginComponent,
+    DialogComponent,
+    ViewGroupsComponent
   ],
   imports: [
     BrowserModule, DevExtremeModule, BrowserAnimationsModule, HttpModule, AgmCoreModule,

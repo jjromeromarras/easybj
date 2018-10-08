@@ -1,11 +1,11 @@
-import { ActionToolbar } from "./actiontoolbar";
+import { ActionToolbar } from './actiontoolbar';
 
 export class GroupActionToolbar {
     title: string;
-    actions: Array<ActionToolbar>;    
+    actions: Array<ActionToolbar>;
     sequence: number;
-    
-    constructor(){
+
+    constructor() {
         this.actions = new Array<ActionToolbar>();
     }
 }

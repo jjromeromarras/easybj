@@ -4,10 +4,40 @@ import { ViewControl } from '../view/controls/viewcontrol';
 import { ArrayUtils } from './arrayutils';
 import { eViewControlTypes } from '../enums/eviewcontroltypes';
 import { ViewPageControl } from '../view/controls/viewpagecontrol';
+import { ViewField } from '../view/controls/viewfield';
 
 @Injectable()
 export class ViewHelper {
 
+    public static createViewField(title: string, vftype: string, type: string, sequence: number, colSpan: number,
+        isRequired: boolean, panel: ViewPanel, data: any) {
+
+        const vf = new ViewField();
+        vf.title = title;
+        vf.isRequired = isRequired;
+        vf.viewFieldType = vftype;
+        vf.type = type;
+        vf.sequence = sequence;
+        vf.colSpan = colSpan;
+        vf.dataobj = data;
+        panel.controls.push(vf);
+        panel.viewFields.push(vf);
+
+    }
+    public static getGridColumnDefinition(title: string, hidecol: Boolean, dataFieldName: String,
+        allowResizing: boolean, allowFiltering: boolean, allowSorting: boolean): any {
+        const columnDefinition: any = {
+            caption: title,
+            dataField: dataFieldName,
+            visible: !hidecol,
+            allowResizing: true,
+            allowFiltering: allowFiltering,
+            allowSorting: allowSorting,
+            showInColumnChooser: true
+        };
+
+        return columnDefinition;
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Get ViewControl with visibility condiction script
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

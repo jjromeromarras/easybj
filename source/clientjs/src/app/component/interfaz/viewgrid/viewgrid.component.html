@@ -8,13 +8,15 @@
     [paging]='{
             pageSize: 50
         }' 
-    [allowColumnReordering]='true' [pager]='{
+    [allowColumnReordering]='true' 
+    [pager]='{
             visible: true,
             showPageSizeSelector: true,
             allowedPageSizes: [50, 100, 200],
             showInfo: true
         }'
-    [sorting]="{ mode: 'multiple' }" [allowColumnResizing]='true' [columnAutoWidth]='false' [wordWrapEnabled]='false'
+    [sorting]="{ mode: 'multiple' }" [allowColumnResizing]='true' [columnAutoWidth]='true' [wordWrapEnabled]='false'
     [filterRow]='{ visible: true }' [remoteOperations]="{sorting: true, paging: true,filtering:true}"
     (onSelectionChanged)="onSelectionChanged($event)" >
+    <dxo-selection mode="single"></dxo-selection>
 </dx-data-grid>

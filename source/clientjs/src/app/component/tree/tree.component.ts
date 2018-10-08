@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { Config } from '../../services/config.service';
 import { BroadcasterService } from 'ng-broadcaster';
 import { DxTreeViewComponent } from 'devextreme-angular';
@@ -11,7 +11,7 @@ import { DxTreeViewComponent } from 'devextreme-angular';
     }
 )
 
-export class TreeComponent {
+export class TreeComponent implements OnDestroy {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // INPUT/OUTPUT FIELDS
@@ -28,11 +28,11 @@ export class TreeComponent {
         text: 'Organization',
         expanded: false,
         items: [
-            { id: '1_1', text: 'Jobs (0)',  expanded: true },
-            { id: '1_2', text: 'MenuItems (0)',  expanded: true },
-            { id: '1_3', text: 'Resources (0)',  expanded: true },
-            { id: '1_4', text: 'RFMenuItems (0)',  expanded: true },
-            { id: '1_5', text: 'Users groups (0)',  expanded: true },
+            { id: '1_1', text: 'Jobs (0)', expanded: true },
+            { id: '1_2', text: 'MenuItems (0)', expanded: true },
+            { id: '1_3', text: 'Resources (0)', expanded: true },
+            { id: '1_4', text: 'RFMenuItems (0)', expanded: true },
+            { id: '1_5', text: 'Users groups (0)', expanded: true },
         ]
     }, {
         id: '2',
@@ -56,7 +56,7 @@ export class TreeComponent {
 
 
     ngOnDestroy() {
-        if (this.subscriber != undefined) {
+        if (this.subscriber !== undefined) {
             this.subscriber.unsubscribe();
         }
     }
@@ -66,29 +66,28 @@ export class TreeComponent {
     // PRIVATE METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private registerTypeBroadcast() {
-        let me = this;
         this.subscriber = this.messageeventservice.on<any>('onNewApplication')
             .subscribe(message => {
                 this.createTreeApp();
             });
     }
 
-    private createTreeApp(){
+    private createTreeApp() {
         this.tenantdata[1].items = [];
         this.config.applications.forEach(app => {
 
-            this.tenantdata[1].items.push(this.createNodeApp(app.guid, app.name.value))
-        })
-        this.treeView.instance.option("items", this.tenantdata);
+            this.tenantdata[1].items.push(this.createNodeApp(app.guid, app.name.value));
+        });
+        this.treeView.instance.option('items', this.tenantdata);
     }
 
     private createNodeApp(id: string, name: string): any {
-        var expand: boolean = false;
-        if (this.config.currentapp != undefined) {
-            expand = this.config.currentapp.name.value == name;
+        let expand = false;
+        if (this.config.currentapp !== undefined) {
+            expand = this.config.currentapp.name.value === name;
         }
 
-        var ap = {
+        const ap = {
             id: id,
             text: name,
             expanded: expand,
@@ -115,11 +114,13 @@ export class TreeComponent {
                 { id: name + '_records', text: 'Records (0)' },
                 { id: name + '_resources', text: 'Resources (0)' },
                 { id: name + '_subscriptions', text: 'Validators (0)' },
-                { id: name + '_wfaction', text: 'Workflow acions (0)' },
+                { id: name + '_views', text: 'Views (0)' },
+                { id: name + '_viewgroups', text: 'View Groups (0)' },
+                { id: name + '_wfaction', text: 'Workflow actions (0)' },
                 { id: name + '_workflows', text: 'Workflows (0)' },
                 { id: name + '_writing', text: 'Writing Model (0)' },
             ]
-        }
+        };
 
         return ap;
     }
@@ -128,11 +129,15 @@ export class TreeComponent {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // HTML METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public onSelectionChanged(e) {   
-        let app = e.itemData;
-        this.config.currentapp = this.config.applications.find(p=>p.guid==app.id);
+    public onItemExpanded(e) {
+        const app = e.itemData;
+        this.config.currentapp = this.config.applications.find(p => p.guid === app.id);
         this.createTreeApp();
     }
 
+    public onItemSelectionChanged(e) {
+        const item = e.itemData;
+        this.messageeventservice.broadcast('selectOptionTreeApp', item.id);
+    }
 
 }

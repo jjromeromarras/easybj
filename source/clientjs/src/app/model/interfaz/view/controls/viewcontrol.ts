@@ -5,5 +5,5 @@ export class ViewControl {
     type: string;                   /* Enumeration of type: eViewControlTypes */
     currentVisible: boolean;
     controlClass: string;
-    rownumber: number;  
+    rownumber: number;
 }

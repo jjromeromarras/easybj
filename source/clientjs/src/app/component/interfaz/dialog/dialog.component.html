@@ -1,0 +1,15 @@
+<dx-popup #dialogPanel [showTitle]="false" [showCloseButton]="false" [title]="title" [(visible)]="showPopup" (onShown)="onShown($event)"
+  (onHiding)="onCloseButton($event)"  [rtlEnabled]='rtlEnabled'>
+  <div *dxTemplate="let data of 'content'">
+    <div class="modal-body">
+      <h2>{{ message }}</h2>
+      <div>
+        <!--<button class="btn btn-primary" *ngIf="buttonOkVisible" (click)="onOkButton($event)"> {{config.getEnviromentData().resources.getValue('ok')}} </button>-->
+        <button id="Yes" class="btn btn-primary" *ngIf="buttonYesVisible" (click)="onYesButton($event)"> Yes </button>
+        <button id="No" class="btn btn-primary" *ngIf="buttonNoVisible" (click)="onNoButton($event)"> No </button>
+        <button id="Cancel" class="btn btn-primary" *ngIf="buttonCancelVisible" (click)="onCancelButton($event)"> Cancel </button>
+        <button id="Exit" class="btn btn-primary" *ngIf="buttonExitVisible" (click)="onExitButton($event)"> Exit  </button>
+      </div>
+    </div>
+  </div>
+</dx-popup>

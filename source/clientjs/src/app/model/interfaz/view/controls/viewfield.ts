@@ -29,11 +29,11 @@ export class ViewField extends ViewControl {
                 this.dataobj.value = value;
         }
         getData = () => {
-                return this.dataobj[this.property];
+                return this.data;
         };
 
         setData = (newData: any) => {
-                this.dataobj.value = newData;
+                this.data = newData;
         };
         getShowValue = () => {
                 return this.showValue;

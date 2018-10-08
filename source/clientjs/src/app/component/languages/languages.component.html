@@ -1,8 +1,23 @@
 <div>
     <dx-popup [showTitle]="true" [title]="title" [height]='auto' [(visible)]="visible" (onHiding)="onHiding($event)">
         <div *dxTemplate="let data of 'content'">
-            <app-toolbar [panels]="pages"></app-toolbar>
-            <app-viewgrid [columnDefs]="colData" [gridDataSource]='config.languages' ></app-viewgrid>
+            <div *ngIf='!showviewedit'>
+                <app-toolbar [panels]="pages"></app-toolbar>
+                <app-viewgrid [columnDefs]="colData" [gridDataSource]='config.languages' (selectionChange)='onSelectionChange($event)'></app-viewgrid>
+            </div>
+            <div *ngIf='showviewedit'>
+                <app-entity-editor #formeditor [viewMode]='viewMode' [viewpanels]='viewPanels' [savedAndContinue]='false'>
+                </app-entity-editor>
+                <button type="button" class="btn btn-primary css3transition" (click)="onClickedSave()">
+                    Save
+                </button>
+                <button type="button" class="btn btn-primary css3transition" (click)="onClickedCancel()">
+                    Cancel
+                </button>
+            </div>
         </div>
     </dx-popup>
+    <app-dialog *ngIf="showDialog" [title]="dialogTitle" [message]="message" [dialogType]="dialogType" 
+    (onCloseDialog)="onCloseDialog($event)"></app-dialog>
+
 </div>

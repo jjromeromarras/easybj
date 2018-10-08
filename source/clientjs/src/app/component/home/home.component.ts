@@ -7,7 +7,7 @@ import { Config } from '../../services/config.service';
 import { BroadcasterService } from 'ng-broadcaster';
 @Component(
     {
-        selector: 'home',
+        selector: 'app-home',
         templateUrl: './home.component.html',
     }
 )
@@ -19,13 +19,15 @@ export class HomeComponent {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public pages: Array<PanelToolbar>;
     public shownewapplication: boolean;
-    public opapplication: string;    
+    public opapplication: string;
     public selectapp: Application;
     public showlanguages: boolean;
-
+    public showviewgorups: boolean;
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PRIVATE FIELDS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private subscriber: any;
+    private subdelmenu: any;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CONSTRUCTOR
@@ -33,11 +35,13 @@ export class HomeComponent {
     constructor(public config: Config, private messageeventservice: BroadcasterService) {
         this.pages = [];
         this.shownewapplication = false;
+        this.showviewgorups = false;
         this.showlanguages = false;
         this.SetInitialMenu();
+        this.registerTypeBroadcast();
     }
 
-    
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PRIVATE METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,24 +49,24 @@ export class HomeComponent {
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// Project Page
-        let projectpage = new PanelToolbar();
-        projectpage.title = "Project";
+        const projectpage = new PanelToolbar();
+        projectpage.title = 'Project';
         projectpage.sequence = 1;
         // Group Program
-        let programgroup = new GroupActionToolbar();
-        programgroup.title = "Program";
+        const programgroup = new GroupActionToolbar();
+        programgroup.title = 'Program';
         programgroup.sequence = 1;
 
-        let btnnewapplication = new ActionToolbar();
-        btnnewapplication.title = "New application";
+        const btnnewapplication = new ActionToolbar();
+        btnnewapplication.title = 'New application';
         btnnewapplication.image = 'ApplicationResources/img/R052ApplicationAdd32x32.png';
         btnnewapplication.sequence = 1;
         btnnewapplication.executeAction = (params: any) => {
             this.executeNewApplication(params);
         };
 
-        let btnimport = new ActionToolbar();
-        btnimport.title = "Import applications";
+        const btnimport = new ActionToolbar();
+        btnimport.title = 'Import applications';
         btnimport.image = 'ApplicationResources/img/R057ApplicationImport32x32.png';
         btnimport.sequence = 2;
 
@@ -72,12 +76,12 @@ export class HomeComponent {
         projectpage.groups.push(programgroup);
 
         // Group languages
-        let languagesgroup = new GroupActionToolbar();
-        languagesgroup.title = "Languages";
+        const languagesgroup = new GroupActionToolbar();
+        languagesgroup.title = 'Languages';
         languagesgroup.sequence = 2;
 
-        let btnlanguages = new ActionToolbar();
-        btnlanguages.title = "Management languages";
+        const btnlanguages = new ActionToolbar();
+        btnlanguages.title = 'Management languages';
         btnlanguages.sequence = 1;
         btnlanguages.image = 'ApplicationResources/img/R298gestionar_idiomas_32x32.png';
         btnlanguages.executeAction = (params: any) => {
@@ -91,24 +95,24 @@ export class HomeComponent {
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// Import/Export Page
-        let importexport = new PanelToolbar();
-        importexport.title = "Import/Export";
+        const importexport = new PanelToolbar();
+        importexport.title = 'Import/Export';
         importexport.sequence = 2;
         this.pages.push(importexport);
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// Packages management Page
-        let packagemang = new PanelToolbar();
-        packagemang.title = "Packages management";
+        const packagemang = new PanelToolbar();
+        packagemang.title = 'Packages management';
         packagemang.sequence = 3;
         this.pages.push(packagemang);
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// Utils management Page
-        let utils = new PanelToolbar();
-        utils.title = "Utils";
+        const utils = new PanelToolbar();
+        utils.title = 'Utils';
         utils.sequence = 4;
         this.pages.push(utils);
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,13 +123,29 @@ export class HomeComponent {
     // PRIVATE METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private executeNewApplication(params: any) {
-        this.shownewapplication = true;    
+        this.shownewapplication = true;
         this.selectapp = new Application();
-        this.opapplication='New Application'    
+        this.opapplication = 'New Application';
     }
 
     private executeShowLangauges(params: any) {
         this.showlanguages = true;
+    }
+
+    private registerTypeBroadcast() {
+        this.subscriber = this.messageeventservice.on<any>('addMenuGroup')
+            .subscribe(message => {
+                message.forEach(pg => {
+                    this.pages.push(pg);
+                });
+
+            });
+
+        this.subdelmenu = this.messageeventservice.on<any>('delMenuGroup')
+            .subscribe(message => {
+                this.pages = this.pages.filter(p => p.type !== message.type);
+
+            });
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -145,5 +165,4 @@ export class HomeComponent {
     onCloseLanguage($event) {
         this.showlanguages = false;
     }
-
 }

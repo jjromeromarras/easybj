@@ -1,26 +1,26 @@
-import { BaseEntity } from "../common/baseentity";
-import { Job } from "../organization/job";
-import { Aggregate } from "./aggregate/aggregate";
-import { Entity } from "./views/entity/entity";
-import { Event } from "./event/event";
-import { FieldType } from "./field/fieldtype";
-import { Format } from "./views/format/format";
-import { MenuItem } from "../organization/menuitem";
-import { Record } from "./record/record";
-import { RecordList } from "./record/recordlist";
-import { Relationship } from "./relationship/relationship";
-import { Report } from "./report/report";
-import { Resource } from "../resources/resource";
-import { RFMenuItem } from "../organization/rfmenuitem";
-import { SecGroup } from "../organization/secgroup";
-import { Subscription } from "rxjs";
-import { Validator } from "./views/validator/validator";
-import { ViewGroup } from "./views/viewgroups";
-import { BindData } from "./objstr";
+import { BaseEntity } from '../common/baseentity';
+import { Job } from '../organization/job';
+import { Aggregate } from './aggregate/aggregate';
+import { Entity } from './views/entity/entity';
+import { Event } from './event/event';
+import { FieldType } from './field/fieldtype';
+import { Format } from './views/format/format';
+import { MenuItem } from '../organization/menuitem';
+import { Record } from './record/record';
+import { RecordList } from './record/recordlist';
+import { Relationship } from './relationship/relationship';
+import { Report } from './report/report';
+import { Resource } from '../resources/resource';
+import { RFMenuItem } from '../organization/rfmenuitem';
+import { SecGroup } from '../organization/secgroup';
+import { Validator } from './views/validator/validator';
+import { ViewGroup } from './views/viewgroups';
+import { BindData } from './objstr';
+import { Subscription } from './subscription/subscription';
 
 
 export class Application extends BaseEntity {
-    activationDate: Date;    
+    activationDate: Date;
     jobs: Array<Job>;
     aggregates: Array<Aggregate>;
     dependingApplications: Array<string>;
@@ -61,16 +61,16 @@ export class Application extends BaseEntity {
         this.relationships = new Array<Relationship>();
         this.reports = new Array<Report>();
         this.resources = new Array<Resource>();
-        this.rfmenuitems  = new Array<RFMenuItem>();
+        this.rfmenuitems = new Array<RFMenuItem>();
         this.secgroups = new Array<SecGroup>();
         this.subcriptions = new Array<Subscription>();
         this.validators = new Array<Validator>();
         this.viewgroups = new Array<ViewGroup>();
 
         //// BIND DATA
-        this.imagesFolder= new BindData();
-        this.description= new BindData();
-        
+        this.imagesFolder = new BindData();
+        this.description = new BindData();
+
     }
 
 }

@@ -1,7 +1,5 @@
-import { Component, Input, SimpleChange } from '@angular/core';
-import { PanelToolbar } from '../../model/interfaz/toolbar/paneltoolbar';
+import { Component, Input, SimpleChange, OnChanges } from '@angular/core';
 import { GroupActionToolbar } from '../../model/interfaz/toolbar/groupactiontoolbar';
-import action_sheet from 'devextreme/ui/action_sheet';
 import { ActionToolbar } from '../../model/interfaz/toolbar/actiontoolbar';
 @Component(
     {
@@ -18,10 +16,18 @@ export class ToolbarGroupComponent {
     @Input() group: GroupActionToolbar;
 
 
-    ngOnChanges(changes: { [propkey: string]: SimpleChange }) {
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // HTML METODS
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    onClick(action: ActionToolbar) {
+        action.executeAction(null);
     }
 
-    onClick(action: ActionToolbar){
-        action.executeAction(null);
+    onVisible(action: ActionToolbar): boolean {
+        if (action.visibleAction !== undefined) {
+            return action.visibleAction(null);
+        }
+        return true;
     }
 }

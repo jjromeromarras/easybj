@@ -4,8 +4,10 @@
     </th>
     <tr>
         <dx-tree-view #tree [dataSource]="tenantdata" itemTemplate="itemTemplate"
+        [selectByClick]="true"
+        (onItemSelectionChanged)="onItemSelectionChanged($event)"
+        (onItemExpanded)="onItemExpanded($event)">
         
-        (onItemExpanded)="onSelectionChanged($event)">
             <dxo-selection mode="single">
                 <!-- "multiple" | "none" -->
             </dxo-selection>

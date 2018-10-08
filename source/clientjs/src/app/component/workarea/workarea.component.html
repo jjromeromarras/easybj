@@ -1,1 +1,12 @@
-WORK AREA
+<dx-tab-panel #tabPanel [dataSource]="pages" [selectedIndex]="0" [loop]="false" [deferRendering]="false" [animationEnabled]="true"
+    [swipeEnabled]="false">
+    <div *dxTemplate="let page of 'title'">
+        <span>{{page.title}}</span>
+        <img (click)='onCloseTab(page)' src="ApplicationResources\img\close.png">
+    </div>
+    <div *dxTemplate="let page of 'item'">
+        <div *ngIf="page.type=='ViewGroups'" class="tabpanel-item">
+            <app-viewgroups> </app-viewgroups>
+        </div>
+    </div>
+</dx-tab-panel>
