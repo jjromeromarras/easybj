@@ -33,6 +33,7 @@ import { DialogComponent } from '../component/interfaz/dialog/dialog.component';
 import { ViewGroupsComponent } from '../component/viewgroups/viewgroups.component';
 import { ViewGroupComponent } from '../component/viewgroups/viewgroup.component';
 import { ViewGroupService } from '../services/viewgroups/viewgroup.services';
+import { ApplicationService } from '../services/applications/application.services';
 
 
 @NgModule({
@@ -66,7 +67,7 @@ import { ViewGroupService } from '../services/viewgroups/viewgroup.services';
     BrowserModule, DevExtremeModule, BrowserAnimationsModule, HttpModule, AgmCoreModule,
     APP_ROUTER, FormsModule
   ],
-  providers: [Config, ErrorHandlerService, BroadcasterService, ViewGroupService],
+  providers: [Config, ErrorHandlerService, BroadcasterService, ViewGroupService, ApplicationService],
   bootstrap: [EasyBComponent]
 })
 export class MainModule { }

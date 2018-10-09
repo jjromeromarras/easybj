@@ -5,6 +5,7 @@ import { ActionToolbar } from '../../model/interfaz/toolbar/actiontoolbar';
 import { Application } from '../../model/application/application';
 import { Config } from '../../services/config.service';
 import { BroadcasterService } from 'ng-broadcaster';
+import { eViewModes } from '../../model/interfaz/enums/eviewmodes';
 @Component(
     {
         selector: 'app-home',
@@ -23,6 +24,7 @@ export class HomeComponent {
     public selectapp: Application;
     public showlanguages: boolean;
     public showviewgorups: boolean;
+    public viewMode: eViewModes;
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PRIVATE FIELDS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -142,13 +144,15 @@ export class HomeComponent {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private executeNewApplication(params: any) {
         this.shownewapplication = true;
+        this.viewMode = eViewModes.New;
         this.selectapp = new Application();
         this.opapplication = 'New Application';
     }
 
     private executeEditApplication(params: any) {
-        if (this.config.currentapp != undefined) {
+        if (this.config.currentapp !== undefined) {
             this.selectapp = this.config.currentapp;
+            this.viewMode = eViewModes.Edit;
             this.shownewapplication = true;
             this.opapplication = 'Edit Application';
         }
@@ -179,8 +183,6 @@ export class HomeComponent {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     onApplicationCreationSaved($event) {
         this.shownewapplication = false;
-        this.config.applications.push(this.selectapp);
-        this.config.currentapp = this.selectapp;
         this.messageeventservice.broadcast('onNewApplication');
     }
 

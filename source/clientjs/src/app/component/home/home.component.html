@@ -10,7 +10,7 @@
     </TR>
 </TABLE>
 
-<app-application *ngIf='shownewapplication' [title]='opapplication' [application]="selectapp"
+<app-application *ngIf='shownewapplication' [title]='opapplication' [application]="selectapp" [viewMode]='viewMode'
     (save)="onApplicationCreationSaved($event)" (cancel)="onApplicationCreationCanceled()"></app-application>
 
 <app-languages *ngIf='showlanguages' (close)='onCloseLanguage()'></app-languages>

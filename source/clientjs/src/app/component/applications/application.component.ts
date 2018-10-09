@@ -6,6 +6,8 @@ import { eViewFieldTypes } from '../../model/interfaz/enums/eviewfieldtypes';
 import { eViewControlTypes } from '../../model/interfaz/enums/eviewcontroltypes';
 import { ViewHelper } from '../../model/interfaz/utils/viewhelper';
 import { Config } from '../../services/config.service';
+import { ApplicationService } from '../../services/applications/application.services';
+import { constantsMsg } from '../../model/common/constantsMsg';
 
 @Component(
     {
@@ -24,7 +26,6 @@ export class ApplicationComponent implements OnChanges {
     public savestr: string;
     public auto: string;
     public inlineCreationVisible: boolean;
-    public viewMode: eViewModes;
     public viewPanels: Array<ViewPanel>;
     public appData: Array<Application>;
     public showCheckBoxesMode: string;
@@ -33,6 +34,7 @@ export class ApplicationComponent implements OnChanges {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Input() title: string;
     @Input() application: Application;
+    @Input() viewMode: eViewModes;
     @Output() save = new EventEmitter();
     @Output() cancel = new EventEmitter();
     @Output() error = new EventEmitter();
@@ -40,7 +42,7 @@ export class ApplicationComponent implements OnChanges {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CONSTRUCTOR
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    constructor(private config: Config) {
+    constructor(private config: Config, private applicationservice: ApplicationService) {
         this.inlineCreationVisible = true;
         this.cancelstr = 'Cancel';
         this.savestr = 'Save';
@@ -70,20 +72,27 @@ export class ApplicationComponent implements OnChanges {
     }
 
     /**Cancel button, hides popup */
-    onClickedCancel($event) {
+    onClickedCancel() {
         this.inlineCreationVisible = false;
-        $event.preventDefault();
         this.cancel.emit('Canceled');
     }
 
-    onClickedSave($event) {
-        this.inlineCreationVisible = false;
-        $event.preventDefault();
+    onClickedSave() {
+        let msg = constantsMsg.NOERROR;
+        if (this.viewMode === eViewModes.New) {
+            msg = this.applicationservice.AddApplication(this.application);
+        } else {
+            msg = this.applicationservice.EditApplication(this.application);
+        }
+        if (msg !== constantsMsg.NOERROR) {
+            alert(msg);
+        } else {
+            this.onClickedCancel();
+        }
         this.save.emit('Save');
     }
 
     onHiding($event) {
-        this.inlineCreationVisible = false;
-        this.cancel.emit('Canceled');
+        this.onClickedCancel();
     }
 }

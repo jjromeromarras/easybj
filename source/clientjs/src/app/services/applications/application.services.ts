@@ -1,10 +1,11 @@
 import { Injectable } from "@angular/core";
 import { Config } from "../config.service";
-import { ViewGroup } from "../../model/application/views/viewgroups";
+import { Application } from "../../model/application/application";
 import { constantsMsg } from "../../model/common/constantsMsg";
 
+
 @Injectable()
-export class ViewGroupService {
+export class ApplicationService {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CONSTRUCTOR
@@ -15,45 +16,42 @@ export class ViewGroupService {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PUBLIC METHOD
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public AddViewGroup(viewgroup: ViewGroup): string {
+    public AddApplication(app: Application): string {
+        const result = this.CheckApplication(app);
+        if (result === constantsMsg.NOERROR) {
+            this.config.applications.push(app);
+        }
+        return result;
+    }
+
+    public EditApplication(app: Application): string {
         if (this.config.currentapp !== undefined) {
-            const result = this.CheckViewGroup(viewgroup);
-            if (result == constantsMsg.NOERROR) {
-                this.config.currentapp.viewgroups.push(viewgroup);
-            }
+            const result = this.CheckApplication(app);
             return result;
         }
         return constantsMsg.GENERICERROR + ' There is not an application selected';
     }
 
-    public EditViewGroup(viewgroup: ViewGroup): string {
+    public RemoveApplication(app: Application): string {
         if (this.config.currentapp !== undefined) {
-            const result = this.CheckViewGroup(viewgroup);
-            return result;
-        }
-        return constantsMsg.GENERICERROR + ' There is not an application selected';
-    }
-
-    public RemoveViewGroup(viewgroup: ViewGroup): string {
-        if (this.config.currentapp !== undefined) {
-            this.config.currentapp.viewgroups = this.config.currentapp.viewgroups.filter(p => p.guid != viewgroup.guid);
+            this.config.applications = this.config.applications.filter(p => p.guid !== app.guid);
+            this.config.currentapp = undefined;
             return constantsMsg.NOERROR;
         }
         return constantsMsg.GENERICERROR + ' There is not an application selected';
     }
 
-
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PRIVATE METHOD
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private CheckViewGroup(viewgroup: ViewGroup): string {
-        if (!this.CheckViewGroupName(viewgroup)) {
+    private CheckApplication(app: Application): string {
+        if (!this.CheckApplicationName(app)) {
             return constantsMsg.DUPLICATENAME;
         }
         return constantsMsg.NOERROR;
     }
-    private CheckViewGroupName(viewgroup: ViewGroup): boolean {
+    private CheckApplicationName(app: Application): boolean {
         // Check name unique
-        return this.config.currentapp.viewgroups.findIndex(p => p.name.value == viewgroup.name.value && p.guid != viewgroup.guid) == -1;
+        return this.config.applications.findIndex(p => p.name.value === app.name.value && p.guid !== app.guid) === -1;
     }
 }
