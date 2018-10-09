@@ -16,12 +16,12 @@ export class BaseEntity {
     lockedBy: string;
     lockedDate: Date;
     version: string;
+    applicationsource: string;
     usableAsEntityStereotype: UsableAsEntityStereotype;
 
     constructor() {
         this.checkStatus = CheckStatus.New;
         this.usableAsEntityStereotype = new UsableAsEntityStereotype();
-        this.usableAsEntityStereotype.inheritanceType = InheritanceType.NoInheritance;
         
         this.guid  = ModelHelper.Guid();
         this.createDate = new Date(Date.now());

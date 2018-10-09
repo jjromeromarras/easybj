@@ -1,1 +1,4 @@
-VIEWGROUPS
+<app-viewgrid [columnDefs]="colData" [gridDataSource]='config.currentapp.viewgroups' (selectionChange)='onSelectionChange($event)'></app-viewgrid>
+<app-viewgroup *ngIf='showviewgroup' (close)='onCloseViewGroup()' [title]='title' [selectedViewGroup]='selectedItem'
+    [viewMode]='viewMode'></app-viewgroup>
+<app-dialog *ngIf="showDialog" [title]="dialogTitle" [message]="message" [dialogType]="dialogType" (onCloseDialog)="onCloseDialog($event)"></app-dialog>

@@ -31,6 +31,8 @@ import { LanguagesComponent } from '../component/languages/languages.component';
 import { ViewGridComponent } from '../component/interfaz/viewgrid/viewgrid.component';
 import { DialogComponent } from '../component/interfaz/dialog/dialog.component';
 import { ViewGroupsComponent } from '../component/viewgroups/viewgroups.component';
+import { ViewGroupComponent } from '../component/viewgroups/viewgroup.component';
+import { ViewGroupService } from '../services/viewgroups/viewgroup.services';
 
 
 @NgModule({
@@ -57,13 +59,14 @@ import { ViewGroupsComponent } from '../component/viewgroups/viewgroups.componen
     LanguagesComponent,
     LoginComponent,
     DialogComponent,
-    ViewGroupsComponent
+    ViewGroupsComponent,
+    ViewGroupComponent
   ],
   imports: [
     BrowserModule, DevExtremeModule, BrowserAnimationsModule, HttpModule, AgmCoreModule,
     APP_ROUTER, FormsModule
   ],
-  providers: [Config, ErrorHandlerService, BroadcasterService],
+  providers: [Config, ErrorHandlerService, BroadcasterService, ViewGroupService],
   bootstrap: [EasyBComponent]
 })
 export class MainModule { }

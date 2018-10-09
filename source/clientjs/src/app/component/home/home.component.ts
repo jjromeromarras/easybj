@@ -65,12 +65,30 @@ export class HomeComponent {
             this.executeNewApplication(params);
         };
 
+        const btneditapplication = new ActionToolbar();
+        btneditapplication.title = 'Edit application';
+        btneditapplication.image = 'ApplicationResources/img/R054ApplicationEdit32x32.png';
+        btneditapplication.sequence = 1;
+        btneditapplication.executeAction = (params: any) => {
+            this.executeEditApplication(params);
+        };
+
+        const btnremoveapplication = new ActionToolbar();
+        btnremoveapplication.title = 'Remove application';
+        btnremoveapplication.image = 'ApplicationResources/img/R053ApplicationRemove32x32.png';
+        btnremoveapplication.sequence = 1;
+        btnremoveapplication.executeAction = (params: any) => {
+            this.executeNewApplication(params);
+        };
+
         const btnimport = new ActionToolbar();
         btnimport.title = 'Import applications';
         btnimport.image = 'ApplicationResources/img/R057ApplicationImport32x32.png';
         btnimport.sequence = 2;
 
         programgroup.actions.push(btnnewapplication);
+        programgroup.actions.push(btneditapplication);
+        programgroup.actions.push(btnremoveapplication);
         programgroup.actions.push(btnimport);
 
         projectpage.groups.push(programgroup);
@@ -126,6 +144,14 @@ export class HomeComponent {
         this.shownewapplication = true;
         this.selectapp = new Application();
         this.opapplication = 'New Application';
+    }
+
+    private executeEditApplication(params: any) {
+        if (this.config.currentapp != undefined) {
+            this.selectapp = this.config.currentapp;
+            this.shownewapplication = true;
+            this.opapplication = 'Edit Application';
+        }
     }
 
     private executeShowLangauges(params: any) {

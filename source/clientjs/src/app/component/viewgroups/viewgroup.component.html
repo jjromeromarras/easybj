@@ -1,0 +1,14 @@
+<div>
+    <dx-popup [showTitle]="true" [title]="title" [height]='auto' [(visible)]="visible" (onHiding)="onHiding($event)">
+        <div *dxTemplate="let data of 'content'">
+            <app-entity-editor #formeditor [viewMode]='viewMode' [viewpanels]='viewPanels' [savedAndContinue]='false'>
+            </app-entity-editor>
+            <button type="button" class="btn btn-primary css3transition" (click)="onClickedSave()">
+                Save
+            </button>
+            <button type="button" class="btn btn-primary css3transition" (click)="onClickedCancel()">
+                Cancel
+            </button>
+        </div>
+    </dx-popup>
+</div>

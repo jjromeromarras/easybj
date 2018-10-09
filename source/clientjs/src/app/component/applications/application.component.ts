@@ -5,6 +5,7 @@ import { ViewPanel } from '../../model/interfaz/view/controls/viewpanel';
 import { eViewFieldTypes } from '../../model/interfaz/enums/eviewfieldtypes';
 import { eViewControlTypes } from '../../model/interfaz/enums/eviewcontroltypes';
 import { ViewHelper } from '../../model/interfaz/utils/viewhelper';
+import { Config } from '../../services/config.service';
 
 @Component(
     {
@@ -25,7 +26,8 @@ export class ApplicationComponent implements OnChanges {
     public inlineCreationVisible: boolean;
     public viewMode: eViewModes;
     public viewPanels: Array<ViewPanel>;
-
+    public appData: Array<Application>;
+    public showCheckBoxesMode: string;
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // INPUT/OUTPU METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,11 +40,12 @@ export class ApplicationComponent implements OnChanges {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CONSTRUCTOR
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    constructor() {
+    constructor(private config: Config) {
         this.inlineCreationVisible = true;
         this.cancelstr = 'Cancel';
         this.savestr = 'Save';
         this.auto = 'auto';
+        this.showCheckBoxesMode = 'normal';
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,6 +65,7 @@ export class ApplicationComponent implements OnChanges {
                 viewpanel, this.application.imagesFolder);
 
             this.viewPanels.push(viewpanel);
+            this.appData = this.config.applications.filter(p => p.guid != this.application.guid);
         }
     }
 

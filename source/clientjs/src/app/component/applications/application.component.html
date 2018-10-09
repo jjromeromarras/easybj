@@ -5,6 +5,16 @@
             <div class="btn-group button-options inlinecreationbuttons">
                 <app-entity-editor #formeditor [viewMode]='viewMode' [viewpanels]='viewPanels' [savedAndContinue]='false'>
                 </app-entity-editor>
+                <dx-tree-view #tree [dataSource]="appData" itemTemplate="itemTemplate" [selectByClick]="true"
+                    [showCheckBoxesMode]='showCheckBoxesMode'>
+
+                    <dxo-selection mode="multiple">
+                        <!-- "multiple" | "none" -->
+                    </dxo-selection>
+                    <div *dxTemplate="let itemObj of 'itemTemplate'">
+                        <i>{{itemObj.name.value}}</i>
+                    </div>
+                </dx-tree-view>
                 <button type="button" class="btn btn-primary css3transition" (click)="onClickedSave($event)">
                     {{savestr}}
                 </button>
