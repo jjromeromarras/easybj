@@ -1,0 +1,2 @@
+<app-viewgrid [columnDefs]="colData" [gridDataSource]='datasource' (selectionChange)='onSelectionChange($event)'></app-viewgrid>
+<app-dialog *ngIf="showDialog" [title]="dialogTitle" [message]="message" [dialogType]="dialogType" (onCloseDialog)="onCloseDialog($event)"></app-dialog>

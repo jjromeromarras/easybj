@@ -1,68 +1,72 @@
-import { Component, Input, Output, EventEmitter, SimpleChange, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
+import { List } from '../../model/application/list/list';
 import { PanelToolbar } from '../../model/interfaz/toolbar/paneltoolbar';
+import { eViewModes } from '../../model/interfaz/enums/eviewmodes';
 import { Config } from '../../services/config.service';
+import { ActionConfirmationModes } from '../interfaz/dialog/ActionConfirmationModes';
+import { eWorkAreaType } from '../../model/interfaz/enums/eworkareatype';
 import { GroupActionToolbar } from '../../model/interfaz/toolbar/groupactiontoolbar';
 import { ActionToolbar } from '../../model/interfaz/toolbar/actiontoolbar';
-import { ViewGroup } from '../../model/application/views/viewgroups';
-import { eWorkAreaType } from '../../model/interfaz/enums/eworkareatype';
 import { ViewHelper } from '../../model/interfaz/utils/viewhelper';
-import { eViewModes } from '../../model/interfaz/enums/eviewmodes';
-import { ActionConfirmationModes } from '../interfaz/dialog/ActionConfirmationModes';
+import { BroadcasterService } from 'ng-broadcaster';
 import { DialogResponse } from '../interfaz/dialog/dialogconstants';
-import { ViewGroupService } from '../../services/viewgroups/viewgroup.services';
-import { constantsMsg } from '../../model/common/constantsMsg';
+
 
 @Component(
     {
-        selector: 'app-viewgroups',
-        templateUrl: './viewgroups.component.html',
+        selector: 'app-lists',
+        templateUrl: './lists.component.html',
     }
 )
 
-export class ViewGroupsComponent {
-
+export class ListsComponent {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PUBLIC FIELDS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public selectedItem: ViewGroup;
+    public selectedItem: List;
     public pages: Array<PanelToolbar>;
     public colData: any[];
     public title: string;
     public viewMode: eViewModes;
-    public showviewgroup: boolean;
     public showDialog: boolean;
+    public showlist: boolean;
     public dialogTitle: string;
     public message: string;
     public dialogType: any;
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CONSTRUCTOR
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    constructor(public config: Config, private viewgroupservie: ViewGroupService) {
+    constructor(public config: Config, private messageeventservice: BroadcasterService) {
         this.SetInitialMenu();
         this.CreateColumns();
-        this.showviewgroup = false;
         this.showDialog = false;
+        this.showlist = false;
         this.dialogType = ActionConfirmationModes.YesNo;
-        this.dialogTitle = 'Remove view group';
-        this.message = 'Do you want to remove view group?';
+        this.dialogTitle = 'Remove list';
+        this.message = 'Do you want to remove list?';
         this.viewMode = eViewModes.Read;
 
+
+
     }
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PRIVATE METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     private SetInitialMenu() {
 
         this.pages = new Array<PanelToolbar>();
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// Project Page
         const page = new PanelToolbar();
-        page.title = 'View Groups';
+        page.title = 'Lists';
         page.sequence = 5;
-        page.type = eWorkAreaType.ViewGroups;
+        page.type = eWorkAreaType.List;
 
         const group = new GroupActionToolbar();
-        group.title = 'View Group';
+        group.title = 'List';
         group.sequence = 1;
 
         const btadd = new ActionToolbar();
@@ -70,7 +74,7 @@ export class ViewGroupsComponent {
         btadd.image = 'ApplicationResources/img/R167anadir_grupo_vistas_32x32.png';
         btadd.sequence = 1;
         btadd.executeAction = (params: any) => {
-            this.NewViewGroup();
+            //this.NewViewGroup();
         };
         group.actions.push(btadd);
 
@@ -79,7 +83,7 @@ export class ViewGroupsComponent {
         btedit.image = 'ApplicationResources/img/R175editar_grupo_vistas_32x32.png';
         btedit.sequence = 2;
         btedit.executeAction = (params: any) => {
-            this.EditViewGroup();
+            //this.EditViewGroup();
         };
         btedit.visibleAction = (params: any) => {
             return this.chekVisibility();
@@ -91,7 +95,7 @@ export class ViewGroupsComponent {
         btdel.image = 'ApplicationResources/img/R179eliminar_grupo_vistas_32x32.png';
         btdel.sequence = 3;
         btdel.executeAction = (params: any) => {
-            this.RemoveViewGroup();
+            //   this.RemoveViewGroup();
         };
         btdel.visibleAction = (params: any) => {
             return this.chekVisibility();
@@ -104,7 +108,7 @@ export class ViewGroupsComponent {
         gvisible.sequence = 2;
 
         const btviewuse = new ActionToolbar();
-        btviewuse.title = 'View Uses';
+        btviewuse.title = 'List Uses';
         btviewuse.image = 'ApplicationResources/img/R099Released32x32.png';
         btviewuse.sequence = 1;
         btviewuse.executeAction = (params: any) => {
@@ -120,7 +124,7 @@ export class ViewGroupsComponent {
     }
 
     private chekVisibility(): boolean {
-        return this.config.currentapp.viewgroups.length > 0;
+        return this.config.currentapp.lists.length > 0;
     }
     private CreateColumns() {
         this.colData = [];
@@ -130,27 +134,6 @@ export class ViewGroupsComponent {
         this.colData.push(ViewHelper.getGridColumnDefinition('Application Source', false, 'applicationsource', true, true, true));
     }
 
-    private NewViewGroup() {
-        this.title = 'New View Group';
-        this.viewMode = eViewModes.New;
-        this.selectedItem = new ViewGroup();
-        this.selectedItem.applicationsource = this.config.currentapp.name.value;
-        this.showviewgroup = true;
-    }
-
-    private EditViewGroup() {
-        if (this.selectedItem !== undefined) {
-            this.title = 'Edit View Group';
-            this.viewMode = eViewModes.Edit;
-            this.showviewgroup = true;
-        }
-    }
-
-    private RemoveViewGroup() {
-        if (this.selectedItem !== undefined) {
-            this.showDialog = true;
-        }
-    }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // HTML METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -159,16 +142,13 @@ export class ViewGroupsComponent {
         this.selectedItem = $event;
     }
 
-    onCloseViewGroup() {
-        this.showviewgroup = false;
-        this.selectedItem = undefined;
-    }
 
     onCloseDialog(e) {
+
         if (e === DialogResponse.Yes) {
-            if (this.viewgroupservie.RemoveViewGroup(this.selectedItem) === constantsMsg.NOERROR) {
-                this.selectedItem = undefined;
-            }
+            //    if (this.viewgroupservie.RemoveViewGroup(this.selectedItem) === constantsMsg.NOERROR) {
+            this.selectedItem = undefined;
+            //  }
         }
         this.showDialog = false;
     }

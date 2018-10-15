@@ -34,6 +34,9 @@ import { ViewGroupsComponent } from '../component/viewgroups/viewgroups.componen
 import { ViewGroupComponent } from '../component/viewgroups/viewgroup.component';
 import { ViewGroupService } from '../services/viewgroups/viewgroup.services';
 import { ApplicationService } from '../services/applications/application.services';
+import { ListsComponent } from '../component/list/lists.component';
+import { NewsComponent } from '../component/news/news.component';
+import { BaseGridComponent } from '../component/basegrid/basegrid.component';
 
 
 @NgModule({
@@ -61,7 +64,10 @@ import { ApplicationService } from '../services/applications/application.service
     LoginComponent,
     DialogComponent,
     ViewGroupsComponent,
-    ViewGroupComponent
+    ViewGroupComponent,
+    ListsComponent,
+    NewsComponent,
+    BaseGridComponent
   ],
   imports: [
     BrowserModule, DevExtremeModule, BrowserAnimationsModule, HttpModule, AgmCoreModule,

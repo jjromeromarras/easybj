@@ -86,9 +86,10 @@ export class ViewGroupComponent implements OnChanges {
             save = this.viewgroupservice.EditViewGroup(this.selectedViewGroup);
         }
 
-        if (save != constantsMsg.NOERROR)
-            alert(save)
-        else
+        if (save !== constantsMsg.NOERROR) {
+            alert(save);
+        } else {
             this.onClickedCancel();
+        }
     }
 }

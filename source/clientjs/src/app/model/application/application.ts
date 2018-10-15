@@ -17,6 +17,7 @@ import { Validator } from './views/validator/validator';
 import { ViewGroup } from './views/viewgroups';
 import { BindData } from './objstr';
 import { Subscription } from './subscription/subscription';
+import { List } from './list/list';
 
 
 export class Application extends BaseEntity {
@@ -43,6 +44,7 @@ export class Application extends BaseEntity {
     validators: Array<Validator>;
     versionId: string;
     viewgroups: Array<ViewGroup>;
+    lists: Array<List>;
 
     // TODO: WF, VISTAS Y WFSTATION
 
@@ -66,6 +68,7 @@ export class Application extends BaseEntity {
         this.subcriptions = new Array<Subscription>();
         this.validators = new Array<Validator>();
         this.viewgroups = new Array<ViewGroup>();
+        this.lists = new Array<List>();
 
         //// BIND DATA
         this.imagesFolder = new BindData();

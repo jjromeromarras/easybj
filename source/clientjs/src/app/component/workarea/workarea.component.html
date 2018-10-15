@@ -1,12 +1,18 @@
-<dx-tab-panel #tabPanel [dataSource]="pages" [selectedIndex]="0" [loop]="false" [deferRendering]="false" [animationEnabled]="true"
-    [swipeEnabled]="false">
+<dx-tab-panel #tabPanel [dataSource]="pages" [(selectedIndex)]="index" [loop]="false" [deferRendering]="false" [animationEnabled]="true"
+    [swipeEnabled]="false" (onSelectionChanged)='onSelectionChanged($event)'>
     <div *dxTemplate="let page of 'title'">
         <span>{{page.title}}</span>
-        <img (click)='onCloseTab(page)' src="ApplicationResources\img\close.png">
+        <img *ngIf="page.type!='News'" (click)='onCloseTab(page)' src="ApplicationResources\img\close.png">
     </div>
     <div *dxTemplate="let page of 'item'">
+        <div *ngIf="page.type=='News'" class="tabpanel-item">
+            <app-news> </app-news>
+        </div>
         <div *ngIf="page.type=='ViewGroups'" class="tabpanel-item">
             <app-viewgroups> </app-viewgroups>
+        </div>
+        <div *ngIf="page.type=='List'" class="tabpanel-item">
+            <app-lists> </app-lists>
         </div>
     </div>
 </dx-tab-panel>

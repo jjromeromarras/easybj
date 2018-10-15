@@ -20,4 +20,5 @@ export const eWorkAreaType = Object.freeze({
     WorkflowActions: 'WorkflowActions',
     Workflows: 'Workflows',
     WritingModel: 'WritingModel',
+    News: 'News'
 });

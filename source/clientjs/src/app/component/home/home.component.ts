@@ -6,6 +6,7 @@ import { Application } from '../../model/application/application';
 import { Config } from '../../services/config.service';
 import { BroadcasterService } from 'ng-broadcaster';
 import { eViewModes } from '../../model/interfaz/enums/eviewmodes';
+import { eWorkAreaType } from '../../model/interfaz/enums/eworkareatype';
 @Component(
     {
         selector: 'app-home',
@@ -54,6 +55,7 @@ export class HomeComponent {
         const projectpage = new PanelToolbar();
         projectpage.title = 'Project';
         projectpage.sequence = 1;
+        projectpage.type = eWorkAreaType.None;
         // Group Program
         const programgroup = new GroupActionToolbar();
         programgroup.title = 'Program';
@@ -165,9 +167,16 @@ export class HomeComponent {
     private registerTypeBroadcast() {
         this.subscriber = this.messageeventservice.on<any>('addMenuGroup')
             .subscribe(message => {
-                message.forEach(pg => {
-                    this.pages.push(pg);
-                });
+                if (message !== undefined) {
+                    message.forEach(pg => {
+                        if (this.pages.findIndex(p => p.type === pg.type) === -1) {
+                            this.pages.push(pg);
+                            this.pages = this.pages.filter(p => p.type === pg.type || p.type === eWorkAreaType.None);
+                        }
+                    });
+                } else {
+                    this.pages = this.pages.filter(p => p.type === eWorkAreaType.None);
+                }
 
             });
 

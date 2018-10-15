@@ -38,7 +38,7 @@ export class DialogComponent implements OnInit, AfterViewInit {
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // CONSTRUCTOR 
+    // CONSTRUCTOR
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(private config: Config, private changeDetectorRef: ChangeDetectorRef) {
         this.showPopup = true;
@@ -97,12 +97,12 @@ export class DialogComponent implements OnInit, AfterViewInit {
     }
 
     public onShown($event) {
-        this.buttonYesVisible = (this.dialogType == ActionConfirmationModes.YesNo)
-            || (this.dialogType == ActionConfirmationModes.YesNoCancel);
-        this.buttonNoVisible = (this.dialogType == ActionConfirmationModes.YesNo) 
-        || (this.dialogType == ActionConfirmationModes.YesNoCancel);
-        this.buttonCancelVisible = (this.dialogType == ActionConfirmationModes.YesNoCancel);
-        this.buttonExitVisible = (this.dialogType == ActionConfirmationModes.None);
+        this.buttonYesVisible = (this.dialogType === ActionConfirmationModes.YesNo)
+            || (this.dialogType === ActionConfirmationModes.YesNoCancel);
+        this.buttonNoVisible = (this.dialogType === ActionConfirmationModes.YesNo)
+            || (this.dialogType === ActionConfirmationModes.YesNoCancel);
+        this.buttonCancelVisible = (this.dialogType === ActionConfirmationModes.YesNoCancel);
+        this.buttonExitVisible = (this.dialogType === ActionConfirmationModes.None);
     }
 
 }

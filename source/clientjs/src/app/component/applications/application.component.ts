@@ -67,7 +67,7 @@ export class ApplicationComponent implements OnChanges {
                 viewpanel, this.application.imagesFolder);
 
             this.viewPanels.push(viewpanel);
-            this.appData = this.config.applications.filter(p => p.guid != this.application.guid);
+            this.appData = this.config.applications.filter(p => p.guid !== this.application.guid);
         }
     }
 
