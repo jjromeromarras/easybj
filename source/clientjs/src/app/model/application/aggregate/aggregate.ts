@@ -6,7 +6,6 @@ export class Aggregate extends BaseEntity {
     
     applicationName: string;
     assemblyFullName: string;
-    description: string;
     fromMetadata: boolean;
     fullName: string;
     internalName: string;

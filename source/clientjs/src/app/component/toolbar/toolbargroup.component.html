@@ -1,6 +1,6 @@
 <td *ngFor="let action of group.actions">
     <button [disabled]='!onVisible(action)' style="width: 100px; height: 80px" (click)='onClick(action)'>
-            <img src="{{action.image}}" alt="Mecalux Application Info">
+            <img src="{{action.image}}">
             <br>{{action.title}}
     </button>
 </td>

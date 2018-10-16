@@ -5,7 +5,6 @@ import { ViewGroup } from '../application/views/viewgroups';
 
 export class SecGroup extends BaseEntity {
 
-    description: string;
     emailAddress: string;
     actions: Array<Action>;
     rfMenuItems: Array<RFMenuItem>;

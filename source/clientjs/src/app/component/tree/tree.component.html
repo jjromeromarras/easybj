@@ -3,16 +3,17 @@
         Navigation
     </th>
     <tr>
-        <dx-tree-view #tree [dataSource]="tenantdata" itemTemplate="itemTemplate"
-        [selectByClick]="true"
-        (onItemSelectionChanged)="onItemSelectionChanged($event)"
-        (onItemExpanded)="onItemExpanded($event)">
-        
+        <dx-tree-view #tree [dataSource]="tenantdata" itemTemplate="itemTemplate" [selectByClick]="true"
+            (onItemSelectionChanged)="onItemSelectionChanged($event)" (onItemExpanded)="onItemExpanded($event)">
+
             <dxo-selection mode="single">
                 <!-- "multiple" | "none" -->
             </dxo-selection>
             <div *dxTemplate="let itemObj of 'itemTemplate'">
-                <i>{{itemObj.text}}</i>
+                <div>
+                    <img src="{{itemObj.image}}">
+                    {{itemObj.text}}
+                </div>
             </div>
         </dx-tree-view>
     </tr>

@@ -4,7 +4,6 @@ import { BaseEntity } from '../common/baseentity'
 import { SecGroup } from './secgroup';
 
 export class Organization extends BaseEntity {
-    description: string;
     isActive: boolean;
     onlineMode: boolean;
     menuItems: Array<MenuItem>;

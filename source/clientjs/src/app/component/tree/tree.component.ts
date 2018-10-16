@@ -26,18 +26,20 @@ export class TreeComponent implements OnDestroy {
     public tenantdata = [{
         id: '1',
         text: 'Organization',
+        image: 'ApplicationResources/img16/appelements.png',
         expanded: false,
         items: [
-            { id: '1_1', text: 'Jobs (0)', expanded: true },
-            { id: '1_2', text: 'MenuItems (0)', expanded: true },
-            { id: '1_3', text: 'Resources (0)', expanded: true },
-            { id: '1_4', text: 'RFMenuItems (0)', expanded: true },
-            { id: '1_5', text: 'Users groups (0)', expanded: true },
+            { id: '_jobs', text: 'Jobs (0)', image: 'ApplicationResources/img16/jobs.png' },
+            { id: '_menuitems', text: 'MenuItems (0)', image: 'ApplicationResources/img16/menuitems.png' },
+            { id: '_resources', text: 'Resources (0)', image: 'ApplicationResources/img16/resources.png' },
+            { id: '_RFMenuItems', text: 'RFMenuItems (0)', image: 'ApplicationResources/img16/rfmenu.png' },
+            { id: '_UsersGroups', text: 'Users group (0)', image: 'ApplicationResources/img16/usergroups.png' },
         ]
     }, {
         id: '2',
         text: 'Applications',
         expanded: true,
+        image: 'ApplicationResources/img16/applications.png',
         items: [
         ]
     }];
@@ -75,8 +77,8 @@ export class TreeComponent implements OnDestroy {
     private createTreeApp() {
         this.tenantdata[1].items = [];
         this.config.applications.forEach(app => {
-
-            this.tenantdata[1].items.push(this.createNodeApp(app.guid, app.name.value));
+            const node = this.createNodeApp(app.guid, app.name.value);
+            this.tenantdata[1].items.push(node);
         });
         this.treeView.instance.option('items', this.tenantdata);
     }
@@ -92,33 +94,36 @@ export class TreeComponent implements OnDestroy {
             text: name,
             expanded: expand,
             type: 'application',
+            image: !expand ? 'ApplicationResources/img16/application.png' : 'ApplicationResources/img16/currentapplication.png',
             items: [
                 {
                     id: name + '_ap',
                     text: 'Application elements',
                     expanded: expand,
+                    image: 'ApplicationResources/img16/appelements.png',
                     items: [
-                        { id: name + '_jobs', text: 'Jobs (0)' },
-                        { id: name + '_menuitems', text: 'MenuItems (0)' },
-                        { id: name + '_RFMenuItems', text: 'RFMenuItems (0)' },
-                        { id: name + '_UsersGroups', text: 'Users group (0)' },
+                        { id: name + '_jobs', text: 'Jobs (0)', image: 'ApplicationResources/img16/jobs.png' },
+                        { id: name + '_menuitems', text: 'MenuItems (0)', image: 'ApplicationResources/img16/menuitems.png' },
+                        { id: name + '_RFMenuItems', text: 'RFMenuItems (0)', image: 'ApplicationResources/img16/rfmenu.png' },
+                        { id: name + '_UsersGroups', text: 'Users group (0)', image: 'ApplicationResources/img16/usergroups.png' },
                     ]
                 },
-                { id: name + '_commands', text: 'Commands (0)' },
-                { id: name + '_dialogs', text: 'Dialogs (0)' },
-                { id: name + '_entities', text: 'Entities (0)' },
-                { id: name + '_events', text: 'Events (0)' },
-                { id: name + '_fieldtype', text: 'Field types (0)' },
-                { id: name + '_list', text: 'List (0)' },
-                { id: name + '_queries', text: 'Queries (0)' },
-                { id: name + '_records', text: 'Records (0)' },
-                { id: name + '_resources', text: 'Resources (0)' },
-                { id: name + '_subscriptions', text: 'Validators (0)' },
-                { id: name + '_views', text: 'Views (0)' },
-                { id: name + '_viewgroups', text: 'View Groups (0)' },
-                { id: name + '_wfaction', text: 'Workflow actions (0)' },
-                { id: name + '_workflows', text: 'Workflows (0)' },
-                { id: name + '_writing', text: 'Writing Model (0)' },
+                { id: name + '_commands', text: 'Commands (0)', image: 'ApplicationResources/img16/comando.png' },
+                { id: name + '_dialogs', text: 'Dialogs (0)', image: 'ApplicationResources/img16/dialogs.png' },
+                { id: name + '_entities', text: 'Entities (0)', image: 'ApplicationResources/img16/entities.png' },
+                { id: name + '_events', text: 'Events (0)', image: 'ApplicationResources/img16/events.png' },
+                { id: name + '_fieldtypes', text: 'Field types (0)', image: 'ApplicationResources/img16/fieldtypes.png' },
+                { id: name + '_list', text: 'Lists (0)', image: 'ApplicationResources/img16/lists.png' },
+                { id: name + '_queries', text: 'Queries (0)', image: 'ApplicationResources/img16/queries.png' },
+                { id: name + '_records', text: 'Records (0)', image: 'ApplicationResources/img16/records.png' },
+                { id: name + '_resources', text: 'Resources (0)', image: 'ApplicationResources/img16/resources.png' },
+                { id: name + '_subscriptions', text: 'Subcriptions (0)', image: 'ApplicationResources/img16/subscriptions.png' },
+                { id: name + '_validators', text: 'Validators (0)', image: 'ApplicationResources/img16/validators.png' },
+                { id: name + '_views', text: 'Views (0)', image: 'ApplicationResources/img16/views.png' },
+                { id: name + '_viewgroups', text: 'View Groups (0)', image: 'ApplicationResources/img16/viewgroups.png' },
+                { id: name + '_wfaction', text: 'Workflow actions (0)', image: 'ApplicationResources/img16/wfactions.png' },
+                { id: name + '_workflows', text: 'Workflows (0)', image: 'ApplicationResources/img16/workflows.png' },
+                { id: name + '_writing', text: 'Writing Model (0)', image: 'ApplicationResources/img16/writingmodel.png' },
             ]
         };
 

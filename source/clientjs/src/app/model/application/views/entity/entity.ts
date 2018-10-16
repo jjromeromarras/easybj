@@ -6,7 +6,6 @@ import { Property } from "./property";
 export class Entity extends BaseEntity {
     isTemplate: boolean;
     MaxLengthNameDatawarehouse: number = 28;
-    description: string;
     fromMetadata: boolean;
     isDataWarehouse: boolean;
     pluralName: Resource;

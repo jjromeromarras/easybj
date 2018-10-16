@@ -37,6 +37,7 @@ import { ApplicationService } from '../services/applications/application.service
 import { ListsComponent } from '../component/list/lists.component';
 import { NewsComponent } from '../component/news/news.component';
 import { BaseGridComponent } from '../component/basegrid/basegrid.component';
+import { FieldTypesComponent } from '../component/fieldtype/fieldtypes.component';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { BaseGridComponent } from '../component/basegrid/basegrid.component';
     ViewGroupComponent,
     ListsComponent,
     NewsComponent,
-    BaseGridComponent
+    BaseGridComponent,
+    FieldTypesComponent
   ],
   imports: [
     BrowserModule, DevExtremeModule, BrowserAnimationsModule, HttpModule, AgmCoreModule,

@@ -1,5 +1,5 @@
-<dx-tab-panel #tabPanel [dataSource]="pages" [(selectedIndex)]="index" [loop]="false" [deferRendering]="false" [animationEnabled]="true"
-    [swipeEnabled]="false" (onSelectionChanged)='onSelectionChanged($event)'>
+<dx-tab-panel #tabPanel [dataSource]="pages" [(selectedIndex)]="index" [loop]="false" [deferRendering]="false"
+    [animationEnabled]="true" [swipeEnabled]="false" (onSelectionChanged)='onSelectionChanged($event)'>
     <div *dxTemplate="let page of 'title'">
         <span>{{page.title}}</span>
         <img *ngIf="page.type!='News'" (click)='onCloseTab(page)' src="ApplicationResources\img\close.png">
@@ -13,6 +13,9 @@
         </div>
         <div *ngIf="page.type=='List'" class="tabpanel-item">
             <app-lists> </app-lists>
+        </div>
+        <div *ngIf="page.type=='FieldTypes'" class="tabpanel-item">
+            <app-fieldtypes> </app-fieldtypes>
         </div>
     </div>
 </dx-tab-panel>

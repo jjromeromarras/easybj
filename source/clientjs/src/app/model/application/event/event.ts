@@ -3,7 +3,6 @@ import { EventProperty } from './eventproperty';
 
 export class Event extends BaseEntity {
     isTemplate: boolean;
-    description: string;
     fromMetadata: boolean;
     internalName: string;
     isPublic: boolean;

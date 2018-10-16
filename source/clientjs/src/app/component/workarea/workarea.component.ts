@@ -48,6 +48,9 @@ export class WorkAreaComponent {
                 if (message.indexOf('list') !== -1) {
                     this.createSelectedTab(eWorkAreaType.List, 'List');
                 }
+                if (message.indexOf('fieldtypes') !== -1) {
+                    this.createSelectedTab(eWorkAreaType.FieldTypes, 'Field Types');
+                }
 
             });
     }

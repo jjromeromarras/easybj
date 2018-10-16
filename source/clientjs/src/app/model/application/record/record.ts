@@ -5,7 +5,6 @@ import { RecordType } from './recordtype';
 export class Record extends BaseEntity {
 
     autoUpdateLength: boolean;
-    description: string;
     fieldRecords: Array<FieldRecord>;
     overridenVersionId: string;
     recordType: RecordType;

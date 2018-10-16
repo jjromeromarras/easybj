@@ -6,7 +6,6 @@ export class AggregateProperty extends BaseEntity {
     enumFullName: string;
     recordName: string;
     dataType: AggregatePropertyDataType;
-    description: string;
     obsolete: boolean;
     obsoleteMessage: string;
     originalName: string;

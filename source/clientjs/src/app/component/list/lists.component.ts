@@ -71,7 +71,7 @@ export class ListsComponent {
 
         const btadd = new ActionToolbar();
         btadd.title = 'Add';
-        btadd.image = 'ApplicationResources/img/R167anadir_grupo_vistas_32x32.png';
+        btadd.image = 'ApplicationResources/img/R111alta_gestion_listas_32x32.png';
         btadd.sequence = 1;
         btadd.executeAction = (params: any) => {
             //this.NewViewGroup();
@@ -80,7 +80,7 @@ export class ListsComponent {
 
         const btedit = new ActionToolbar();
         btedit.title = 'Edit';
-        btedit.image = 'ApplicationResources/img/R175editar_grupo_vistas_32x32.png';
+        btedit.image = 'ApplicationResources/img/R120editar_gestion_listas_32x32.png';
         btedit.sequence = 2;
         btedit.executeAction = (params: any) => {
             //this.EditViewGroup();
@@ -92,7 +92,7 @@ export class ListsComponent {
 
         const btdel = new ActionToolbar();
         btdel.title = 'Remove';
-        btdel.image = 'ApplicationResources/img/R179eliminar_grupo_vistas_32x32.png';
+        btdel.image = 'ApplicationResources/img/R114borrar_gestion_listas_32x32.png';
         btdel.sequence = 3;
         btdel.executeAction = (params: any) => {
             //   this.RemoveViewGroup();

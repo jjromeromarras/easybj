@@ -8,6 +8,7 @@ import { BindData } from '../application/objstr';
 export class BaseEntity {
     guid: string;
     checkStatus: CheckStatus;
+    description: BindData;    
     name: BindData;
     createDate: Date;
     createdBy: string;
@@ -26,6 +27,7 @@ export class BaseEntity {
         this.guid  = ModelHelper.Guid();
         this.createDate = new Date(Date.now());
         this.name = new BindData();
+        this.description = new BindData();
 
     }
 }
