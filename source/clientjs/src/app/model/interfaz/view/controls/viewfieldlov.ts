@@ -14,4 +14,10 @@ export class ViewFieldLov {
     sqlOrderBy: string;
     sqlWhere: string;
     valueProperty: Property;
+
+    constructor(){
+        this.listOfValues= new Array<Lov>();
+        this.showProperties = new Array<Property>();
+    
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnChanges, SimpleChange } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChange, OnDestroy } from '@angular/core';
 import { eViewModes } from '../../model/interfaz/enums/eviewmodes';
 import { DialogResponse } from '../interfaz/dialog/dialogconstants';
 import { PanelToolbar } from '../../model/interfaz/toolbar/paneltoolbar';
@@ -12,7 +12,7 @@ import { forEach } from '@angular/router/src/utils/collection';
     }
 )
 
-export class BaseGridComponent implements OnChanges {
+export class BaseGridComponent implements OnChanges, OnDestroy {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // INPUT/OUTPUT FIELDS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -37,9 +37,14 @@ export class BaseGridComponent implements OnChanges {
     // CONSTRUCTOR
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     constructor(private messageeventservice: BroadcasterService) {
+        this.subscriber = undefined;
         this.registerTypeBroadcast();
     }
-
+    ngOnDestroy() {
+        if (this.subscriber != undefined) {
+            this.subscriber = undefined;        
+        }
+    }
     ngOnChanges(changes: { [propkey: string]: SimpleChange }) {
         for (const propName in changes) {
             if (propName === 'pages') {
@@ -51,12 +56,15 @@ export class BaseGridComponent implements OnChanges {
     // PRIVATE METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private registerTypeBroadcast() {
-        this.subscriber = this.messageeventservice.on<any>('addMenuComponent')
-            .subscribe(message => {
-                if (message === this.type) {
-                    this.messageeventservice.broadcast('addMenuGroup', this.pages);
-                }
-            });
+        if (this.subscriber === undefined) {
+            const me = this;
+            this.subscriber = this.messageeventservice.on<any>('addMenuComponent')
+                .subscribe(message => {
+                    if (message === me.type) {
+                        me.messageeventservice.broadcast('addMenuGroup', me.pages);
+                    }
+                });
+        }
 
 
     }

@@ -49,6 +49,7 @@ export class ViewField extends ViewControl {
                 this.isRequired = false;
                 this.allowEdit = true;
                 this.allowSearch = false;
+                this.viewFieldLOV = new ViewFieldLov();
         }
 
 }

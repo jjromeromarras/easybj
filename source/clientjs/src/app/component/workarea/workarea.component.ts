@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Config } from '../../services/config.service';
 import { BroadcasterService } from 'ng-broadcaster';
 import { WorkPageControl } from '../../model/interfaz/view/controls/workpagecontrol';
@@ -10,7 +10,7 @@ import { eWorkAreaType } from '../../model/interfaz/enums/eworkareatype';
     }
 )
 
-export class WorkAreaComponent {
+export class WorkAreaComponent implements OnDestroy {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PUBLIC FIELDS
@@ -33,26 +33,34 @@ export class WorkAreaComponent {
         wk.title = 'News';
         wk.type = eWorkAreaType.News;
         this.pages.push(wk);
+        this.sub = undefined;
         this.registerTypeBroadcast();
     }
 
+    ngOnDestroy() {
+        if (this.sub != undefined) {
+            this.sub = undefined;
+        }
+    }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PRIVATE METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private registerTypeBroadcast() {
-        this.sub = this.messageeventservice.on<string>('selectOptionTreeApp')
-            .subscribe(message => {
-                if (message.indexOf('viewgroups') !== -1) {
-                    this.createSelectedTab(eWorkAreaType.ViewGroups, 'View Groups');
-                }
-                if (message.indexOf('list') !== -1) {
-                    this.createSelectedTab(eWorkAreaType.List, 'List');
-                }
-                if (message.indexOf('fieldtypes') !== -1) {
-                    this.createSelectedTab(eWorkAreaType.FieldTypes, 'Field Types');
-                }
+        if (this.sub === undefined) {
+            this.sub = this.messageeventservice.on<string>('selectOptionTreeApp')
+                .subscribe(message => {
+                    if (message.indexOf('viewgroups') !== -1) {
+                        this.createSelectedTab(eWorkAreaType.ViewGroups, 'View Groups');
+                    }
+                    if (message.indexOf('list') !== -1) {
+                        this.createSelectedTab(eWorkAreaType.List, 'List');
+                    }
+                    if (message.indexOf('fieldtypes') !== -1) {
+                        this.createSelectedTab(eWorkAreaType.FieldTypes, 'Field Types');
+                    }
 
-            });
+                });
+        }
     }
 
     private createSelectedTab(type: any, title: string) {

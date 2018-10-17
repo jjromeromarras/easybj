@@ -2,6 +2,7 @@ import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { Config } from '../../services/config.service';
 import { BroadcasterService } from 'ng-broadcaster';
 import { DxTreeViewComponent } from 'devextreme-angular';
+import { Application } from '../../model/application/application';
 
 
 @Component(
@@ -77,14 +78,16 @@ export class TreeComponent implements OnDestroy {
     private createTreeApp() {
         this.tenantdata[1].items = [];
         this.config.applications.forEach(app => {
-            const node = this.createNodeApp(app.guid, app.name.value);
+            const node = this.createNodeApp(app);
             this.tenantdata[1].items.push(node);
         });
         this.treeView.instance.option('items', this.tenantdata);
     }
 
-    private createNodeApp(id: string, name: string): any {
+    private createNodeApp(app: Application): any {
         let expand = false;
+        const id = app.guid;
+        const name = app.name.value;
         if (this.config.currentapp !== undefined) {
             expand = this.config.currentapp.name.value === name;
         }
@@ -112,7 +115,7 @@ export class TreeComponent implements OnDestroy {
                 { id: name + '_dialogs', text: 'Dialogs (0)', image: 'ApplicationResources/img16/dialogs.png' },
                 { id: name + '_entities', text: 'Entities (0)', image: 'ApplicationResources/img16/entities.png' },
                 { id: name + '_events', text: 'Events (0)', image: 'ApplicationResources/img16/events.png' },
-                { id: name + '_fieldtypes', text: 'Field types (0)', image: 'ApplicationResources/img16/fieldtypes.png' },
+                { id: name + '_fieldtypes', text: 'Field types ('+app.fieltypes.length+')', image: 'ApplicationResources/img16/fieldtypes.png' },
                 { id: name + '_list', text: 'Lists (0)', image: 'ApplicationResources/img16/lists.png' },
                 { id: name + '_queries', text: 'Queries (0)', image: 'ApplicationResources/img16/queries.png' },
                 { id: name + '_records', text: 'Records (0)', image: 'ApplicationResources/img16/records.png' },

@@ -1,9 +1,9 @@
 export enum CheckStatus {
-    None = 0,
-    Default = 1,
-    New = 2,
-    Editable = 3,
-    Locked = 4,
-    DeletePending = 5,
-    Deleted = 6,
+    None = 'None',
+    Default = 'Readonly',
+    New = 'New',
+    Editable = 'Editable',
+    Locked = 'Locked',
+    DeletePending = 'DeletePending',
+    Deleted = 'Deleted',
 };

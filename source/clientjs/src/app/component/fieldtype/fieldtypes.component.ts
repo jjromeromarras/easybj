@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { List } from '../../model/application/list/list';
 import { PanelToolbar } from '../../model/interfaz/toolbar/paneltoolbar';
 import { eViewModes } from '../../model/interfaz/enums/eviewmodes';
 import { Config } from '../../services/config.service';
@@ -11,6 +10,9 @@ import { ViewHelper } from '../../model/interfaz/utils/viewhelper';
 import { BroadcasterService } from 'ng-broadcaster';
 import { DialogResponse } from '../interfaz/dialog/dialogconstants';
 import { FieldType } from '../../model/application/field/fieldtype';
+import { FieldTypeService } from '../../services/fieldtypes/fieldtype.services';
+import { constantsMsg } from '../../model/common/constantsMsg';
+import { CheckStatus } from '../../model/common/checkstatus';
 
 
 @Component(
@@ -30,7 +32,7 @@ export class FieldTypesComponent {
     public title: string;
     public viewMode: eViewModes;
     public showDialog: boolean;
-    public showlist: boolean;
+    public showFieldType: boolean;
     public dialogTitle: string;
     public message: string;
     public dialogType: any;
@@ -38,11 +40,11 @@ export class FieldTypesComponent {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CONSTRUCTOR
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    constructor(public config: Config, private messageeventservice: BroadcasterService) {
+    constructor(public config: Config, private messageeventservice: BroadcasterService, private service: FieldTypeService) {
         this.SetInitialMenu();
         this.CreateColumns();
         this.showDialog = false;
-        this.showlist = false;
+        this.showFieldType = false;
         this.dialogType = ActionConfirmationModes.YesNo;
         this.dialogTitle = 'Remove field type';
         this.message = 'Do you want to remove field type?';
@@ -64,7 +66,7 @@ export class FieldTypesComponent {
         const page = new PanelToolbar();
         page.title = 'Field types';
         page.sequence = 5;
-        page.type = eWorkAreaType.List;
+        page.type = eWorkAreaType.FieldTypes;
 
         const group = new GroupActionToolbar();
         group.title = 'Field type';
@@ -75,7 +77,7 @@ export class FieldTypesComponent {
         btadd.image = 'ApplicationResources/img/R112alta_tipo_dato_32x32.png';
         btadd.sequence = 1;
         btadd.executeAction = (params: any) => {
-            //this.NewViewGroup();
+            this.New();
         };
         group.actions.push(btadd);
 
@@ -84,10 +86,10 @@ export class FieldTypesComponent {
         btedit.image = 'ApplicationResources/img/R121editar_tipo_dato_32x32.png';
         btedit.sequence = 2;
         btedit.executeAction = (params: any) => {
-            //this.EditViewGroup();
+            this.Edit();
         };
         btedit.visibleAction = (params: any) => {
-            return this.chekVisibility();
+            return this.chekVisibilityCheckIn();
         };
         group.actions.push(btedit);
 
@@ -96,14 +98,14 @@ export class FieldTypesComponent {
         btdel.image = 'ApplicationResources/img/R115borrar_tipo_dato_32x32.png';
         btdel.sequence = 3;
         btdel.executeAction = (params: any) => {
-            //   this.RemoveViewGroup();
+            this.Remove();
         };
         btdel.visibleAction = (params: any) => {
-            return this.chekVisibility();
+            return this.chekVisibilityCheckIn();
         };
         group.actions.push(btdel);
         page.groups.push(group);
-        
+
         const gcheckin = new GroupActionToolbar();
         gcheckin.title = 'Checkin/Checkout';
         gcheckin.sequence = 3;
@@ -112,7 +114,10 @@ export class FieldTypesComponent {
         btcheckinall.title = 'Checkin all';
         btcheckinall.image = 'ApplicationResources/img/R146checkin_all_32x32.png';
         btcheckinall.executeAction = (params: any) => {
-            //this.NewLanguage();
+            this.CheckinAll();
+        };
+        btcheckinall.visibleAction = (params: any) => {
+            return this.chekVisibilityCheckIn();
         };
 
 
@@ -120,14 +125,19 @@ export class FieldTypesComponent {
         btcheckin.title = 'Checkin';
         btcheckin.image = 'ApplicationResources/img/R058checkinResource32x32.png';
         btcheckin.executeAction = (params: any) => {
-            //this.NewLanguage();
+            this.Checkin();
         };
-
+        btcheckin.visibleAction = (params: any) => {
+            return this.chekVisibilityCheckIn();
+        };
         const btcheckout = new ActionToolbar();
         btcheckout.title = 'Checkout';
         btcheckout.image = 'ApplicationResources/img/R060CheckoutResource32x32.png';
         btcheckout.executeAction = (params: any) => {
-            //this.NewLanguage();
+            this.Checkout();
+        };
+        btcheckout.visibleAction = (params: any) => {
+            return this.chekVisibilityCheckOut();
         };
 
         gcheckin.actions.push(btcheckinall);
@@ -141,7 +151,7 @@ export class FieldTypesComponent {
         gvisible.sequence = 3;
 
         const btviewuse = new ActionToolbar();
-        btviewuse.title = 'List Uses';
+        btviewuse.title = 'Field Type Uses';
         btviewuse.image = 'ApplicationResources/img/R099Released32x32.png';
         btviewuse.sequence = 1;
         btviewuse.executeAction = (params: any) => {
@@ -151,8 +161,8 @@ export class FieldTypesComponent {
             return this.chekVisibility();
         };
         gvisible.actions.push(btviewuse);
-        
-        page.groups.push(gvisible);        
+
+        page.groups.push(gvisible);
 
         this.pages.push(page);
     }
@@ -160,17 +170,76 @@ export class FieldTypesComponent {
     private chekVisibility(): boolean {
         return this.config.currentapp.fieltypes.length > 0;
     }
+
+    private chekVisibilityCheckIn(): boolean {
+        return this.chekVisibility() && this.selectedItem !== undefined && this.selectedItem.checkStatus === CheckStatus.Editable;
+    }
+    private chekVisibilityCheckOut(): boolean {
+        return this.chekVisibility() && this.selectedItem !== undefined && this.selectedItem.checkStatus === CheckStatus.Default;
+    }
     private CreateColumns() {
         this.colData = [];
         this.colData.push(ViewHelper.getGridColumnDefinition('Check status', false, 'checkStatus', true, true, true));
         this.colData.push(ViewHelper.getGridColumnDefinition('Name', false, 'name.value', true, true, true));
         this.colData.push(ViewHelper.getGridColumnDefinition('Description', false, 'description.value', true, true, true));
-        this.colData.push(ViewHelper.getGridColumnDefinition('Type', false, 'stereotype', true, true, true));
+        this.colData.push(ViewHelper.getGridColumnDefinition('Type', false, 'stereotype.value', true, true, true));
         this.colData.push(ViewHelper.getGridColumnDefinition('Entity type', false, 'entityStereotypeInternal.value', true, true, true));
         this.colData.push(ViewHelper.getGridColumnDefinition('Locked by', false, 'lockedBy', true, true, true));
         this.colData.push(ViewHelper.getGridColumnDefinition('Inheritance type', false,
             'usableAsEntityStereotype.inheritanceType', true, true, true));
         this.colData.push(ViewHelper.getGridColumnDefinition('Application Source', false, 'applicationsource', true, true, true));
+    }
+
+    private New() {
+        this.title = 'New Field Type';
+        this.viewMode = eViewModes.New;
+        this.selectedItem = new FieldType();
+        this.selectedItem.applicationsource = this.config.currentapp.name.value;
+        this.showFieldType = true;
+    }
+
+    private Edit() {
+        if (this.selectedItem !== undefined) {
+            this.title = 'Edit Field Type';
+            this.viewMode = eViewModes.Edit;
+            this.showFieldType = true;
+        }
+    }
+
+    private Remove() {
+        if (this.selectedItem !== undefined) {
+            this.showDialog = true;
+        }
+    }
+
+    private Checkin() {
+        if (this.selectedItem !== undefined && this.selectedItem.checkStatus === CheckStatus.Editable) {
+            const result = this.service.CheckIn(this.selectedItem);
+            if (result !== constantsMsg.NOERROR) {
+                alert(result);
+            }
+        }
+    }
+
+    private CheckinAll() {
+        if (this.config.currentapp !== undefined) {
+            this.config.currentapp.fieltypes.filter(p => p.checkStatus === CheckStatus.Editable).forEach(f => {
+                const result = this.service.CheckIn(f);
+                if (result !== constantsMsg.NOERROR) {
+                    alert(result);
+                }
+
+            });
+        }
+    }
+
+    private Checkout() {
+        if (this.selectedItem !== undefined && this.selectedItem.checkStatus === CheckStatus.Default) {
+            const result = this.service.CheckOut(this.selectedItem);
+            if (result !== constantsMsg.NOERROR) {
+                alert(result);
+            }
+        }
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -181,13 +250,17 @@ export class FieldTypesComponent {
         this.selectedItem = $event;
     }
 
+    onCloseFieldType() {
+        this.showFieldType = false;
+        this.selectedItem = undefined;
+    }
 
     onCloseDialog(e) {
 
         if (e === DialogResponse.Yes) {
-            //    if (this.viewgroupservie.RemoveViewGroup(this.selectedItem) === constantsMsg.NOERROR) {
-            this.selectedItem = undefined;
-            //  }
+            if (this.service.Remove(this.selectedItem) === constantsMsg.NOERROR) {
+                this.selectedItem = undefined;
+            }
         }
         this.showDialog = false;
     }

@@ -38,6 +38,8 @@ import { ListsComponent } from '../component/list/lists.component';
 import { NewsComponent } from '../component/news/news.component';
 import { BaseGridComponent } from '../component/basegrid/basegrid.component';
 import { FieldTypesComponent } from '../component/fieldtype/fieldtypes.component';
+import { FieldTypeComponent } from '../component/fieldtype/fieldtype.component';
+import { FieldTypeService } from '../services/fieldtypes/fieldtype.services';
 
 
 @NgModule({
@@ -69,13 +71,14 @@ import { FieldTypesComponent } from '../component/fieldtype/fieldtypes.component
     ListsComponent,
     NewsComponent,
     BaseGridComponent,
-    FieldTypesComponent
+    FieldTypesComponent,
+    FieldTypeComponent
   ],
   imports: [
     BrowserModule, DevExtremeModule, BrowserAnimationsModule, HttpModule, AgmCoreModule,
     APP_ROUTER, FormsModule
   ],
-  providers: [Config, ErrorHandlerService, BroadcasterService, ViewGroupService, ApplicationService],
+  providers: [Config, ErrorHandlerService, BroadcasterService, ViewGroupService, ApplicationService, FieldTypeService],
   bootstrap: [EasyBComponent]
 })
 export class MainModule { }

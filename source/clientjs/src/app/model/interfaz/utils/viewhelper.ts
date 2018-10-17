@@ -9,8 +9,8 @@ import { ViewField } from '../view/controls/viewfield';
 @Injectable()
 export class ViewHelper {
 
-    public static createViewField(title: string, vftype: string, type: string, sequence: number, colSpan: number,
-        isRequired: boolean, panel: ViewPanel, data: any) {
+    public static  createViewField(title: string, vftype: string, type: string, sequence: number, colSpan: number,
+        isRequired: boolean, panel: ViewPanel, data: any): ViewField {
 
         const vf = new ViewField();
         vf.title = title;
@@ -22,7 +22,7 @@ export class ViewHelper {
         vf.dataobj = data;
         panel.controls.push(vf);
         panel.viewFields.push(vf);
-
+        return vf
     }
     public static getGridColumnDefinition(title: string, hidecol: Boolean, dataFieldName: String,
         allowResizing: boolean, allowFiltering: boolean, allowSorting: boolean): any {

@@ -87,10 +87,8 @@ export class ViewFieldSelectBoxComponent implements OnInit {
             // In this case, if the datasource has only one row it must be selected
             this.renderOnCreate = this.viewField.isRequired;
 
-            let isListOfValues = (this.viewField.viewFieldLOV.listOfValues != undefined && this.viewField.viewFieldLOV.listOfValues.length > 0);
 
-            if ((this.viewField.viewFieldType == eViewFieldTypes.AutoCompleteLookup && !isListOfValues) ||
-                (this.viewField.viewFieldType == eViewFieldTypes.DropDownList && this.viewField.allowSearch && !isListOfValues)) {
+            if (this.viewField.allowSearch) {
                 this.searchEnabled = true;
             }
 
