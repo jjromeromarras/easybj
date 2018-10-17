@@ -1,14 +1,13 @@
-import { ModelHelper } from '../../utils/modelhelper'
-import { CheckStatus } from './checkstatus'
+import { ModelHelper } from '../../utils/modelhelper';
+import { CheckStatus } from './checkstatus';
 import { UsableAsEntityStereotype } from './usableasentitystereotype';
-import { InheritanceType } from './Inheritancetype';
 import { BindData } from '../application/objstr';
 
 
 export class BaseEntity {
     guid: string;
     checkStatus: CheckStatus;
-    description: BindData;    
+    description: BindData;
     name: BindData;
     createDate: Date;
     createdBy: string;
@@ -23,8 +22,8 @@ export class BaseEntity {
     constructor() {
         this.checkStatus = CheckStatus.New;
         this.usableAsEntityStereotype = new UsableAsEntityStereotype();
-        
-        this.guid  = ModelHelper.Guid();
+
+        this.guid = ModelHelper.Guid();
         this.createDate = new Date(Date.now());
         this.name = new BindData();
         this.description = new BindData();

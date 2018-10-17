@@ -40,6 +40,9 @@ import { BaseGridComponent } from '../component/basegrid/basegrid.component';
 import { FieldTypesComponent } from '../component/fieldtype/fieldtypes.component';
 import { FieldTypeComponent } from '../component/fieldtype/fieldtype.component';
 import { FieldTypeService } from '../services/fieldtypes/fieldtype.services';
+import { RecordComponent } from '../component/record/record.component';
+import { RecordService } from '../services/records/record.service';
+import { RecordsComponent } from '../component/record/records.component';
 
 
 @NgModule({
@@ -72,13 +75,16 @@ import { FieldTypeService } from '../services/fieldtypes/fieldtype.services';
     NewsComponent,
     BaseGridComponent,
     FieldTypesComponent,
-    FieldTypeComponent
+    FieldTypeComponent,
+    RecordComponent,
+    RecordsComponent
   ],
   imports: [
     BrowserModule, DevExtremeModule, BrowserAnimationsModule, HttpModule, AgmCoreModule,
     APP_ROUTER, FormsModule
   ],
-  providers: [Config, ErrorHandlerService, BroadcasterService, ViewGroupService, ApplicationService, FieldTypeService],
+  providers: [Config, ErrorHandlerService, BroadcasterService, ViewGroupService,
+    ApplicationService, FieldTypeService, RecordService],
   bootstrap: [EasyBComponent]
 })
 export class MainModule { }

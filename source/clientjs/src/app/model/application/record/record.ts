@@ -1,4 +1,4 @@
-import { BaseEntity } from '../../common/baseentity'
+import { BaseEntity } from '../../common/baseentity';
 import { FieldRecord } from '../field/fieldrecord';
 import { RecordType } from './recordtype';
 
@@ -10,7 +10,7 @@ export class Record extends BaseEntity {
     recordType: RecordType;
     separator: string;
 
-    constructor(){
+    constructor() {
         super();
         this.fieldRecords = new Array<FieldRecord>();
     }

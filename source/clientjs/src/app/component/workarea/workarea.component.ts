@@ -38,7 +38,7 @@ export class WorkAreaComponent implements OnDestroy {
     }
 
     ngOnDestroy() {
-        if (this.sub != undefined) {
+        if (this.sub !== undefined) {
             this.sub = undefined;
         }
     }
@@ -57,6 +57,9 @@ export class WorkAreaComponent implements OnDestroy {
                     }
                     if (message.indexOf('fieldtypes') !== -1) {
                         this.createSelectedTab(eWorkAreaType.FieldTypes, 'Field Types');
+                    }
+                    if (message.indexOf('record') !== -1) {
+                        this.createSelectedTab(eWorkAreaType.Records, 'Records');
                     }
 
                 });
