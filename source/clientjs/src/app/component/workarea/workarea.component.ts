@@ -61,6 +61,9 @@ export class WorkAreaComponent implements OnDestroy {
                     if (message.indexOf('record') !== -1) {
                         this.createSelectedTab(eWorkAreaType.Records, 'Records');
                     }
+                    if (message.indexOf('dialog') !== -1) {
+                        this.createSelectedTab(eWorkAreaType.Dialogs, 'Dialogs');
+                    }
 
                 });
         }

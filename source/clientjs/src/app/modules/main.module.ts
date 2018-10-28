@@ -43,6 +43,8 @@ import { FieldTypeService } from '../services/fieldtypes/fieldtype.services';
 import { RecordComponent } from '../component/record/record.component';
 import { RecordService } from '../services/records/record.service';
 import { RecordsComponent } from '../component/record/records.component';
+import { DialogsService } from '../services/dialogs/dialogs.services';
+import { DialogsComponent } from '../component/dialogs/dialogs.component';
 
 
 @NgModule({
@@ -77,14 +79,15 @@ import { RecordsComponent } from '../component/record/records.component';
     FieldTypesComponent,
     FieldTypeComponent,
     RecordComponent,
-    RecordsComponent
+    RecordsComponent,
+    DialogsComponent
   ],
   imports: [
     BrowserModule, DevExtremeModule, BrowserAnimationsModule, HttpModule, AgmCoreModule,
     APP_ROUTER, FormsModule
   ],
   providers: [Config, ErrorHandlerService, BroadcasterService, ViewGroupService,
-    ApplicationService, FieldTypeService, RecordService],
+    ApplicationService, FieldTypeService, RecordService, DialogsService],
   bootstrap: [EasyBComponent]
 })
 export class MainModule { }

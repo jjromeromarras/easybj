@@ -3,13 +3,10 @@
     <div *dxTemplate="let page of 'title'">
         <span>{{page.title}}</span>
     </div>
-    <div *dxTemplate="let page of 'item'">
+    <div id='toolbar' *dxTemplate="let page of 'item'">
         <table>
             <td *ngFor="let group of page.groups">
-                <table BORDER>
-                    <tr>
-                        <th COLSPAN=5 style="text-align: center">{{group.title}}</th>
-                    </tr>
+                <table>
                     <tr>
                         <app-toolbargroup [group]='group'></app-toolbargroup>
                     </tr>

@@ -1,0 +1,4 @@
+<!--<app-dialog *ngIf='showdata' (close)='onCloseFieldType()' [title]='title' [selected]='selectedItem' [viewMode]='viewMode'></app-dialog>-->
+<app-basegrid [colData]="colData" [datasource]='config.currentapp.records' [title]="dialogTitle" [message]="message" [showDialog]="showDialog"
+    [dialogType]="dialogType" (selectionChange)='onSelectionChange($event)' (closeDialog)="onCloseDialog($event)" [type]="'Records'"
+    [pages]="pages"></app-basegrid>

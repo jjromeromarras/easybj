@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Config } from '../config.service';
+import { BroadcasterService } from 'ng-broadcaster';
+import { Dialog } from '../../model/application/dialogs/dialogs';
 import { constantsMsg } from '../../model/common/constantsMsg';
 import { CheckStatus } from '../../model/common/checkstatus';
-import { BroadcasterService } from 'ng-broadcaster';
-import { Record } from '../../model/application/record/record';
+
 
 @Injectable()
-export class RecordService {
+export class DialogsService {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // CONSTRUCTOR
@@ -17,11 +18,11 @@ export class RecordService {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PUBLIC METHOD
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Add(obj: Record): string {
+    public Add(obj: Dialog): string {
         if (this.config.currentapp !== undefined) {
-            const result = this.CheckRecord(obj);
+            const result = this.CheckDialog(obj);
             if (result === constantsMsg.NOERROR) {
-                this.config.currentapp.records.push(obj);
+              //  this.config.currentapp.Dialogs.push(obj);
                 obj.checkStatus = CheckStatus.Default;
                 this.messageeventservice.broadcast('onNewApplication');
             }
@@ -30,24 +31,24 @@ export class RecordService {
         return constantsMsg.GENERICERROR + ' There is not an application selected';
     }
 
-    public Edit(obj: Record): string {
+    public Edit(obj: Dialog): string {
         if (this.config.currentapp !== undefined) {
-            const result = this.CheckRecord(obj);
+            const result = this.CheckDialog(obj);
             return result;
         }
         return constantsMsg.GENERICERROR + ' There is not an application selected';
     }
 
-    public Remove(obj: Record): string {
+    public Remove(obj: Dialog): string {
         if (this.config.currentapp !== undefined) {
-            this.config.currentapp.records = this.config.currentapp.records.filter(p => p.guid !== obj.guid);
-            this.messageeventservice.broadcast('onNewApplication');
+           // this.config.currentapp.Dialogs = this.config.currentapp.Dialogs.filter(p => p.guid !== obj.guid);
+           // this.messageeventservice.broadcast('onNewApplication');
             return constantsMsg.NOERROR;
         }
         return constantsMsg.GENERICERROR + ' There is not an application selected';
     }
 
-    public CheckIn(obj: Record): string {
+    public CheckIn(obj: Dialog): string {
         if (this.config.currentapp !== undefined) {
             obj.checkStatus = CheckStatus.Default;
             obj.lockedBy = '';
@@ -56,7 +57,7 @@ export class RecordService {
         return constantsMsg.GENERICERROR + ' There is not an application selected';
     }
 
-    public CheckOut(obj: Record): string {
+    public CheckOut(obj: Dialog): string {
         if (this.config.currentapp !== undefined) {
             if (obj.checkStatus === CheckStatus.Default) {
                 obj.checkStatus = CheckStatus.Editable;
@@ -73,14 +74,15 @@ export class RecordService {
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PRIVATE METHOD
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private CheckRecord(obj: Record): string {
-        if (!this.CheckRecordName(obj)) {
+    private CheckDialog(obj: Dialog): string {
+        if (!this.CheckDialogName(obj)) {
             return constantsMsg.DUPLICATENAME;
         }
         return constantsMsg.NOERROR;
     }
-    private CheckRecordName(obj: Record): boolean {
+    private CheckDialogName(obj: Dialog): boolean {
         // Check name unique
-        return this.config.currentapp.records.findIndex(p => p.name.value === obj.name.value && p.guid !== obj.guid) === -1;
+       // return this.config.currentapp.fieltypes.findIndex(p => p.name.value === obj.name.value && p.guid !== obj.guid) === -1;
+       return true;
     }
 }
