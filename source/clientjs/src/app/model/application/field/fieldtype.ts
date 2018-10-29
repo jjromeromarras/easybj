@@ -1,4 +1,4 @@
-import { BaseEntity } from '../../common/baseentity'
+import { BaseEntity } from '../../common/baseentity';
 import { BindData } from '../objstr';
 
 export class FieldType extends BaseEntity {
@@ -6,7 +6,7 @@ export class FieldType extends BaseEntity {
     entityStereotypeInternal: BindData;
     stereotype: BindData;
 
-    constructor(){
+    constructor() {
         super();
         this.entityStereotypeInternal = new BindData();
         this.stereotype = new BindData();

@@ -1,5 +1,5 @@
 <td *ngFor="let action of group.actions">
-    <button [disabled]='!onVisible(action)' style="width: 100px; height: 80px" (click)='onClick(action)'>
+    <button id='button-toolbar' [disabled]='!onVisible(action)'  (click)='onClick(action)'>
             <img src="{{action.image}}">
             <br>{{action.title}}
     </button>
