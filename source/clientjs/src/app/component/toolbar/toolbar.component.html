@@ -1,5 +1,5 @@
-<dx-tab-panel #tabPanel [dataSource]="panels" [(selectedIndex)]="index" [loop]="false" [deferRendering]="false" [animationEnabled]="true"
-    [swipeEnabled]="false">
+<dx-tab-panel #tabPanel [dataSource]="panels" [(selectedIndex)]="index" [loop]="false" [deferRendering]="false"
+    [animationEnabled]="true" [swipeEnabled]="false">
     <div *dxTemplate="let page of 'title'">
         <span>{{page.title}}</span>
     </div>

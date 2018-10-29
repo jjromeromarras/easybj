@@ -1,0 +1,13 @@
+<nlog autoReload="true" xmlns="http://www.nlog-project.org/schemas/NLog.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <variable name="day" value="${date:format=dddd}" />
+  <variable name="month" value="${date:format=MMMM}" />
+  <variable name="brief" value="${longdate} [${threadid}] [${level}] [${logger}] ${message} ${exception:format=Message}" />
+  <variable name="verbose" value="${longdate} [${threadid}] [${level}] [${logger}] [${ndc}] ${message} ${mdc:item=job} ${mdc:item=cost} ${exception:format=ToString}" />
+  <variable name="verboseContext" value="${date:format=yyyy/MM/dd HH\:mm\:ss.fff}  ${mdc:item=tenant}  ${mdc:item=service}  ${mdc:item=application}  ${threadid}  [${level}]  ${logger}  ${ndc:bottomFrames=2}  ${message}  ${exception:format=ToString}  ${mdc:item=user}  ${mdc:item=computer}  ${mdc:item=client}  ${mdc:item=clientModule}  ${mdc:item=workflow}  ${mdc:item=workflowId}  ${mdc:item=query}  ${mdc:item=subscription}  ${mdc:item=command}  ${mdc:item=commandId}  ${mdc:item=event}  ${mdc:item=eventId}  ${mdc:item=costName}  ${mdc:item=cost}  ${event-context:item=context}" />
+
+  <!-- Log directories -->
+  <variable name="baselogdir" value="${specialfolder:folder=CommonApplicationData}/Mecalux/EasyBService" />
+  <variable name="baseweblogdir" value="C:\inetpub\wwwroot\..\logs\LogFiles\Mecalux\EasyBService" />
+  <variable name="appdatalogdir" value="${basedir}/App_Data" />
+
+</nlog>

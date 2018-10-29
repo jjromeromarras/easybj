@@ -1,6 +1,5 @@
 <div *ngIf="application!=undefined">
     <dx-popup [showTitle]="true" [title]="title" [height]='auto' [(visible)]="inlineCreationVisible" (onHiding)="onHiding($event)">
-        prueba
         <div *dxTemplate="let data of 'content'">
             <div class="btn-group button-options inlinecreationbuttons">
                 <app-entity-editor #formeditor [viewMode]='viewMode' [viewpanels]='viewPanels' [savedAndContinue]='false'>

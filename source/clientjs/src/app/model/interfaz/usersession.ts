@@ -8,6 +8,8 @@ export class UserSession {
     errorCode: string;
     errorDescription: string;
     expirationDate: string;
+    userId: string;
+    
     constructor() {
     }
 

@@ -1,0 +1,1 @@
+Check folder permissions to upload images
