@@ -1,0 +1,2548 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mecalux.ITSW.Core.Security</name>
+    </assembly>
+    <members>
+        <member name="T:Mecalux.ITSW.Core.Security.Authorization.AuthenticationOptions">
+            <summary>
+            Authentication options
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.AuthenticationOptions.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Authorization.AuthenticationOptions"/> class.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Authorization.AuthenticationOptions.AllowedIssuer">
+            <summary>
+            Gets or sets the allowed issuer.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Authorization.AuthenticationOptions.IssuerSigningKey">
+            <summary>
+            Gets or sets the signing key.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Authorization.AuthenticationOptions.Audience">
+            <summary>
+            Gets or sets the audience restriction.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Authorization.ScopeAuthorizeAttribute">
+            <summary>
+            Authorize attribute to require some scope
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.ScopeAuthorizeAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Authorization.ScopeAuthorizeAttribute"/> class.
+            </summary>
+            <param name="validScopes">The valid scopes.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.ScopeAuthorizeAttribute.IsAuthorized(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Indicates whether the specified control is authorized.
+            </summary>
+            <param name="actionContext">The context.</param>
+            <returns>
+            true if the control is authorized; otherwise, false.
+            </returns>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Authorization.ClaimAuthorizeAttribute">
+            <summary>
+            Authorize attribute to require claims
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.ClaimAuthorizeAttribute.#ctor(System.String,System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Authorization.ClaimAuthorizeAttribute"/> class.
+            </summary>
+            <param name="requiredClaimType">Type of the required claim.</param>
+            <param name="requiredClaimTypes">The required claim types.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.ClaimAuthorizeAttribute.IsAuthorized(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Indicates whether the specified control is authorized.
+            </summary>
+            <param name="actionContext">The context.</param>
+            <returns>
+            true if the control is authorized; otherwise, false.
+            </returns>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Authorization.RequireHttpsAuthorizeAttribute">
+            <summary>
+            Authorize attribute to require ssl connection.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.RequireHttpsAuthorizeAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Authorization.RequireHttpsAuthorizeAttribute"/> class.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.RequireHttpsAuthorizeAttribute.OnAuthorization(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Calls when a process requests authorization.
+            </summary>
+            <param name="actionContext">The action context, which encapsulates information for using <see cref="T:System.Web.Http.Filters.AuthorizationFilterAttribute" />.</param>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Authorization.RequireHttpsAuthorizeAttribute.Port">
+            <summary>
+            Gets or sets the https port to try (Get/Head) Location auto redirect.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Authorization.Wcf.TokenServiceAuthorizationManager">
+            <summary>
+            ServiceAuthorizationManager validates access token.
+            Authorization options must be set: WcfAuthentication.Options
+            Then Use: 
+            host.Authorization.ServiceAuthorizationManager = new TokenServiceAuthorizationManager();
+            host.Authorization.PrincipalPermissionMode = System.ServiceModel.Description.PrincipalPermissionMode.None;
+            or
+            <example>
+            <system.serviceModel>
+                <behaviors>
+                <serviceBehaviors>
+                <behavior name="">
+                <serviceAuthorization principalPermissionMode="None" serviceAuthorizationManagerType="Mecalux.ITSW.Core.Security.Authorization.Wcf.TokenServiceAuthorizationManager, Mecalux.ITSW.Core.Security"/>
+                </behavior>
+                </serviceBehaviors>
+                </behaviors>
+            </system.serviceModel>
+            </example>
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.Wcf.TokenServiceAuthorizationManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Authorization.Wcf.TokenServiceAuthorizationManager"/> class.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.Wcf.TokenServiceAuthorizationManager.CheckAccessCore(System.ServiceModel.OperationContext)">
+            <summary>
+            Checks authorization for the given operation context based on default policy evaluation.
+            </summary>
+            <param name="operationContext">The <see cref="T:System.ServiceModel.OperationContext" /> for the current authorization request.</param>
+            <returns>
+            true if access is granted; otherwise, false. The default is true.
+            </returns>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Authorization.Wcf.WcfAuthentication">
+            <summary>
+            Wcf token authentication
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.Wcf.WcfAuthentication.ValidateWcfToken">
+            <summary>
+            Validates the WCF token.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Authorization.Wcf.WcfAuthentication.Options">
+            <summary>
+            Gets or sets the authentication options.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Authorization.Wcf.WcfAuthentication.NoAuthenticatedActions">
+            <summary>
+            Gets the no authenticate actions.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Authorization.Wcf.WcfAuthentication.CurrentPrincipal">
+            <summary>
+            Gets the current principal.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Client.AccessTokenResponse">
+            <summary>
+            Response for token requests.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.AccessTokenResponse.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Client.AccessTokenResponse"/> class.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.AccessTokenResponse.AccessToken">
+            <summary>
+            Gets or sets the access token.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.AccessTokenResponse.RefreshToken">
+            <summary>
+            Gets or sets the refresh token.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.AccessTokenResponse.IdToken">
+            <summary>
+            Gets the identifier token.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.AccessTokenResponse.TokenType">
+            <summary>
+            Gets or sets the type of the token.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.AccessTokenResponse.ExpiresIn">
+            <summary>
+            Gets or sets the expiration seconds.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.AccessTokenResponse.ExpirationDate">
+            <summary>
+            Gets local expiration date.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.AccessTokenResponse.Properties">
+            <summary>
+            Gets or sets the properties.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.AccessTokenResponse.IsExpired">
+            <summary>
+            Gets a value indicating whether the access token is expired.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Client.HttpClientExtensions">
+            <summary>
+            HttpClient extension class
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.HttpClientExtensions.SetBasicAuthentication(System.Net.Http.HttpClient,System.String,System.String)">
+            <summary>
+            Sets the basic authentication header.
+            </summary>
+            <param name="client">The client.</param>
+            <param name="userName">Name of the user.</param>
+            <param name="password">The password.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.HttpClientExtensions.SetBearerToken(System.Net.Http.HttpClient,System.String)">
+            <summary>
+            Sets the bearer token header.
+            </summary>
+            <param name="client">The client.</param>
+            <param name="token">The token.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.HttpClientExtensions.UnauthorizedExpiredToken(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Check if response is unauthorized and the token is expired.
+            </summary>
+            <param name="response">The response.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenManager.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Client.TokenManager"/> class.
+            </summary>
+            <param name="clientId">The client identifier.</param>
+            <param name="clientSecret">The client secret.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenManager.SetAutoRefreshToken(System.String,System.Boolean,System.Int32)">
+            <summary>
+            Sets the automatic refresh token.
+            </summary>
+            <param name="refreshToken">The refresh token.</param>
+            <param name="autoRefresh">if set to <c>true</c> [automatic refresh].</param>
+            <param name="refreshTokenInterval">The refresh token interval in seconds.</param>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenManager.CurrentToken">
+            <summary>
+            Gets or sets the current token.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenManager.CurrentRefeshToken">
+            <summary>
+            Gets or sets the current refesh token.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenManager.TokenExpiresIn">
+            <summary>
+            Gets or sets the token expiration in seconds.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenManager.SecurityServerTokenUri">
+            <summary>
+            Gets or sets the security server token URI.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenManager.TokenAutoRefreshActivated">
+            <summary>
+            Gets a value indicating whether token automatic refresh is activated.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Client.TokenClient">
+            <summary>
+            Token request client class.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Client.TokenClient"/> class.
+            </summary>
+            <param name="authorizationServerBaseAddress">The authorization server base address.</param>
+            <param name="clientId">The client identifier.</param>
+            <param name="clientSecret">The client secret.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.RequestToken(System.String,System.String,System.Guid,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Requests the token.
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <param name="password">The password.</param>
+            <param name="tenantId">The tenant identifier.</param>
+            <param name="language">The language.</param>
+            <param name="computerName">Name of the computer.</param>
+            <param name="scopes">The scopes.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.RequestToken(System.String,System.String,System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Requests the token.
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <param name="password">The password.</param>
+            <param name="tenantCode">The tenant code.</param>
+            <param name="language">The language.</param>
+            <param name="computerName">Name of the computer.</param>
+            <param name="scopes">The scopes.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.RequestClientToken(System.Guid,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Requests the token.
+            </summary>
+            <param name="tenantId">The tenant identifier.</param>
+            <param name="language">The language.</param>
+            <param name="computerName">Name of the computer.</param>
+            <param name="scopes">The scopes.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.RequestClientToken(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Requests the token.
+            </summary>
+            <param name="tenantCode">The tenant code.</param>
+            <param name="language">The language.</param>
+            <param name="computerName">Name of the computer.</param>
+            <param name="scopes">The scopes.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.RequestTokenFromWindowsCredentials(System.Guid,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Requests the token from a previous one.
+            </summary>
+            <param name="tenantId">The tenant identifier.</param>
+            <param name="computerName">Name of the computer.</param>
+            <param name="scopes">The scopes.</param>
+            <returns></returns>
+            <exception cref="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException"></exception>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.RequestTokenFromWindowsCredentials(System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Requests the token from windows credentials.
+            </summary>
+            <param name="tenantCode">The tenant code.</param>
+            <param name="computerName">Name of the computer.</param>
+            <param name="scopes">The scopes.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.RequestTokenFromSaml2Credentials(System.String,System.Guid,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Requests the token with a saml2 assertion.
+            </summary>
+            <param name="saml2Assertion">The saml2 assertion.</param>
+            <param name="tenantId">The tenant identifier.</param>
+            <param name="computerName">Name of the computer.</param>
+            <param name="scopes">The scopes.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.RequestTokenFromSaml2Credentials(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Requests the token with a saml2 assertion.
+            </summary>
+            <param name="saml2Assertion">The saml2 assertion.</param>
+            <param name="tenantCode">The tenant code.</param>
+            <param name="computerName">Name of the computer.</param>
+            <param name="scopes">The scopes.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.RefreshToken(System.String)">
+            <summary>
+            Refreshes the token.
+            </summary>
+            <param name="refreshToken">The refresh token.</param>
+            <returns></returns>
+            <exception cref="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException"></exception>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.RevokeRefreshToken(System.String)">
+            <summary>
+            Revokes the refresh token.
+            </summary>
+            <param name="refreshToken">The refresh token.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.ValidateIdToken(System.String)">
+            <summary>
+            Validates the id token. Extracts the claims from token, validating issuer and client identifier.
+            </summary>
+            <param name="idToken">The identifier token.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.GetTenantId(System.String)">
+            <summary>
+            Gets the tenant identifier.
+            </summary>
+            <param name="tenantCode">The tenant code.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.GetTenantCodes">
+            <summary>
+            Gets the STS tenant codes.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.ChangeUserPassword(System.Guid,System.String,System.String,System.String)">
+            <summary>
+            Changes the user password.
+            </summary>
+            <param name="tenantId">The tenant identifier.</param>
+            <param name="userName">Name of the user.</param>
+            <param name="password">The password.</param>
+            <param name="newPassword">The new password.</param>
+            <exception cref="T:Mecalux.ITSW.Core.Security.Client.UserPasswordChangeException"/>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.ChangeUserPassword(System.String,System.String,System.String,System.String)">
+            <summary>
+            Changes the user password.
+            </summary>
+            <param name="tenantCode">The tenant code.</param>
+            <param name="userName">Name of the user.</param>
+            <param name="password">The password.</param>
+            <param name="newPassword">The new password.</param>
+            <exception cref="T:Mecalux.ITSW.Core.Security.Client.UserPasswordChangeException"/>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.CheckRefresh(Mecalux.ITSW.Core.Security.Client.AccessTokenResponse)">
+            <summary>
+            Checks accesss token expiration and refreshes the token.
+            </summary>
+            <param name="current">The current response.</param>
+            <returns></returns>
+            <exception cref="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException"></exception>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.Dispose">
+            <summary>
+            Disposes the resources used by the processor.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenClient.Dispose(System.Boolean)">
+            <summary>
+            Disposes the resources used by the processor.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenClient.AuthorizationIssuer">
+            <summary>
+            Gets or sets the authentication issuer.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenClient.AuthorizationServerBaseAddress">
+            <summary>
+            Gets the authorization server base address.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenClient.AuthorizationServerTokenAddress">
+            <summary>
+            Gets or sets the authorization server token address.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenClient.AuthorizationServerRevokeTokenAddress">
+            <summary>
+            Gets or sets the authorization server revoke token address.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenClient.AuthorizationServerGetTenantIdAddress">
+            <summary>
+            Gets the authorization server get tenant identifier address.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenClient.AuthorizationServerGetTenantCodesAddress">
+            <summary>
+            Gets the authorization server get tenant codes address.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenClient.AuthorizationServerChangePasswordAddress">
+            <summary>
+            Gets the authorization server change password address.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenClient.ClientId">
+            <summary>
+            Gets or sets the client identifier.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenClient.ClientSecret">
+            <summary>
+            Gets or sets the client secret.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Client.UserPasswordChangeException">
+            <summary>
+            Token request exception
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.UserPasswordChangeException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException"/> class.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.UserPasswordChangeException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException"/> class.
+            </summary>
+            <param name="message">The error message.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.UserPasswordChangeException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException"/> class.
+            </summary>
+            <param name="cause">The cause.</param>
+            <param name="solution">The solution.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.UserPasswordChangeException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="ex">The ex.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.UserPasswordChangeException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="solution">The solution.</param>
+            <param name="ex">The ex.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.UserPasswordChangeException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException"/> class.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.UserPasswordChangeException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+            <exception cref="T:System.ArgumentNullException">info</exception>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.UserPasswordChangeException.ErrorCode">
+            <summary>
+            Gets the error code.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.UserPasswordChangeException.ErrorDescription">
+            <summary>
+            Gets the error description.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.UserPasswordChangeException.ErrorUri">
+            <summary>
+            Gets or sets the error URI on the server.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException">
+            <summary>
+            Token request exception
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenRequestException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException"/> class.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenRequestException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException"/> class.
+            </summary>
+            <param name="message">The error message.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenRequestException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException"/> class.
+            </summary>
+            <param name="cause">The cause.</param>
+            <param name="solution">The solution.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenRequestException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="ex">The ex.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenRequestException.#ctor(System.String,System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="solution">The solution.</param>
+            <param name="ex">The ex.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenRequestException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Client.TokenRequestException"/> class.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Client.TokenRequestException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+            <exception cref="T:System.ArgumentNullException">info</exception>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenRequestException.ErrorCode">
+            <summary>
+            Gets the error code.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenRequestException.ErrorDescription">
+            <summary>
+            Gets the error description.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Client.TokenRequestException.ErrorUri">
+            <summary>
+            Gets or sets the error URI on the server.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants">
+            <summary>
+            Authentication constants
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes">
+            <summary>
+            Custom claim types
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.ClientId">
+            <summary>
+            The client identifier
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.TenantId">
+            <summary>
+            The tenant identifier
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.TenantCode">
+            <summary>
+            The tenant code
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.Scope">
+            <summary>
+            The scope
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.AuthenticationType">
+            <summary>
+            The Authentication type
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.Language">
+            <summary>
+            The language
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.DefaultLanguage">
+            <summary>
+            Default language claim
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.ComputerName">
+            <summary>
+            The computer name
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.Site">
+            <summary>
+            Site claim
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.DefaultSite">
+            <summary>
+            Default Site claim
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.LicenseType">
+            <summary>
+            The licensed level
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.LicensedSite">
+            <summary>
+            Licensed sites
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.LicensedApp">
+            <summary>
+            Licensed app
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.Role">
+            <summary>
+            The role
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.Name">
+            <summary>
+            The name
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ClaimTypes.UserId">
+            <summary>
+            The user identifier
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.TicketProperties">
+            <summary>
+            Request token response properties
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.TicketProperties.Issuer">
+            <summary>
+            The issuer
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.TicketProperties.ClientId">
+            <summary>
+            The client identifier
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.TicketProperties.Audience">
+            <summary>
+            The audience
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.TicketProperties.TenantId">
+            <summary>
+            The tenant identifier
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.TicketProperties.UserName">
+            <summary>
+            The user name
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.TicketProperties.IdToken">
+            <summary>
+            The identifier token
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.AuthTypes">
+            <summary>
+            Authentication types
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.AuthTypes.ClientCredentials">
+            <summary>
+            The client credentials authentication
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ContextProperties">
+            <summary>
+            Context properties
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ContextProperties.ClientId">
+            <summary>
+            The client identifier
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ContextProperties.Client">
+            <summary>
+            The client
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ContextProperties.TenantId">
+            <summary>
+            The tenant identifier
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ContextProperties.TenantCode">
+            <summary>
+            The tenant code
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ContextProperties.Language">
+            <summary>
+            The language
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.AuthenticationConstants.ContextProperties.ComputerName">
+            <summary>
+            The computer name
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Constants.LicenseErrorCodes">
+            <summary>
+            Error codes corresponding to licensing issues
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.LicenseErrorCodes.TooManyUsers">
+            <summary>
+            Active sessions have reached the limit allowed by the license
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.LicenseErrorCodes.SiteNotValid">
+            <summary>
+            Site is not licensed
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.AuthorizationCode">
+            <summary>
+            Authorization code
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.AuthorizationCode.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.AuthorizationCode.ClientId">
+            <summary>
+            Gets or sets the client identifier.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.AuthorizationCode.UserName">
+            <summary>
+            Gets or sets the name of the user.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.AuthorizationCode.IssuedUtc">
+            <summary>
+            Gets or sets the issued UTC.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.AuthorizationCode.ExpiresUtc">
+            <summary>
+            Gets or sets the expires UTC.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.AuthorizationCode.ProtectedTicket">
+            <summary>
+            Gets or sets the protected ticket.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.ClientApplication">
+            <summary>
+            Represents a client
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.ClientApplication.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Model.ClientApplication"/> class.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.ClientApplication.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.ClientApplication.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.ClientApplication.Secret">
+            <summary>
+            Gets or sets the secret.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.ClientApplication.RedirectUrl">
+            <summary>
+            Gets or sets the redirect URL.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.ClientApplication.IsActive">
+            <summary>
+            Gets or sets a value indicating whether this instance is active.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.ClientApplication.RefreshTokenLifetime">
+            <summary>
+            Gets or sets the refresh token lifetime in minutes.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.ClientApplication.RefreshTokenRevokesPrevious">
+            <summary>
+            Gets or sets a value indicating whether refresh token revokes previous refresh token. 
+            Used only if IAuthStore is configured.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.ClientApplicationCollection">
+            <summary>
+            A ClientApplication collection
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.ClientApplicationCollection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Model.ClientApplicationCollection"/> class.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.ClientApplicationCollection.Clients">
+            <summary>
+            Gets the clients.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Constants.OAuthConstants">
+            <summary>
+            OAuth framework constants.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.Errors">
+            <summary>
+            Response error codes
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.Errors.InvalidRequest">
+            <summary>
+            The invalid request
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.Errors.InvalidClient">
+            <summary>
+            The invalid client
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.Errors.UnauthorizedClient">
+            <summary>
+            The unauthorized client
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.Errors.InvalidGrant">
+            <summary>
+            The invalid grant
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.Errors.UnsupportedGrantType">
+            <summary>
+            The unsupported grant type
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.Errors.InvalidScope">
+            <summary>
+            The invalid scope
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.Errors.UnsupportedResponseType">
+            <summary>
+            The unsupported response type
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.Errors.AccessDenied">
+            <summary>
+            The access denied
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.Errors.ServerError">
+            <summary>
+            The server error
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.ErrorsDescriptions">
+            <summary>
+            Response error descriptions
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.ErrorsDescriptions.UserPasswordExpired">
+            <summary>
+            The user password expired
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.ErrorsDescriptions.InvalidUserPassword">
+            <summary>
+            The invalid user password
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.ErrorsDescriptions.InvalidLicense">
+            <summary>
+            The invalid license
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.ErrorsDescriptions.LicenseNumUsersExceeded">
+            <summary>
+            The license number users exceeded
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.ErrorsDescriptions.TokenExpired">
+            <summary>
+            The token expired
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.ErrorsDescriptions.TokenIsRequired">
+            <summary>
+            The token is required
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.AuthenticateHeaderErrors">
+            <summary>
+            WWW-Authenticate header response error codes (Not OAuth)
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Constants.OAuthConstants.AuthenticateHeaderErrors.InvalidToken">
+            <summary>
+            The invalid token
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.IAuthStore">
+            <summary>
+            Authentication store. Stores valid refresh tokens.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.IAuthStore.AddRefreshToken(System.Guid,Mecalux.ITSW.Core.Security.Model.RefreshToken)">
+            <summary>
+            Adds the refresh token.
+            </summary>
+            <param name="tenantId">The tenant identifier.</param>
+            <param name="token">The token.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.IAuthStore.GetRefreshToken(System.Guid,System.String)">
+            <summary>
+            Gets the refresh token.
+            </summary>
+            <param name="tenantId">The tenant identifier.</param>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.IAuthStore.RemoveRefreshToken(System.Guid,System.String)">
+            <summary>
+            Removes and returns the removed refresh token.
+            </summary>
+            <param name="tenantId">The tenant identifier.</param>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.IAuthStore.GetNotExpiredRefreshTokens(System.Guid)">
+            <summary>
+            Gets all refresh tokens.
+            </summary>
+            <param name="tenantId">The tenant identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.ILicenseProvider">
+            <summary>
+            License provider
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.ILicenseProvider.ValidateLicenseClient(System.Guid,System.String)">
+            <summary>
+            Validates the license client.
+            </summary>
+            <param name="tenantId">The tenant identifier.</param>
+            <param name="clientId">The client identifier.</param>
+            <returns>
+            License data if license is ok. Null if client has no license
+            </returns>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.InMemoryAuthStore">
+            <summary>
+            In memory authentication data store
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.InMemoryAuthStore.#ctor(System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Model.InMemoryAuthStore"/> class.
+            </summary>
+            <param name="refreshTokensExpirationTimeout">The refresh token expiration timeout.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.InMemoryAuthStore.AddRefreshToken(System.Guid,Mecalux.ITSW.Core.Security.Model.RefreshToken)">
+            <summary>
+            Adds the refresh token.
+            </summary>
+            <param name="tenantId"></param>
+            <param name="token">The token.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.InMemoryAuthStore.GetRefreshToken(System.Guid,System.String)">
+            <summary>
+            Gets the refresh token.
+            </summary>
+            <param name="tenantId"></param>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.InMemoryAuthStore.RemoveRefreshToken(System.Guid,System.String)">
+            <summary>
+            Removes the refresh token.
+            </summary>
+            <param name="tenantId"></param>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.InMemoryAuthStore.GetNotExpiredRefreshTokens(System.Guid)">
+            <summary>
+            Gets all refresh tokens.
+            </summary>
+            <param name="tenantId"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.InMemoryClientStore">
+            <summary>
+            In memory client storage implementation
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.IClientStore">
+            <summary>
+            Client data storage.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.IClientStore.GetClient(System.String)">
+            <summary>
+            Gets the client application by id.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.InMemoryClientStore.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Model.InMemoryClientStore"/> class.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.InMemoryClientStore.#ctor(System.Collections.Generic.IEnumerable{Mecalux.ITSW.Core.Security.Model.ClientApplication})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Model.InMemoryClientStore"/> class.
+            </summary>
+            <param name="clients">The clients.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.InMemoryClientStore.GetClient(System.String)">
+            <summary>
+            Gets the client by id.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.InMemoryClientStore.SetClients(System.Collections.Generic.IEnumerable{Mecalux.ITSW.Core.Security.Model.ClientApplication})">
+            <summary>
+            Sets the clients.
+            </summary>
+            <param name="clients">The clients.</param>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.InMemoryClientStore.Clients">
+            <summary>
+            Gets the clients.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.LicenseData">
+            <summary>
+            License data
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.LicenseData.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Model.LicenseData"/> class.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.LicenseData.#ctor(System.String,System.Nullable{System.Int32},System.Collections.Generic.IEnumerable{Mecalux.ITSW.Core.Security.Model.Site},System.Collections.Generic.IEnumerable{Mecalux.ITSW.Core.Security.Model.Feature},System.Nullable{System.DateTime},Mecalux.ITSW.Core.Security.Model.Contact)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Model.LicenseData"/> class.
+            </summary>
+            <param name="licenseType">Type of the license.</param>
+            <param name="numUsers">The number users.</param>
+            <param name="sites">The sites.</param>
+            <param name="applications">The applications.</param>
+            <param name="expirationDate">The expiration date.</param>
+            <param name="licensedTo">The licensed to.</param>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.LicenseData.LicensedTo">
+            <summary>
+            Licensed to contact
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.LicenseData.ExpirationDate">
+            <summary>
+            Licence expiration date
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.LicenseData.LicenseType">
+            <summary>
+            Gets the license type.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.LicenseData.Applications">
+            <summary>
+            Gets the applications.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.LicenseData.Sites">
+            <summary>
+            Gets the sites.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.LicenseData.Users">
+            <summary>
+            Number of simultaneous sessions allowed by the licence
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.Site">
+            <summary>
+            Site
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.Site.#ctor(System.String,System.Boolean)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">Site name</param>
+            <param name="isEnabled">IsEnabled</param>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.Site.IsEnabled">
+            <summary>
+            Indicates if the site is enabled on the licence
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.Site.Name">
+            <summary>
+            Site name
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.Feature">
+            <summary>
+            Site
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.Feature.#ctor(System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">Site name</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.Feature.Name">
+            <summary>
+            Feature name
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.Feature.Value">
+            <summary>
+            Gets the value.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.Contact">
+            <summary>
+            License contact
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.Contact.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="company">The company.</param>
+            <param name="name">Site name</param>
+            <param name="email">Email</param>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.Contact.Company">
+            <summary>
+            Gets the company.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.Contact.Name">
+            <summary>
+            Feature name
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.Contact.Email">
+            <summary>
+            Email
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.LicenseDataExtensions">
+            <summary>
+            License extensions
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.LicenseDataExtensions.ValidateLicenseNumUsers(Mecalux.ITSW.Core.Security.Model.LicenseData,System.Func{System.Collections.Generic.IEnumerable{Mecalux.ITSW.Core.Security.Model.LicenseSession}},System.String,System.String,System.String)">
+            <summary>
+            Validates the license number users.
+            </summary>
+            <param name="licenseData">The license data.</param>
+            <param name="getCurrentSessions">The get current sessions.</param>
+            <param name="clientId">The client identifier.</param>
+            <param name="userName">Name of the user.</param>
+            <param name="host">The host.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.LicenseSession">
+            <summary>
+            User session
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.LicenseSession.ClientId">
+            <summary>
+            Gets or sets the client identifier.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.LicenseSession.UserName">
+            <summary>
+            Gets or sets the name of the user.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.LicenseSession.Host">
+            <summary>
+            Gets or sets the host.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.RefreshToken">
+            <summary>
+            Refresh token data
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.RefreshToken.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.RefreshToken.ClientId">
+            <summary>
+            Gets or sets the client identifier.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.RefreshToken.UserName">
+            <summary>
+            Gets or sets the name of the user.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.RefreshToken.Host">
+            <summary>
+            Gets or sets the host.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.RefreshToken.IssuedUtc">
+            <summary>
+            Gets or sets the issued UTC.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.RefreshToken.ExpiresUtc">
+            <summary>
+            Gets or sets the expires UTC.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.RefreshToken.ProtectedTicket">
+            <summary>
+            Gets or sets the protected ticket.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.SecureLicenseData">
+            <summary>
+            License data that can be verified with a signature
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.SecureLicenseData.VerifySignature(System.String)">
+            <summary>
+            Verifies <see cref="P:Mecalux.ITSW.Core.Security.Model.SecureLicenseData.Signature"/> of <see cref="P:Mecalux.ITSW.Core.Security.Model.SecureLicenseData.License"/>
+            with the key <paramref name="publicKey"/>
+            </summary>
+            <param name="publicKey">RSA public key</param>
+            <exception cref="T:System.Security.SecurityException">If the license signature is not valid</exception>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.SecureLicenseData.Sign(System.String)">
+            <summary>
+            Signs this instance with the given key
+            </summary>
+            <param name="privateKey">RSA private key</param>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.SecureLicenseData.License">
+            <summary>
+            License data
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.SecureLicenseData.Signature">
+            <summary>
+            License signature
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Model.UserIdentity">
+            <summary>
+            Represents a user identity
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Model.UserIdentity.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Model.UserIdentity"/> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="authenticationType">The type of authentication used.</param>
+            <param name="issuer">The issuer.</param>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Model.UserIdentity.DefaultLanguage">
+            <summary>
+            Gets or sets the default language.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Saml2.ISaml2ResponseHandler">
+            <summary>
+            Saml2 tenant response handler
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.ISaml2ResponseHandler.ValidateResponse(System.Guid,System.String)">
+            <summary>
+            Validates the response.
+            </summary>
+            <param name="tenantId">The tenant identifier.</param>
+            <param name="assertion">The assertion.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Server.AuthorizationRevokeHandler">
+            <summary>
+            Owin middleware to revoke access tokens
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.AuthorizationRevokeHandler.#ctor(Microsoft.Owin.OwinMiddleware,Microsoft.Owin.Security.OAuth.OAuthAuthorizationServerOptions,Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Server.AuthorizationRevokeHandler"/> class.
+            </summary>
+            <param name="next">The next.</param>
+            <param name="oauthOptions">The oauth options.</param>
+            <param name="options">The server options.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.AuthorizationRevokeHandler.Invoke(Microsoft.Owin.IOwinContext)">
+            <summary>
+            Process an individual request.
+            </summary>
+            <param name="context"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Server.IIdentityProvider">
+            <summary>
+            Identity provider
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.IIdentityProvider.ValidateUser(System.String,System.String,System.Guid)">
+            <summary>
+            Validates the user with user name and password.
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <param name="password">The password.</param>
+            <param name="tenantId">The tenant identifier.</param>
+            <returns></returns>
+            <exception cref="T:Mecalux.ITSW.Core.Security.Server.UserPasswordExpiredException">If user password is expired.</exception>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.IIdentityProvider.ValidateUser(System.Security.Claims.ClaimsIdentity,System.Guid)">
+            <summary>
+            Validates the user with a previous identity information.
+            </summary>
+            <param name="identity">The identity.</param>
+            <param name="tenantId">The tenant identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.IIdentityProvider.ChangeUserPassword(System.String,System.String,System.String,System.Guid)">
+            <summary>
+            Changes the user password.
+            </summary>
+            <param name="userName">Name of the user.</param>
+            <param name="password">The password.</param>
+            <param name="newPassword">The new password.</param>
+            <param name="tenantId">The tenant identifier.</param>
+            <exception cref="T:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeException"></exception>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.IIdentityProvider.GetTenantId(System.String)">
+            <summary>
+            Gets the tenant identifier.
+            </summary>
+            <param name="tenantCode">The tenant code.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.IIdentityProvider.GetTenantCode(System.Guid)">
+            <summary>
+            Gets the tenant code.
+            </summary>
+            <param name="tenantId">The tenant identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.IIdentityProvider.GetTenantCodes">
+            <summary>
+            Gets the tenant codes.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.AuthorizationCodeProvider.#ctor(System.TimeSpan)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Server.AuthorizationCodeProvider"/> class.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions">
+            <summary>
+            Authorization server options
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.TokenEndpointPath">
+            <summary>
+            Gets or sets the token endpoint path.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.AuthorizeEndpointPath">
+            <summary>
+            Gets or sets the authorize endpoint path.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.RevokeEndpointPath">
+            <summary>
+            Gets or sets the revoke endpoint path.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.DefaultAccessTokenExpireTimeSpan">
+            <summary>
+            Gets or sets the default access token expire time span.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.DefaultRefreshTokenExpireTimeSpan">
+            <summary>
+            Gets or sets the default refresh token expire time span.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.DefaultIdTokenExpireTimeSpan">
+            <summary>
+            Gets or sets the default identifier token expire time span.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.DefaultCodeExpireTimeSpan">
+            <summary>
+            Gets or sets the default code expire time span.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.AllowInsecureHttp">
+            <summary>
+            Gets or sets a value indicating whether [allow insecure HTTP].
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.Issuer">
+            <summary>
+            Gets or sets the issuer name.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.SigningKey">
+            <summary>
+            Gets or sets the signing key.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.Audience">
+            <summary>
+            Gets or sets the target token audience.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.DefaultClientCredentialScopes">
+            <summary>
+            Gets or sets the default client credential scopes.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.ValidateClients">
+            <summary>
+            Gets or sets a value indicating whether to validate clients or not.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.AllowedClients">
+            <summary>
+            Gets or sets the allowed clients.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.IdentityProvider">
+            <summary>
+            Gets or sets the identity provider to validate user name and password.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.Saml2Handler">
+            <summary>
+            Gets or sets the saml2 handler to validate saml2 asertions.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.AuthenticationStore">
+            <summary>
+            Gets or sets the authentication data store.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions.LicenseProvider">
+            <summary>
+            Gets or sets the license provider.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.AuthorizationRefreshTokenProvider.Create(Microsoft.Owin.Security.Infrastructure.AuthenticationTokenCreateContext)">
+            <summary>
+            Creates the specified context.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Server.AuthorizationServerExtension">
+            <summary>
+            Owin Authorization Server extensions
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.AuthorizationServerExtension.UseAuthorizationSecurityTokenServer(Owin.IAppBuilder,Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions)">
+            <summary>
+            Uses the authorization security token server.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="options">The options.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeException">
+            <summary>
+            User validation exception
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeException.#ctor(Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeException"/> class.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeException.#ctor(Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeException"/> class.
+            </summary>
+            <param name="error">The error.</param>
+            <param name="description">The description.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeException"/> class.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeException.ErrorCode">
+            <summary>
+            Gets the error code.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeException.ErrorDescription">
+            <summary>
+            Gets the error description.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError">
+            <summary>
+            Change password errors
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.InvalidEmptyNewPassword">
+            <summary>
+            The invalid new password
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.InvalidTenantId">
+            <summary>
+            The invalid tenant identifier
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.UserNotFound">
+            <summary>
+            The user not found
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.InvalidUserPassword">
+            <summary>
+            The invalid user password
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.DoNotRepeatPassword">
+            <summary>
+            The do not repeat password
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.InvalidMaxLength">
+            <summary>
+            The invalid maximum length
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.InvalidMinLength">
+            <summary>
+            The invalid minimum length
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.MustContainChar">
+            <summary>
+            The must contain character
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.MustContainLowercase">
+            <summary>
+            The must contain lowercase
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.MustContainNumber">
+            <summary>
+            The must contain number
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.MustContainSymbol">
+            <summary>
+            The must contain symbol
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.MustContainUppercase">
+            <summary>
+            The must contain uppercase
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.MustHaveOnlyChars">
+            <summary>
+            The must have only chars
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.MustHaveOnlyNumbers">
+            <summary>
+            The must have only numbers
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.DataBaseError">
+            <summary>
+            The data base error
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Server.UserPasswordChangeError.UnexpectedError">
+            <summary>
+            The unexpected error
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Server.UserValidationException">
+            <summary>
+            Tenant exception
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.UserValidationException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Server.UserValidationException"/> class.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.UserValidationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Server.UserValidationException"/> class.
+            </summary>
+            <param name="message">The error message.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.UserValidationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Server.UserValidationException"/> class.
+            </summary>
+            <param name="message">The error message.</param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.UserValidationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Server.UserValidationException"/> class.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.UserValidationException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+            <exception cref="T:System.ArgumentNullException">info</exception>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Server.UserPasswordExpiredException">
+            <summary>
+            User validation exception
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.UserPasswordExpiredException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Server.UserPasswordExpiredException"/> class.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.UserPasswordExpiredException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Server.UserPasswordExpiredException"/> class.
+            </summary>
+            <param name="message">The error message.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.UserPasswordExpiredException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Server.UserPasswordExpiredException"/> class.
+            </summary>
+            <param name="message">The error message.</param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.UserPasswordExpiredException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Abstraction.Exceptions.BaseException"/> class.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="info"/> parameter is null. </exception>
+              
+            <exception cref="T:System.Runtime.Serialization.SerializationException">The class name is null or <see cref="P:System.Exception.HResult"/> is zero (0). </exception>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.UserPasswordExpiredException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Tokens.DpapiSecureDataFormat">
+            <summary>
+            Secure data format for Owin AuthenticationTicket
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.DpapiSecureDataFormat.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Tokens.DpapiSecureDataFormat"/> class.
+            </summary>
+            <param name="appName">Name of the application.</param>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Tokens.HmacSigning">
+            <summary>
+            HMAC-SHA Signing credentials and SecurityToken provider.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Tokens.Jwt.JwtTokenProvider">
+            <summary>
+            Jwt server token provider
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.Jwt.JwtTokenProvider.#ctor(System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Tokens.Jwt.JwtTokenProvider"/> class.
+            </summary>
+            <param name="allowedIssuer">The allowed issuer.</param>
+            <param name="issuerSigningKey">The issuer signing key.</param>
+            <param name="audiences">The audiences.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.Jwt.JwtTokenProvider.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Tokens.Jwt.JwtTokenProvider"/> class.
+            </summary>
+            <param name="issuer">The issuer.</param>
+            <param name="issuerSigningKey">The issuer signing key.</param>
+            <param name="audience">The audience.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.Jwt.JwtTokenFactory.CreateToken(System.Security.Claims.ClaimsIdentity,System.IdentityModel.Tokens.SigningCredentials,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Creates the token.
+            </summary>
+            <param name="identity">The identity.</param>
+            <param name="signingCredentials">The signing credentials.</param>
+            <param name="issuer">The issuer.</param>
+            <param name="audience">The audience.</param>
+            <param name="notBefore">The not before.</param>
+            <param name="expires">The expires.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.Jwt.JwtTokenFactory.ValidateToken(System.String,System.String,System.IdentityModel.Tokens.SecurityToken,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Validates the token.
+            </summary>
+            <param name="tokenString">The token string.</param>
+            <param name="issuer">The issuer.</param>
+            <param name="issuerSigningToken">The issuer signing token.</param>
+            <param name="audiences">The audiences.</param>
+            <returns></returns>
+            <exception cref="T:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException">
+            </exception>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.Jwt.JwtTokenFactory.CreateIdToken(System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Creates the Id token.
+            </summary>
+            <param name="claims">The claims.</param>
+            <param name="issuer">The issuer.</param>
+            <param name="audience">The audience.</param>
+            <param name="notBefore">The not before.</param>
+            <param name="expires">The expires.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.Jwt.JwtTokenFactory.ValidateIdToken(System.String,System.String,System.String)">
+            <summary>
+            Validates the Id token.
+            </summary>
+            <param name="tokenString">The token string.</param>
+            <param name="issuer">The issuer.</param>
+            <param name="clientId">The client identifier.</param>
+            <returns></returns>
+            <exception cref="T:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException">
+            Invalid issuer
+            or
+            Invalid audience
+            or
+            Invalid token: expired.
+            </exception>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Tokens.RsaSigning">
+            <summary>
+            RSA Signing credentials and SecurityToken provider.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Authorization.Wcf.ClientOAuthEndpointBeaviour">
+            <summary>
+            Wcf client behaviour to set auth bearer token.
+            <code>
+             client.Endpoint.EndpointBehaviors.Add(new ClientOAuthEndpointBeaviour());
+             ClientMessageInspector.AccessToken = AccessToken;
+            </code>
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.Wcf.ClientOAuthEndpointBeaviour.ApplyClientBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.ClientRuntime)">
+            <summary>
+            Implements a modification or extension of the client across an endpoint.
+            </summary>
+            <param name="endpoint">The endpoint that is to be customized.</param>
+            <param name="clientRuntime">The client runtime to be customized.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.Wcf.ClientOAuthEndpointBeaviour.AddBindingParameters(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Channels.BindingParameterCollection)">
+            <summary>
+            Implement to pass data at runtime to bindings to support custom behavior.
+            </summary>
+            <param name="endpoint">The endpoint to modify.</param>
+            <param name="bindingParameters">The objects that binding elements require to support the behavior.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.Wcf.ClientOAuthEndpointBeaviour.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.EndpointDispatcher)">
+            <summary>
+            Implements a modification or extension of the service across an endpoint.
+            </summary>
+            <param name="endpoint">The endpoint that exposes the contract.</param>
+            <param name="endpointDispatcher">The endpoint dispatcher to be modified or extended.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.Wcf.ClientOAuthEndpointBeaviour.Validate(System.ServiceModel.Description.ServiceEndpoint)">
+            <summary>
+            Implement to confirm that the endpoint meets some intended criteria.
+            </summary>
+            <param name="endpoint">The endpoint to validate.</param>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Authorization.Wcf.ClientMessageInspector">
+            <summary>
+            Wcf token message inspector
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.Wcf.ClientMessageInspector.BeforeSendRequest(System.ServiceModel.Channels.Message@,System.ServiceModel.IClientChannel)">
+            <summary>
+            Enables inspection or modification of a message before a request message is sent to a service.
+            </summary>
+            <param name="request">The message to be sent to the service.</param>
+            <param name="channel">The WCF client object channel.</param>
+            <returns>
+            The object that is returned as the correlationState argument of the <see cref="M:System.ServiceModel.Dispatcher.IClientMessageInspector.AfterReceiveReply(System.ServiceModel.Channels.Message@,System.Object)" /> method. This is null if no correlation state is used.The best practice is to make this a <see cref="T:System.Guid" /> to ensure that no two correlationState objects are the same.
+            </returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.Wcf.ClientMessageInspector.AfterReceiveReply(System.ServiceModel.Channels.Message@,System.Object)">
+            <summary>
+            Enables inspection or modification of a message after a reply message is received but prior to passing it back to the client application.
+            </summary>
+            <param name="reply">The message to be transformed into types and handed back to the client application.</param>
+            <param name="correlationState">Correlation state data.</param>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Authorization.Wcf.ClientMessageInspector.AccessToken">
+            <summary>
+            Gets or sets the access token for wcf operations.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.AuthorizationServerProvider.#ctor(Mecalux.ITSW.Core.Security.Server.AuthorizationServerOptions)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Server.AuthorizationServerProvider"/> class.
+            </summary>
+            <param name="options">The options.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.AuthorizationServerProvider.ValidateClientAuthentication(Microsoft.Owin.Security.OAuth.OAuthValidateClientAuthenticationContext)">
+            <summary>
+            Called to validate that the origin of the request is a registered "client_id", and that the correct credentials for that client are
+            present on the request. If the web application accepts Basic authentication credentials,
+            context.TryGetBasicCredentials(out clientId, out clientSecret) may be called to acquire those values if present in the request header. If the web
+            application accepts "client_id" and "client_secret" as form encoded POST parameters,
+            context.TryGetFormCredentials(out clientId, out clientSecret) may be called to acquire those values if present in the request body.
+            If context.Validated is not called the request will not proceed further.
+            </summary>
+            <param name="context">The context of the event carries information in and results out.</param>
+            <returns>
+            Task to enable asynchronous execution
+            </returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.AuthorizationServerProvider.GrantResourceOwnerCredentials(Microsoft.Owin.Security.OAuth.OAuthGrantResourceOwnerCredentialsContext)">
+            <summary>
+            Called when a request to the Token endpoint arrives with a "grant_type" of "password". This occurs when the user has provided name and password
+            credentials directly into the client application's user interface, and the client application is using those to acquire an "access_token" and
+            optional "refresh_token". If the web application supports the
+            resource owner credentials grant type it must validate the context.Username and context.Password as appropriate. To issue an
+            access token the context.Validated must be called with a new ticket containing the claims about the resource owner which should be associated
+            with the access token. The application should take appropriate measures to ensure that the endpoint isn’t abused by malicious callers.
+            The default behavior is to reject this grant type.
+            See also http://tools.ietf.org/html/rfc6749#section-4.3.2
+            </summary>
+            <param name="context">The context of the event carries information in and results out.</param>
+            <returns>
+            Task to enable asynchronous execution
+            </returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.AuthorizationServerProvider.GrantCustomExtension(Microsoft.Owin.Security.OAuth.OAuthGrantCustomExtensionContext)">
+            <summary>
+            Called when a request to the Token endpoint arrives with a "grant_type" of any other value. If the application supports custom grant types
+            it is entirely responsible for determining if the request should result in an access_token. If context.Validated is called with ticket
+            information the response body is produced in the same way as the other standard grant types. If additional response parameters must be
+            included they may be added in the final TokenEndpoint call.
+            See also http://tools.ietf.org/html/rfc6749#section-4.5
+            </summary>
+            <param name="context">The context of the event carries information in and results out.</param>
+            <returns>
+            Task to enable asynchronous execution
+            </returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.AuthorizationServerProvider.GrantClientCredentials(Microsoft.Owin.Security.OAuth.OAuthGrantClientCredentialsContext)">
+            <summary>
+            Called when a request to the Token endpoint arrives with a "grant_type" of "client_credentials". This occurs when a registered client
+            application wishes to acquire an "access_token" to interact with protected resources on it's own behalf, rather than on behalf of an authenticated user.
+            If the web application supports the client credentials it may assume the context.ClientId has been validated by the ValidateClientAuthentication call.
+            To issue an access token the context.Validated must be called with a new ticket containing the claims about the client application which should be associated
+            with the access token. The application should take appropriate measures to ensure that the endpoint isn’t abused by malicious callers.
+            The default behavior is to reject this grant type.
+            See also http://tools.ietf.org/html/rfc6749#section-4.4.2
+            </summary>
+            <param name="context">The context of the event carries information in and results out.</param>
+            <returns>
+            Task to enable asynchronous execution
+            </returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.AuthorizationServerProvider.ValidateClientRedirectUri(Microsoft.Owin.Security.OAuth.OAuthValidateClientRedirectUriContext)">
+            <summary>
+            Called to validate that the context.ClientId is a registered "client_id", and that the context.RedirectUri a "redirect_uri"
+            registered for that client. This only occurs when processing the Authorize endpoint. The application MUST implement this
+            call, and it MUST validate both of those factors before calling context.Validated. If the context.Validated method is called
+            with a given redirectUri parameter, then IsValidated will only become true if the incoming redirect URI matches the given redirect URI.
+            If context.Validated is not called the request will not proceed further.
+            </summary>
+            <param name="context">The context of the event carries information in and results out.</param>
+            <returns>
+            Task to enable asynchronous execution
+            </returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.AuthorizationServerProvider.ValidateAuthorizeRequest(Microsoft.Owin.Security.OAuth.OAuthValidateAuthorizeRequestContext)">
+            <summary>
+            Called for each request to the Authorize endpoint to determine if the request is valid and should continue.
+            The default behavior when using the OAuthAuthorizationServerProvider is to assume well-formed requests, with
+            validated client redirect URI, should continue processing. An application may add any additional constraints.
+            </summary>
+            <param name="context">The context of the event carries information in and results out.</param>
+            <returns>
+            Task to enable asynchronous execution
+            </returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.AuthorizationServerProvider.GrantAuthorizationCode(Microsoft.Owin.Security.OAuth.OAuthGrantAuthorizationCodeContext)">
+            <summary>
+            Called when a request to the Token endpoint arrives with a "grant_type" of "authorization_code". This occurs after the Authorize
+            endpoint as redirected the user-agent back to the client with a "code" parameter, and the client is exchanging that for an "access_token".
+            The claims and properties
+            associated with the authorization code are present in the context.Ticket. The application must call context.Validated to instruct the Authorization
+            Server middleware to issue an access token based on those claims and properties. The call to context.Validated may be given a different
+            AuthenticationTicket or ClaimsIdentity in order to control which information flows from authorization code to access token.
+            The default behavior when using the OAuthAuthorizationServerProvider is to flow information from the authorization code to
+            the access token unmodified.
+            See also http://tools.ietf.org/html/rfc6749#section-4.1.3
+            </summary>
+            <param name="context">The context of the event carries information in and results out.</param>
+            <returns>
+            Task to enable asynchronous execution
+            </returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.AuthorizationServerProvider.GrantRefreshToken(Microsoft.Owin.Security.OAuth.OAuthGrantRefreshTokenContext)">
+            <summary>
+            Called when a request to the Token endpoint arrives with a "grant_type" of "refresh_token". This occurs if your application has issued a "refresh_token"
+            along with the "access_token", and the client is attempting to use the "refresh_token" to acquire a new "access_token", and possibly a new "refresh_token".
+            To issue a refresh token the an Options.RefreshTokenProvider must be assigned to create the value which is returned. The claims and properties
+            associated with the refresh token are present in the context.Ticket. The application must call context.Validated to instruct the
+            Authorization Server middleware to issue an access token based on those claims and properties. The call to context.Validated may
+            be given a different AuthenticationTicket or ClaimsIdentity in order to control which information flows from the refresh token to
+            the access token. The default behavior when using the OAuthAuthorizationServerProvider is to flow information from the refresh token to
+            the access token unmodified.
+            See also http://tools.ietf.org/html/rfc6749#section-6
+            </summary>
+            <param name="context">The context of the event carries information in and results out.</param>
+            <returns>
+            Task to enable asynchronous execution
+            </returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Server.AuthorizationServerProvider.TokenEndpoint(Microsoft.Owin.Security.OAuth.OAuthTokenEndpointContext)">
+            <summary>
+            Called at the final stage of a successful Token endpoint request. An application may implement this call in order to do any final
+            modification of the claims being used to issue access or refresh tokens. This call may also be used in order to add additional
+            response parameters to the Token endpoint's json response body.
+            </summary>
+            <param name="context">The context of the event carries information in and results out.</param>
+            <returns>
+            Task to enable asynchronous execution
+            </returns>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Tokens.AesSecureDataFormat">
+            <summary>
+            Secure data format for Owin AuthenticationTicket
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.AesSecureDataFormat.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Tokens.AesSecureDataFormat"/> class.
+            </summary>
+            <param name="key">The key.</param>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Authorization.AuthenticationExtension">
+            <summary>
+            Owin Authentication extension class
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.AuthenticationExtension.UseAuthentication(Owin.IAppBuilder,Mecalux.ITSW.Core.Security.Authorization.AuthenticationOptions)">
+            <summary>
+            Uses the authentication.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="options">The options.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.AuthenticationExtension.ApplyChallenge(Microsoft.Owin.Security.OAuth.OAuthChallengeContext)">
+            <summary>
+            Applies the challenge.
+            </summary>
+            <param name="context">The context.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.AuthenticationExtension.AuthenticateRequests(Owin.IAppBuilder,System.Func{Microsoft.Owin.IOwinRequest,System.Boolean})">
+            <summary>
+            Authenticates the requests depending on a function check.
+            </summary>
+            <param name="app">The application.</param>
+            <param name="checkRequest">The check request.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Authorization.AuthenticationExtension.PrintCurrentIntegratedPipelineStage(System.String)">
+            <summary>
+            Prints the current integrated pipeline stage.
+            </summary>
+            <param name="msg">The MSG.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Saml2.Saml2Request">
+            <summary>
+            Saml2 Request helper class
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Saml2.Saml2Request"/> class.
+            </summary>
+            <param name="issuer">The issuer.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.GetRequest(Mecalux.ITSW.Core.Security.Saml2.Saml2Request.AuthRequestFormat)">
+            <summary>
+            Gets the 'SAMLRequest' variable value.
+            </summary>
+            <param name="format">The format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.GetRedirectUrl(System.String,Mecalux.ITSW.Core.Security.Saml2.Saml2Request.AuthRequestFormat)">
+            <summary>
+            Gets the redirect URL. SAML-Endpoint URL with the Base64-ed request in the querystring.
+            </summary>
+            <param name="samlEndpoint">The saml endpoint.</param>
+            <param name="requestFormat">The request format.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.GetRedirectUrl(System.String,System.String,System.String)">
+            <summary>
+            Gets the redirect URL.
+            </summary>
+            <param name="samlEndpoint">The saml endpoint.</param>
+            <param name="samlRequest">The saml request.</param>
+            <param name="relayState">State of the relay.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.Id">
+            <summary>
+            Gets the identifier.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.Issuer">
+            <summary>
+            Gets the issuer.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.IssueDate">
+            <summary>
+            Gets the issue date.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.RelayState">
+            <summary>
+            Gets or sets the relay state parameter value.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.AssertionConsumerServiceUrl">
+            <summary>
+            Gets or sets the assertion consumer service URL.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.Destination">
+            <summary>
+            Gets or sets the assertion destination service URL.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.NameIdPolicyAllowCreate">
+            <summary>
+            Gets or sets a value indicating whether [name identifier policy].
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.SignCertificate">
+            <summary>
+            Gets or sets the sign certificate. If null request will not be signed.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.AuthRequestFormat">
+            <summary>
+            Saml2 Request parameter format
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.AuthRequestFormat.Base64">
+            <summary>
+            Xml to base64
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.AuthRequestFormat.Base64Compressed">
+            <summary>
+            Xml to base64 for azure
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.Security.Saml2.Saml2Request.AuthRequestFormat.Xml">
+            <summary>
+            Xml
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Saml2.Saml2Response">
+            <summary>
+            Saml2 Response helper class
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.#ctor(System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Saml2.Saml2Response"/> class.
+            </summary>
+            <param name="xmlResponse">The XML response.</param>
+            <param name="fromBase64">if set to <c>true</c> [from base64].</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.HasSignature">
+            <summary>
+            Determines whether this instance has signature.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.VerifySignature(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Boolean)">
+            <summary>
+            Verifies the signature.
+            </summary>
+            <param name="certificate">The certificate.</param>
+            <param name="validateReference">if set to <c>true</c> [validate reference].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.ValidateSignatureReference">
+            <summary>
+            Validates the signature reference.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.IsExpired">
+            <summary>
+            Determines whether this instance is expired.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.GetSubjectConfirmationMethod">
+            <summary>
+            Gets the subject confirmation method.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.GetStatus">
+            <summary>
+            Gets the response status.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.GetIssuer">
+            <summary>
+            Gets the response issuer.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.GetAssertionIssuer">
+            <summary>
+            Gets the assertion issuer.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.GetAudience">
+            <summary>
+            Gets the audience.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.GetNameID">
+            <summary>
+            Gets the name identifier.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.GetEmail">
+            <summary>
+            Gets the email.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.GetFirstName">
+            <summary>
+            Gets the first name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.GetLastName">
+            <summary>
+            Gets the last name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.GetDepartment">
+            <summary>
+            Gets the department.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.GetPhone">
+            <summary>
+            Gets the phone.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.GetCompany">
+            <summary>
+            Gets the company.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.GetCustomAttribute(System.String)">
+            <summary>
+            Gets the custom attribute value.
+            </summary>
+            <param name="attributeName">Name of the attribute.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.Xml">
+            <summary>
+            Gets the XML.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Saml2.Saml2Response.AssertionXml">
+            <summary>
+            Gets the assertion XML.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Saml2.Saml2ResponseHandler">
+            <summary>
+            Saml2 token factory/validation
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2ResponseHandler.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Saml2.Saml2ResponseHandler"/> class.
+            </summary>
+            <param name="certificateFileName">Name of the certificate file.</param>
+            <param name="validIssuer">The valid issuer.</param>
+            <param name="validAudience">The valid audience.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2ResponseHandler.#ctor(System.Security.Cryptography.X509Certificates.X509Certificate2,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Saml2.Saml2ResponseHandler"/> class.
+            </summary>
+            <param name="certificate">The certificate.</param>
+            <param name="validIssuer">The valid issuer.</param>
+            <param name="validAudience">The valid audience.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2ResponseHandler.ValidateResponse(System.String,System.Boolean)">
+            <summary>
+            Validates the response.
+            </summary>
+            <param name="saml2Response">The saml2 response.</param>
+            <param name="fromBase64">if set to <c>true</c> [from base64].</param>
+            <returns></returns>
+            <exception cref="T:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException">
+            Invalid assertion: Saml2 assertion is required.
+            Invalid assertion: Invalid issuer
+            Invalid assertion: Invalid audience
+            Invalid assertion: Assertion expired
+            Invalid assertion: Invalid subject confirmation method
+            Invalid assertion: Invalid status
+            Invalid assertion: Signature not found
+            Invalid assertion: Invalid signature
+            Invalid assertion: User 'NameID' is required
+            </exception>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2ResponseHandler.ResolveCertificate(System.Security.Cryptography.X509Certificates.StoreName,System.Security.Cryptography.X509Certificates.StoreLocation,System.Security.Cryptography.X509Certificates.X509FindType,System.Object)">
+            <summary>
+            Resolves the certificate.
+            </summary>
+            <param name="storeName">Name of the store.</param>
+            <param name="storeLocation">The store location.</param>
+            <param name="findType">Type of the find.</param>
+            <param name="findValue">The find value.</param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Saml2.Saml2ResponseHandler.TryResolveCertificate(System.Security.Cryptography.X509Certificates.StoreName,System.Security.Cryptography.X509Certificates.StoreLocation,System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Security.Cryptography.X509Certificates.X509Certificate2@)">
+            <summary>
+            Tries the resolve certificate.
+            </summary>
+            <param name="storeName">Name of the store.</param>
+            <param name="storeLocation">The store location.</param>
+            <param name="findType">Type of the find.</param>
+            <param name="findValue">The find value.</param>
+            <param name="certificate">The certificate.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.TokenFactory.CreateServerTokenProvider(System.String,System.String,System.String)">
+            <summary>
+            Creates the STS server token provider.
+            </summary>
+            <param name="issuer">The issuer.</param>
+            <param name="signingKey">The signing key.</param>
+            <param name="audience">The audience.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.TokenFactory.CreateAuthenticationTokenProvider(System.String,System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Creates the authentication Resource server token provider.
+            </summary>
+            <param name="allowedIssuer">The allowed issuer.</param>
+            <param name="issuerSigningKey">The issuer signing key.</param>
+            <param name="audiences">The audiences.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.TokenFactory.CreateIdToken(System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.String,System.String,System.TimeSpan)">
+            <summary>
+            Creates the identifier token.
+            </summary>
+            <param name="claims">The claims.</param>
+            <param name="issuer">The issuer.</param>
+            <param name="clientId">The client identifier.</param>
+            <param name="expires">The expires.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.TokenFactory.ValidateIdToken(System.String,System.String,System.String)">
+            <summary>
+            Validates the token. Extracts claims from token string, validating issuer.
+            </summary>
+            <param name="idToken">The identifier token.</param>
+            <param name="issuer">The issuer.</param>
+            <param name="clientId">The client identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.TokenFactory.ValidateAccessToken(System.String,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Validates the access token.
+            </summary>
+            <param name="accessToken">The access token.</param>
+            <param name="allowedIssuer">The allowed issuer.</param>
+            <param name="issuerSigningKey">The issuer signing key.</param>
+            <param name="allowedAudiences">The allowed audiences.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException">
+            <summary>
+            Token validation exception.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException"/> class.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException"/> class.
+            </summary>
+            <param name="message">The error message.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException.#ctor(System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="tokenExpired">if set to <c>true</c> [token expired].</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="ex">The ex.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException.#ctor(System.String,System.Boolean,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="tokenExpired">if set to <c>true</c> [token expired].</param>
+            <param name="ex">The ex.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException"/> class.
+            </summary>
+            <param name="info">The <see cref="T:System.Runtime.Serialization.SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
+            <param name="context">The <see cref="T:System.Runtime.Serialization.StreamingContext"/> that contains contextual information about the source or destination.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            </summary>
+            <param name="info"></param>
+            <param name="context"></param>
+            <exception cref="T:System.ArgumentNullException">info</exception>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.Security.Tokens.TokenValidationException.TokenExpired">
+            <summary>
+            Gets a value indicating whether [token expired].
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Tokens.Jwt.JwtTokenValidationHandler">
+            <summary>
+            Handler to validate Jwt tokens with WebApi
+            config.MessageHandlers.Add(new JwtTokenValidationHandler());
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new JwtTokenValidationHandler());
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.Security.Utils.SecUtils">
+            <summary>
+            Utility class
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Utils.SecUtils.Validate(System.String,System.Int32[],System.Boolean,System.Boolean)">
+            <summary>
+            Validates the specified input.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="array">The array.</param>
+            <param name="flag">if set to <c>true</c> [flag].</param>
+            <param name="force">if set to <c>true</c> [force].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.Security.Utils.SecUtils.Verify(System.String,System.Int16)">
+            <summary>
+            Verifies the specified input.
+            </summary>
+            <param name="input">The input.</param>
+            <param name="number">The number.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mecalux.ITSW.Core.WinService</name>
+    </assembly>
+    <members>
+        <member name="T:Mecalux.ITSW.Core.WinService.BaseServiceObject">
+            <summary>
+            Base IServiceObject to run in service mode or console mode under StaticService manage class.
+            Provides Execute and Terminate method to handle service execution.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.WinService.IServiceObject">
+            <summary>
+            This interface is the base to implement a Windows Service.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.IServiceObject.Initialize(System.String)">
+            <summary>
+            Initialize service
+            
+            </summary>
+            <param name="aServiceName">Service Name</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.IServiceObject.Start">
+            <summary>
+            Start the service. This method should return inmediatly
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.IServiceObject.Stop">
+            <summary>
+            Stop de Service. This method should try to stop the main thread and 
+            wait for a configured time to kill if the thread doesn´t finish
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.WinService.IServiceObject.ServiceObjectName">
+            <summary>
+            Returns the Service Object Name
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.WinService.BaseServiceObject.Logger">
+            <summary>
+            Current class logger
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.BaseServiceObject.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Mecalux.ITSW.Core.WinService.BaseServiceObject"/> class.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.BaseServiceObject.Initialize(System.String)">
+            <summary>
+            Initialize service
+            </summary>
+            <param name="aServiceName">Service Name</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.BaseServiceObject.Start">
+            <summary>
+            Start the service. This method should return inmediatly. Runs method 'Exceute' in a new thread.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.BaseServiceObject.Stop">
+            <summary>
+            Stop de Service. This method should try to stop the main thread and
+            wait for a configured time to kill if the thread doesn´t finish
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.BaseServiceObject.Execute">
+            <summary>
+            Main execution method. Executed in a new service thread (main service thread).
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.BaseServiceObject.Terminate">
+            <summary>
+            Terminate execution methos. This method should handle the termination of worked threads.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.BaseServiceObject.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.BaseServiceObject.Dispose(System.Boolean)">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+            <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.WinService.BaseServiceObject.Terminating">
+            <summary>
+            Gets a value indicating whether this <see cref="T:Mecalux.ITSW.Core.WinService.BaseServiceObject"/> is terminating (Service is stopping and Terminate method is executing).
+            </summary>
+            <value>
+              <c>true</c> if Terminate method is executing; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.WinService.BaseServiceObject.Terminated">
+            <summary>
+            Gets a value indicating whether this <see cref="T:Mecalux.ITSW.Core.WinService.BaseServiceObject"/> is terminated.
+            </summary>
+            <value>
+              <c>true</c> if Terminate method has been executed; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.WinService.BaseServiceObject.ServiceObjectName">
+            <summary>
+            Returns the Service Object Name
+            </summary>
+        </member>
+        <member name="F:Mecalux.ITSW.Core.WinService.ServiceMain.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.ServiceMain.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.ServiceMain.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.WinService.StaticService">
+            <summary>
+            Class to encapsulate a WindowsService
+            the class handles installation, uninstallation and running in console mode
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.StaticService.Initialize(System.String[],System.String,System.String)">
+            <summary>
+            Initializes service execution with specified args.
+            </summary>
+            <param name="args">The command line args.</param>
+            <param name="serviceName">Name of the service.</param>
+            <param name="displayName">The service display name.</param>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="serviceName"/> or <paramref name="displayName"/> are empty</exception>
+            <exception cref="T:System.InvalidOperationException">If already initialized</exception>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.StaticService.Initialize(System.String[],System.String,System.String,System.String,System.String)">
+            <summary>
+            Initializes service execution with specified args.
+            </summary>
+            <param name="args">The command line args.</param>
+            <param name="serviceName">Name of the service.</param>
+            <param name="displayName">The service display name.</param>
+            <param name="description">The service description.</param>
+            <param name="serviceObjectName">Name of the main service object.</param>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="serviceName"/> or <paramref name="displayName"/> are empty</exception>
+            <exception cref="T:System.InvalidOperationException">If already initialized</exception>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.StaticService.Uninitialize">
+            <summary>
+            Uninitializes this instance.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.StaticService.ManageService">
+            <summary>
+            Service execution
+            </summary>
+            <exception cref="T:System.InvalidOperationException">If class is not Initialized. </exception>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.StaticService.StopService(System.Int32)">
+            <summary>
+            Stops the running service.
+            </summary>
+            <param name="exitCode">The exit code. ExitCode when running in service mode.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.StaticService.InstallService(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Installs the service.
+            </summary>
+            <param name="executableName">Name of the executable.</param>
+            <param name="name">The name.</param>
+            <param name="displayName">The display name.</param>
+            <param name="description">The description.</param>
+            <param name="configFile">Relative path to config file to use.</param>
+            <param name="configFolder">Relative path to config folder. If config file is not used the default config file will be searched within this folder.</param>
+            <exception cref="T:System.InvalidOperationException">The service name is invalid.-or-The Service Control Manager could not be opened.</exception>
+            <exception cref="T:System.ArgumentNullException">If executableName, name or displayName parameters are null or empty.</exception>
+            <exception cref="T:System.ArgumentException">If name for the service is more than 255 characters in length.</exception>
+            <exception cref="T:System.ComponentModel.Win32Exception">The system could not generate a handle to the service.-or-A service with that name is already installed.</exception>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.WinService.StaticService.UninstallService(System.String)">
+            <summary>
+            Uninstalls the service.
+            </summary>
+            <param name="name">The name.</param>
+            <exception cref="T:System.ArgumentNullException">If name parameters is null or empty.</exception>
+            <exception cref="T:System.ComponentModel.Win32Exception">The Service Control Manager could not be opened. -or- The system could not get a handle to the service. </exception>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.WinService.StaticService.DisplayName">
+            <summary>
+            Service Display Name
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.WinService.StaticService.Description">
+            <summary>
+            Service Description
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.WinService.StaticService.Name">
+            <summary>
+            Service Name
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.WinService.StaticService.ServiceObjectName">
+            <summary>
+            Service Object Name
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.WinService.StaticService.ServiceFolderName">
+            <summary>
+            Gets the name of the service instance folder, for app config, etc. Relative path from application folder.
+            </summary>
+            <value>
+            The name of the service folder. Empty string if it is the default application folder.
+            </value>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.WinService.StaticService.AppConfigFileName">
+            <summary>
+            App config file name. Relative path from application folder.
+            </summary>
+        </member>
+    </members>
+</doc>

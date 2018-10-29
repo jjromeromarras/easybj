@@ -1,0 +1,248 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Mecalux.ITSW.Core.IoC</name>
+    </assembly>
+    <members>
+        <member name="T:Mecalux.ITSW.Core.IoC.Resources.Messages">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.IoC.Resources.Messages.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.IoC.Resources.Messages.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.IoC.Resources.Messages.exception_ContainerNotFound">
+            <summary>
+              Looks up a localized string similar to Container not found in IoC configuration.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.IoC.Resources.Messages.exception_DefaultIOCSettings">
+            <summary>
+              Looks up a localized string similar to default IocContainer setting not found.
+            </summary>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.IoC.Resources.Messages.exception_PerExecutionContextLifetimeManagerKeyCannotBeNull">
+            <summary>
+              Looks up a localized string similar to Key cannot be null in PerExecutionContextLifetimeManager.
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.IoC.ServiceLocator">
+            <summary>
+            Singleton Service Locator.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.ServiceLocator.RegisterIfNecessary``2(Mecalux.ITSW.Core.Abstraction.IServiceLocator)">
+            <summary>
+            Registers the implementation of the given interface if
+            the interface is not already registered.
+            </summary>
+            <remarks>Thread safe method.</remarks>
+            <param name="serviceLocator">Service locator</param>
+            <typeparam name="TInterface">The type of the interface.</typeparam>
+            <typeparam name="TImplementation">The type of the implementation.</typeparam>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.ServiceLocator.RegisterIfNecessary``2(Mecalux.ITSW.Core.Abstraction.IServiceLocator,System.Object[])">
+            <summary>
+            Registers the implementation of the given interface if
+            the interface is not already registered. The constructor that matches the
+            given parameters will be used to create instances of the implementation.
+            </summary>
+            <param name="serviceLocator">Service locator</param>
+            <typeparam name="TInterface">The type of the interface.</typeparam>
+            <typeparam name="TImplementation">The type of the implementation.</typeparam>
+            <param name="constructorParameters">The constructor parameters.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.ServiceLocator.RegisterIfNecessary``1(Mecalux.ITSW.Core.Abstraction.IServiceLocator,``0)">
+            <summary>
+            Registers the instance of the given interface if
+            the interface is not already registered.
+            </summary>
+            <remarks>Thread safe method.</remarks>
+            <param name="serviceLocator">Service locator</param>
+            <typeparam name="TInterface">The type of the interface.</typeparam>
+            <param name="instance">The instance.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.ServiceLocator.RegisterIfNecessary``1(Mecalux.ITSW.Core.Abstraction.IServiceLocator,System.String,``0)">
+            <summary>
+            Registers <paramref name="instance"/> of <typeparamref name="TInterface"/> with the name <paramref name="name"/> if
+            no instance with that name is already registered.
+            </summary>
+            <remarks>Thread safe method.</remarks>
+            <param name="serviceLocator">Service locator</param>
+            <typeparam name="TInterface">The type of the interface.</typeparam>
+            <param name="name">The name.</param>
+            <param name="instance">The instance.</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.ServiceLocator.RegisterIfNecessary``2(Mecalux.ITSW.Core.Abstraction.IServiceLocator,System.String)">
+            <summary>
+            Registers <typeparamref name="TImplementation"/> as the implementation for <typeparamref name="TInterface"/> with name
+            <paramref name="name"/> if no implementation is registered with that name.
+            </summary>
+            <remarks>Thread safe method.</remarks>
+            <param name="serviceLocator">Service locator</param>
+            <typeparam name="TInterface">The type of the interface.</typeparam>
+            <typeparam name="TImplementation">The type of the implementation.</typeparam>
+            <param name="name">The name.</param>
+        </member>
+        <member name="P:Mecalux.ITSW.Core.IoC.ServiceLocator.Current">
+            <summary>
+            Gets the current Service Locator
+            </summary>
+        </member>
+        <member name="T:Mecalux.ITSW.Core.IoC.TypeLocator`1">
+            <summary>
+            Helps keep track of a type hierarchy. It will only keep track of types that inherit <typeparam name="T"/>
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.TypeLocator`1.Register(System.Collections.Generic.IEnumerable{System.Type})">
+            <summary>
+            Registers <paramref name="types"/> as known type.
+            </summary>
+            <param name="types">Types to register</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.TypeLocator`1.Register(System.Type)">
+            <summary>
+            Registers <paramref name="t"/> as known type. If type does not inherit <typeparamref name="T"/> it
+            will be ignored. Base types of <paramref name="t"/> will also be registered.
+            </summary>
+            <param name="t">Type to register</param>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.TypeLocator`1.GetDerivedClasses(System.Type)">
+            <summary>
+            Returns all known non-abstract classes that inherit <paramref name="t"/>. The
+            return value will include <paramref name="t"/> itself if it is a non-abstract class.
+            </summary>
+            <param name="t">Type</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.TypeLocator`1.GetDerivedAbstractClasses(System.Type)">
+            <summary>
+            Returns all known abstract classes that inherit <paramref name="t"/>. The
+            return value will include <paramref name="t"/> itself if it is an abstract class.
+            </summary>
+            <param name="t">Type</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.TypeLocator`1.GetDerivedInterfaces(System.Type)">
+            <summary>
+            Returns all known interfaces that inherit <paramref name="t"/>. The
+            return value will include <paramref name="t"/> itself if it is an interface.
+            </summary>
+            <param name="t">Type</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.UnityServiceLocator.Resolve``1">
+            <summary>
+            Resolves this instance.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+            <exception cref="T:Mecalux.ITSW.Core.Abstraction.Exceptions.ServiceResolutionException"/>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.UnityServiceLocator.Resolve``1(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Resolve an instance of the default requested type from the container with a constructor with parameters.
+            </summary>
+            <typeparam name="T">Type to resolve</typeparam>
+            <param name="constructorParameters">The constructor parameters.</param>
+            <returns>The instance of the object</returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.UnityServiceLocator.Resolve``1(System.String)">
+            <summary>
+            Resolves the specified name.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The name.</param>
+            <returns></returns>
+            <exception cref="T:Mecalux.ITSW.Core.Abstraction.Exceptions.ServiceResolutionException"/>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.UnityServiceLocator.Resolve``1(System.String,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Resolves the specified name with a constructor with parameters.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="name">The name.</param>
+            <param name="constructorParameters">The constructor parameters.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.UnityServiceLocator.Resolve(System.Type)">
+            <summary>
+            Resolve an instance of the requested type
+            </summary>
+            <param name="type">Type to resolve</param>
+            <returns>
+            the instanace of the object
+            </returns>
+            <exception cref="T:Mecalux.ITSW.Core.Abstraction.Exceptions.ServiceResolutionException"/>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.UnityServiceLocator.Resolve(System.Type,System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Resolve an instance of the requested type with a constructor with parameters
+            </summary>
+            <param name="type">The type to resolve.</param>
+            <param name="constructorParameters">The constructor parameters.</param>
+            <returns>
+            The instanace of the object
+            </returns>
+            <exception cref="T:Mecalux.ITSW.Core.Abstraction.Exceptions.ServiceResolutionException"/>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.UnityServiceLocator.ResolveServices``1">
+            <summary>
+            Return instances of all registered types requested
+            </summary>
+            <typeparam name="T">Type requested</typeparam>
+            <returns>IList of the objects of type T</returns>
+            <exception cref="T:Mecalux.ITSW.Core.Abstraction.Exceptions.ServiceResolutionException"/>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.UnityServiceLocator.ResolveServices``1(System.Collections.Generic.IDictionary{System.String,System.Object})">
+            <summary>
+            Return instances of all registered types requested
+            </summary>
+            <typeparam name="T">Type requested</typeparam>
+            <param name="constructorParameters">The constructor parameters.</param>
+            <returns>IList of the objects of type T</returns>
+            <exception cref="T:Mecalux.ITSW.Core.Abstraction.Exceptions.ServiceResolutionException"/>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.UnityServiceLocator.RegisterAll``1(System.String)">
+            <summary>
+            Registers all types included in the assembly that implement the interface.
+            </summary>
+            <typeparam name="TInterface">The type of the interface.</typeparam>
+            <param name="AssemblyString">The assembly string.</param>
+            <exception cref="T:System.ArgumentNullException">If <paramref name="AssemblyString"/> is null or empty</exception>
+            <exception cref="T:System.ArgumentException"/>
+            <exception cref="!:FileNotFoundException"/>
+            <exception cref="!:FileLoadException"/>
+            <exception cref="T:System.BadImageFormatException"/>
+            <exception cref="T:System.Reflection.ReflectionTypeLoadException"/>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.UnityServiceLocator.RegisterAll``1(System.Type[])">
+            <summary>
+            Registers all types that implement the interface.
+            </summary>
+            <typeparam name="TInterface">Source type or interface</typeparam>
+            <param name="Catalog">Type catalog to scan</param>
+            <exception cref="T:System.ArgumentNullException"/>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.UnityServiceLocator.Reset">
+            <summary>
+            Disposes the current container and creates a new one.
+            All instances are unregistered.
+            </summary>
+        </member>
+        <member name="M:Mecalux.ITSW.Core.IoC.UnityServiceLocator.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+    </members>
+</doc>

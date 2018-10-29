@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:attributeGroup id="ConnectionData" name="ConnectionData">
+    <xs:attribute name="name" type="xs:string" use="required">
+      <xs:annotation>
+        <xs:documentation xml:lang="es">
+          Nombre de la conexión.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="connectionString" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation xml:lang="es">Cadena de conexión. En ella se puede utilizar los parámetros {password} y {baseDirectory} que serán reemplazdos por los valores resueltos a partir de los atributos correspondientes.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="providerName" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation xml:lang="es">Nombre del proveedor de la conexión a utilizar. No es necesario cuando la cadena de conexion es MongoDb o Azure Storage.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="encryptedPassword" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation xml:lang="es">Contraseña cifrada. Será descifrada en ejecución y puede ser especificada en la cadena de conexión mediante la cadena {password}.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="baseDirectory" type="xs:string" use="optional">
+      <xs:annotation>
+        <xs:documentation xml:lang="es">Ruta relativa desde el directorio actual, que puede contener variables de entorno (como por ejemplo '%AppData%'), que será transformada a ruta absoluta para poder ser especificada en la cadena de conexión mediante la cadena {baseDirectory}.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+
+  <xs:complexType id="OracleConfiguration" name="OracleConfiguration">
+    <xs:attribute name="initializeSizes" type="xs:boolean" use="optional">
+      <xs:annotation>
+        <xs:documentation xml:lang="es">
+          Indica si se debe indicar tamaños iniciales en la creación tablas e índices u omitirlos y que se tomen los valores por defecto.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+
+  <xs:element name="Tenants">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="tenant" type="tenant" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="tenant">
+    <xs:all>
+      <xs:element name="eventStore" type="eventStore" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="snapshotStore" type="snapshotStore" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="commandStore" type="commandStore" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="blobStore" type="blobStore" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="processStore" type="processStore" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="readDatabase" type="ReadDatabase" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="ADDatabase" type="ADDatabase" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="dataWarehouseDatabase" type="DataWarehouseDatabase" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="lucene" type="lucene" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="processes" type="processes" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="telemetry" type="telemetry" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="urls" type="urls" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="saml2" type="saml2" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="appSettings" type="appSettings" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="keys" type="keys" minOccurs="0" maxOccurs="1"/>
+    </xs:all>
+    <xs:attribute name="id" type="guid" use="required"/>
+    <xs:attribute name="code" type="xs:string" use="required"/>
+    <xs:attribute name="name" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name ="appSetting">
+    <xs:attribute name="key" type="xs:string" use="required"/>
+    <xs:attribute name="value" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name ="appSettings">
+    <xs:sequence>
+      <xs:element name="add" type="appSetting" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="eventStore">
+    <xs:all>
+      <xs:element name="oracle" type="OracleConfiguration" minOccurs="0" maxOccurs="1"/>
+    </xs:all>
+    <xs:attributeGroup ref="ConnectionData"/>
+  </xs:complexType>
+  <xs:complexType name="snapshotStore">
+    <xs:all>
+      <xs:element name="oracle" type="OracleConfiguration" minOccurs="0" maxOccurs="1"/>
+    </xs:all>
+    <xs:attributeGroup ref="ConnectionData"/>
+  </xs:complexType>
+  <xs:complexType name="commandStore">
+    <xs:all>
+      <xs:element name="oracle" type="OracleConfiguration" minOccurs="0" maxOccurs="1"/>
+    </xs:all>
+    <xs:attributeGroup ref="ConnectionData"/>
+  </xs:complexType>
+  <xs:complexType name="blobStore">
+    <xs:attributeGroup ref="ConnectionData"/>
+  </xs:complexType>
+  <xs:complexType name="processStore">
+    <xs:attributeGroup ref="ConnectionData"/>
+  </xs:complexType>
+  <xs:complexType name="ReadDatabase">
+    <xs:all>
+      <xs:element name="oracle" type="OracleConfiguration" minOccurs="0" maxOccurs="1"/>
+    </xs:all>
+    <xs:attributeGroup ref="ConnectionData"/>
+  </xs:complexType>
+  <xs:complexType name="ADDatabase">
+    <xs:attributeGroup ref="ConnectionData"/>
+  </xs:complexType>
+  <xs:complexType name="DataWarehouseDatabase">
+    <xs:attributeGroup ref="ConnectionData"/>
+  </xs:complexType>
+
+  <xs:complexType name="lucene">
+    <xs:attribute name="directory" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="processes">
+    <xs:attribute name="logonApplicationName" type="xs:string"/>
+    <xs:attribute name="logonProcessName" type="xs:string"/>
+    <xs:attribute name="mainApplicationName" type="xs:string" use="required"/>
+    <xs:attribute name="mainProcessName" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="telemetry">
+    <xs:attribute name="key" type="xs:string"/>
+    <xs:attribute name="enabled" type="xs:boolean"/>
+  </xs:complexType>
+  <xs:complexType name="urls">
+    <xs:attribute name="sts" type="xs:string"/>
+    <xs:attribute name="smartUIAngular" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="saml2">
+    <xs:attribute name="enabled" type="xs:boolean"/>
+    <xs:attribute name="url" type="xs:string"/>
+    <xs:attribute name="issuer" type="xs:string"/>
+    <xs:attribute name="certificateFileName" type="xs:string"/>
+    <xs:attribute name="certificateThumbPrint" type="xs:string"/>
+  </xs:complexType>
+  <xs:complexType name="keys">
+    <xs:attribute name="licenseInfoApiPublicKey" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:simpleType name="guid">
+    <xs:annotation>
+      <xs:documentation xml:lang="en">
+        The representation of a GUID, generally the id of an element.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\{[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}\}"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
