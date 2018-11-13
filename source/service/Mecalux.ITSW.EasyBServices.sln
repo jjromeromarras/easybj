@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mecalux.ITSW.EasyBServices"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mecalux.ITSW.EasyBServices.RepositoryManager", "Mecalux.ITSW.EasyBServices.RepositoryManager\Mecalux.ITSW.EasyBServices.RepositoryManager.csproj", "{F0E9D7B4-EA20-428E-AD9A-5ED4E644A30E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mecalux.ITSW.EasyBServices.StoreRepositoryManager", "Mecalux.ITSW.EasyBServices.StoreRepositoryManager\Mecalux.ITSW.EasyBServices.StoreRepositoryManager.csproj", "{6E64570E-7DCD-40AA-B57F-A408B7969334}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mecalux.ITSW.EasyBServices.Model", "Mecalux.ITSW.EasyBServices.Model\Mecalux.ITSW.EasyBServices.Model.csproj", "{E4D976F1-01F1-408C-A947-2279CF1B19CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mecalux.ITSW.EasyBServices.Base", "Mecalux.ITSW.EasyBServices.Base\Mecalux.ITSW.EasyBServices.Base.csproj", "{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mecalux.ITSW.EasyBServices.License", "Mecalux.ITSW.EasyBServices.License\Mecalux.ITSW.EasyBServices.License.csproj", "{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,12 +49,60 @@ Global
 		{F0E9D7B4-EA20-428E-AD9A-5ED4E644A30E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F0E9D7B4-EA20-428E-AD9A-5ED4E644A30E}.Release|x86.ActiveCfg = Release|Any CPU
 		{F0E9D7B4-EA20-428E-AD9A-5ED4E644A30E}.Release|x86.Build.0 = Release|Any CPU
+		{6E64570E-7DCD-40AA-B57F-A408B7969334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E64570E-7DCD-40AA-B57F-A408B7969334}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E64570E-7DCD-40AA-B57F-A408B7969334}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6E64570E-7DCD-40AA-B57F-A408B7969334}.Debug|x86.Build.0 = Debug|Any CPU
+		{6E64570E-7DCD-40AA-B57F-A408B7969334}.LocalizationMode|Any CPU.ActiveCfg = Release|Any CPU
+		{6E64570E-7DCD-40AA-B57F-A408B7969334}.LocalizationMode|Any CPU.Build.0 = Release|Any CPU
+		{6E64570E-7DCD-40AA-B57F-A408B7969334}.LocalizationMode|x86.ActiveCfg = Release|Any CPU
+		{6E64570E-7DCD-40AA-B57F-A408B7969334}.LocalizationMode|x86.Build.0 = Release|Any CPU
+		{6E64570E-7DCD-40AA-B57F-A408B7969334}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E64570E-7DCD-40AA-B57F-A408B7969334}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E64570E-7DCD-40AA-B57F-A408B7969334}.Release|x86.ActiveCfg = Release|Any CPU
+		{6E64570E-7DCD-40AA-B57F-A408B7969334}.Release|x86.Build.0 = Release|Any CPU
+		{E4D976F1-01F1-408C-A947-2279CF1B19CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4D976F1-01F1-408C-A947-2279CF1B19CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4D976F1-01F1-408C-A947-2279CF1B19CC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E4D976F1-01F1-408C-A947-2279CF1B19CC}.Debug|x86.Build.0 = Debug|Any CPU
+		{E4D976F1-01F1-408C-A947-2279CF1B19CC}.LocalizationMode|Any CPU.ActiveCfg = Release|Any CPU
+		{E4D976F1-01F1-408C-A947-2279CF1B19CC}.LocalizationMode|Any CPU.Build.0 = Release|Any CPU
+		{E4D976F1-01F1-408C-A947-2279CF1B19CC}.LocalizationMode|x86.ActiveCfg = Release|Any CPU
+		{E4D976F1-01F1-408C-A947-2279CF1B19CC}.LocalizationMode|x86.Build.0 = Release|Any CPU
+		{E4D976F1-01F1-408C-A947-2279CF1B19CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4D976F1-01F1-408C-A947-2279CF1B19CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4D976F1-01F1-408C-A947-2279CF1B19CC}.Release|x86.ActiveCfg = Release|Any CPU
+		{E4D976F1-01F1-408C-A947-2279CF1B19CC}.Release|x86.Build.0 = Release|Any CPU
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}.Debug|x86.Build.0 = Debug|Any CPU
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}.LocalizationMode|Any CPU.ActiveCfg = Release|Any CPU
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}.LocalizationMode|Any CPU.Build.0 = Release|Any CPU
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}.LocalizationMode|x86.ActiveCfg = Release|Any CPU
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}.LocalizationMode|x86.Build.0 = Release|Any CPU
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}.Release|x86.ActiveCfg = Release|Any CPU
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}.Release|x86.Build.0 = Release|Any CPU
+		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}.Debug|x86.Build.0 = Debug|Any CPU
+		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}.LocalizationMode|Any CPU.ActiveCfg = Release|Any CPU
+		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}.LocalizationMode|Any CPU.Build.0 = Release|Any CPU
+		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}.LocalizationMode|x86.ActiveCfg = Release|Any CPU
+		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}.LocalizationMode|x86.Build.0 = Release|Any CPU
+		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}.Release|x86.ActiveCfg = Release|Any CPU
+		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
 		SolutionGuid = {CC20765F-D585-4DEB-A08C-C3F2BEC44ED0}
+		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
 	EndGlobalSection
 EndGlobal
