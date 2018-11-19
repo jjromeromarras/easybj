@@ -43,58 +43,58 @@ namespace Mecalux.ITSW.EasyBServices.Base
 
         public int ADServiceTimeoutSeconds
         {
-            get => adServiceTimeoutSeconds;
-            set => adServiceTimeoutSeconds = value;
+            get { return adServiceTimeoutSeconds; }
+            set { adServiceTimeoutSeconds = value; }
         }
 
         public int StsRenewalMarginTimeSeconds
         {
-            get => stsRenewalMarginTimeSeconds;
-            set => stsRenewalMarginTimeSeconds = value;
+            get { return stsRenewalMarginTimeSeconds; }
+            set { stsRenewalMarginTimeSeconds = value; }
         }
 
         public string ADServiceUri
         {
-            get => easyWMSADServiceUri;
-            set => easyWMSADServiceUri = value;
+            get { return easyWMSADServiceUri; }
+            set { easyWMSADServiceUri = value; }
         }
 
         public string ADServiceVersion { set; get; }
 
         public string ApplicationDictionaryQueryServiceAddress
         {
-            get => applicationDictionaryQueryServiceAddress;
-            set => applicationDictionaryQueryServiceAddress = value;
+            get { return applicationDictionaryQueryServiceAddress; }
+            set { applicationDictionaryQueryServiceAddress = value; }
         }
                
         public string AuthServerAdressEasySTS
         {
-            get => authServerAdressEasySTS;
-            set => authServerAdressEasySTS = value;
+            get { return authServerAdressEasySTS; }
+            set { authServerAdressEasySTS = value; }
         }
 
         public string EasyWMSMetadataServiceAddress
         {
-            get => easyWMSMetadataServiceAddress;
-            set => easyWMSMetadataServiceAddress = value;
+            get { return easyWMSMetadataServiceAddress; }
+            set { easyWMSMetadataServiceAddress = value; }
         }
 
         public string EasyWMSQueryServiceAddress
         {
-            get => easyWMSQueryServiceAddress;
-            set => easyWMSQueryServiceAddress = value;
+            get { return easyWMSQueryServiceAddress; }
+            set { easyWMSQueryServiceAddress = value; }
         }
 
         public string EasyWMSServiceAddress
         {
-            get => easyWMSServiceAddress;
-            set => easyWMSServiceAddress = value;
+            get { return easyWMSServiceAddress; }
+            set { easyWMSServiceAddress = value; }
         }
 
         public string EasyWMSWorkflowLogServiceAddress
         {
-            get => easyWMSWorkflowLogServiceAddress;
-            set => easyWMSWorkflowLogServiceAddress = value;
+            get { return easyWMSWorkflowLogServiceAddress; }
+            set { easyWMSWorkflowLogServiceAddress = value; }
         }
 
         /// <summary>
@@ -110,28 +110,28 @@ namespace Mecalux.ITSW.EasyBServices.Base
                     licenses = new Dictionary<string, LicenseLevel>();
                 licenses = value;
             }
-            get => licenses; 
+            get { return licenses; }
         }
 
         public string QueryApplicationDictionaryServiceAddress
         {
-            get => applicationDictionaryQueryServiceAddress;
-            set => applicationDictionaryQueryServiceAddress = value;
+            get { return applicationDictionaryQueryServiceAddress; }
+            set { applicationDictionaryQueryServiceAddress = value; }
         }
 
         public string QueryServiceAPI { get; set; }
 
         public string TenantCode
         {
-            get => tenantCode;
-            set => tenantCode = value;
-        }
+            get { return tenantCode; }
+            set { tenantCode = value; }
+            }
 
         public string WebApiUri
         {
-            get => webApiUri;
-            set => webApiUri = value;
-        }
+            get { return webApiUri; }
+            set { webApiUri = value; }
+            }
 
         #endregion Properties
     }

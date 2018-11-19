@@ -62,13 +62,13 @@ namespace Mecalux.ITSW.EasyBServices.Base
 
         public User CurrentUser
         {
-            get => currentUser; 
-            set => currentUser = value;
+            get { return currentUser; }
+            set { currentUser = value; }
         }
 
         public CultureInfo Language
         {
-            get => language = new CultureInfo(languageCode);
+            get { return language = new CultureInfo(languageCode); }
             set
             {
                 language = value;
@@ -78,26 +78,26 @@ namespace Mecalux.ITSW.EasyBServices.Base
 
         public string LastFolderPath
         {
-            get => lastFolderPath;
-            set => lastFolderPath = value;
+            get { return lastFolderPath; }
+            set  { lastFolderPath = value; }
         }
 
         public string MruPath
         {
-            get => mruPath;
-            set => mruPath = value;
+            get { return mruPath; }
+            set { mruPath = value; }
         }
 
         public bool Offline
         {
-            get => !online;
-            set => online = !value;
+            get { return !online; }
+            set { online = !value; }
         }
 
         public bool Online
         {
-            get => online;
-            set => online = value;
+            get { return online; }
+            set { online = value; }
         }
 
         /// <summary>
@@ -106,8 +106,8 @@ namespace Mecalux.ITSW.EasyBServices.Base
         /// </summary>
         public bool OnlySelectOnNavigate
         {
-            get => onlySelectOnNavigate;
-            set => onlySelectOnNavigate = value;
+            get { return onlySelectOnNavigate; }
+            set { onlySelectOnNavigate = value; }
         }
 
 
@@ -116,8 +116,8 @@ namespace Mecalux.ITSW.EasyBServices.Base
         /// </summary>
         public decimal RepetitionTextPercentage
         {
-            get => this.repetitionTextPercentage;
-            set => this.repetitionTextPercentage = value;
+            get { return this.repetitionTextPercentage; }
+            set { this.repetitionTextPercentage = value; }
         }
 
         /// <summary>
@@ -126,8 +126,8 @@ namespace Mecalux.ITSW.EasyBServices.Base
         /// </summary>
         public bool ShowAffectedEntities
         {
-            get => showAffectedEntities;
-            set => showAffectedEntities = value;
+            get { return showAffectedEntities; }
+            set { showAffectedEntities = value; }
         }
 
         /// <summary>
@@ -136,14 +136,14 @@ namespace Mecalux.ITSW.EasyBServices.Base
         /// </summary>
         public bool ShowErrorsInGrid
         {
-            get => showErrorsInGrid;
-            set => showErrorsInGrid = value;
+            get { return showErrorsInGrid; }
+            set { showErrorsInGrid = value; }
         }
 
         public bool DontHideNavigationTree
         {
-            get => dontHideNavigationTree;
-            set => dontHideNavigationTree = value;
+            get { return dontHideNavigationTree; }
+            set { dontHideNavigationTree = value; }
         }
 
         #endregion Properties

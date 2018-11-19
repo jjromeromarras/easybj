@@ -6,6 +6,11 @@
         private string name;
         #endregion
 
+        #region Constructor
+        public NameEntity()
+            :base() { }
+        #endregion
+
         #region Properties
         public virtual string Name
         {

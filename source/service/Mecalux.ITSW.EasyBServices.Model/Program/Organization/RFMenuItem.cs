@@ -25,7 +25,6 @@ namespace Mecalux.ITSW.EasyBServices.Model
         public RFMenuItem()
             : base()
         {
-            groups = new List<SecGroup>();
             processName =
             Name = string.Empty;
         }

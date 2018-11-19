@@ -1,17 +1,14 @@
-﻿using Mecalux.ITSW.EasyBServices.Base;
-using Mecalux.ITSW.EasyBServices.Model;
+﻿using Mecalux.ITSW.EasyBServices.Model;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
-using Mecalux.ITSW.EasyBServices.Model.Interfaz;
-using Mecalux.ITSW.EasyBServices.Model.Enum;
 
 namespace Mecalux.ITSW.EasyBService.Model
 {
     [JsonObject]
-    public class Resource: CheckEntity, IPartiallyOverridableEntity
+    public class Resource: CheckEntity
     {
         #region Properties
         private string key;        
@@ -73,28 +70,15 @@ namespace Mecalux.ITSW.EasyBService.Model
             set => key = value;            
         }
 
-        [JsonIgnore]
-        public bool IsPartiallyOverridden => VersionId != Guid; //&& this.ParentRoot is Application;
-
-        [JsonIgnore]
-        public bool IsVirtualEntity => false;
-
-        public Guid? OverriddenVersionId
+        public IEnumerable<ResourceLanguage> ResourceLanguagesInternal
         {
-            get => VersionId;
-            set => VersionId = value ?? VersionId;
+            get
+            {
+                resourceTranslations.Sort((e1, e2) => e1.CountryCode.CompareTo(e2.CountryCode));
+                return resourceTranslations;
+            }
+            set { resourceTranslations = new List<ResourceLanguage>(value); }
         }
-
-        [JsonIgnore]
-        public IPartiallyOverridableEntity SourceEntity { get => null; set { } }
-
-        public InheritanceType InheritanceType { get; }
-
-        /// <summary>
-        /// Aplicacion de la que se ha obtenido la referencia a esta entidad
-        /// </summary>
-        public string SourceApplication { get; }
-       
         #endregion
 
         #region Methods

@@ -15,6 +15,14 @@ namespace Mecalux.ITSW.EasyBServices.Model
 
         #endregion
 
+        #region Constructor
+        public CheckEntity()
+            : base()
+        {
+            checkStatus = CheckStatus.New;
+        }
+        #endregion
+
         #region Properties
         public CheckStatus CheckStatus
         {

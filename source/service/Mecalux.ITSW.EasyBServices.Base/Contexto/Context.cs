@@ -28,8 +28,8 @@ namespace Mecalux.ITSW.EasyBServices.Base
 
         public static User CurrentUser
         {
-            get => ContextConfig.CurrentUser;
-            set => ContextConfig.CurrentUser = value;
+            get { return ContextConfig.CurrentUser; }
+            set { ContextConfig.CurrentUser = value; }
         }
 
         public static bool IsActivatedAppsStandardDeveloperMode { get; set; }

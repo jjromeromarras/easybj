@@ -1,16 +1,15 @@
 ﻿using Mecalux.ITSW.EasyBServices.Base.Files;
-using Mecalux.ITSW.EasyBServices.Model.Interfaz;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 
-namespace Mecalux.ITSW.EasyBServices.Model.JsonConverters
+namespace Mecalux.ITSW.EasyBServices.Model
 {
     public class GuidReferenceResolver : IReferenceResolver
     {
+
         #region Fields
 
         public const string ActionDataParticle = "ActionData";
@@ -91,18 +90,12 @@ namespace Mecalux.ITSW.EasyBServices.Model.JsonConverters
 
         #endregion Constructors
 
-        #region Delegates
-
-        public delegate BaseEntity ImportPart(string pathName);
-
-        #endregion Delegates
-
         #region Properties
 
         /// <summary>
         /// Aplicacion activa actualmente
         /// </summary>
-        /*public static ApplicationTagContainer ApplicationTagContainer
+        public static ApplicationTagContainer ApplicationTagContainer
         {
             get
             {
@@ -113,10 +106,10 @@ namespace Mecalux.ITSW.EasyBServices.Model.JsonConverters
                 currentApp = value?.Name ?? string.Empty;
                 CurrentReferences.ApplicationTagContainer = value;
             }
-        }*/
+        }
 
         public static bool DisablePartialReferences { set; get; }
-        public static ImportPart Importer { set; get; }
+        //public static ImportPart Importer { set; get; }
 
         public static ConcurrentDictionary<Type, IList<JsonProperty>> OrderedProperties { get { return CurrentReferences.OrderedProperties; } }
 
@@ -136,68 +129,20 @@ namespace Mecalux.ITSW.EasyBServices.Model.JsonConverters
         #endregion Properties
 
         #region Methods
-        /*IEnumerable<ApplicationTagContainer> GetDependingApplications()
+        public void AddReference(object context, string reference, object value)
         {
-            List<ApplicationTagContainer> applications = new List<ApplicationTagContainer>();
-            IEnumerable<Guid> applicationGuids = ApplicationTagContainer?.LastEntity.DependingApplications.Reverse();
-            if (applicationGuids != null)
-            {
-                foreach (Guid applicationGuid in applicationGuids)
-                {
-                    if (ActiveModelData.TryGetValue(applicationGuid, out ApplicationTagContainer applicationTagContainer))
-                    {
-                        applications.Add(applicationTagContainer);
-                    }
-                }
-            }
-            return applications;
-        }*/
-
-        public object ResolveReference(object context, string reference)
-        {
-            /*object result = ResolveReference(context, reference, CurrentApplication, ApplicationTagContainer);
-            if (result == null)
-            {
-                IEnumerable<ApplicationTagContainer> currentAppDependants = GetDependingApplications();
-                if (currentAppDependants != null)
-                {
-                    foreach (var applicationTagContainer in currentAppDependants)
-                    {
-                        result = ResolveReference(context, reference, applicationTagContainer.Name, applicationTagContainer);
-                        if (result != null)
-                            break;
-                    }
-                }
-                if (result == null && !BaseEntity.LogTraceDisabled)
-                    if (CurrentApplicationIsOk(ApplicationTagContainer))
-                        AddLogErrorGettingReference(ApplicationTagContainer, reference, "Error finding element with reference {0}");
-            }
-
-            return result;
-            */
-            return null;
             
         }
-
-        
-
 
         public string GetReference(object context, object value)
         {
             string result = string.Empty;
 
+
             if (value is IBaseEntity p)
             {
-                if (p is IAvoidSerializedGuid avoidedGuid)
-                {
-                    result = GetReferenceInternal(p);
-                    ReferencesAvoidedGuid[result] = p;
-                }
-                else
-                {
-                    References[p.Guid] = p;
-                    result = GetReferenceInternal(p);
-                }
+                References[p.Guid] = p;
+                result = GetReferenceInternal(p);
             }
             else
             {
@@ -210,161 +155,12 @@ namespace Mecalux.ITSW.EasyBServices.Model.JsonConverters
 
         public bool IsReferenced(object context, object value)
         {
-            bool result = false;
-            if (value is IAvoidSerializedGuid avoidedGuid)
-                lock (ReferencesAvoidedGuid)
-                {
-                  //  if (avoidedGuid is View view)
-                    //    result = view.DependsOtherView == null;
-                    //else
-                        result = ReferencesAvoidedGuid.ContainsKey(GetReferenceInternal(avoidedGuid));
-                }
-            else
-            {
-                if (value is IBaseEntity p)
-                {
-                    if (!IsSplittedType(p))
-                    {
-                       // if (IsAllwaysAvoidRefType(p))
-                         //   return false;
-                        //else
-                            lock (References)
-                            {
-                                result = References.ContainsKey(p.Guid);
-                            }
-                    }
-                    else
-                    {
-                    //    if (p is View view)
-                      //      result = view.DependsOtherView == null;
-                        //else
-                            result = true;
-                    }
-                }
-                else
-                {
-                    if (value is Dictionary<string, object>)
-                        result = false;
-                    else
-                        result = ReferenceObjects.Any(v => v.Value == value);
-                }
-            }
-            return result;
+            return false;
         }
 
-       // public static bool IsAllwaysAvoidRefType(IBaseEntity entity)
-      //  {
-        //    Type type = entity.GetType();
-          //  return typeof(FieldRecord).IsAssignableFrom(type);
-       // }
-
-        public void AddReference(object context, string reference, object value)
+        public object ResolveReference(object context, string reference)
         {
-            if (value is IBaseEntity p)
-            {
-                if (IsIAvoidSerializedGuid(reference))
-                {
-                    lock (ReferencesAvoidedGuid)
-                    {
-                        ReferencesAvoidedGuid[reference] = p;
-
-                        if (p is IAvoidSerializedGuid avoidGuidEntity)
-                        {
-                            Guid versionId = ExtractFromReferenceGuid(reference);
-                            lock (referencesByVersionId)
-                            {
-                                if (!referencesByVersionId.ContainsKey(versionId))
-                                    referencesByVersionId[versionId] = new HashSet<string>();
-                                referencesByVersionId[versionId].Add(reference);
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    Guid id = ParseGuidFromReference(reference);
-                    lock (References)
-                        References[id] = p;
-                }
-            }
-            else
-            {
-                if (int.TryParse(reference, out int i))
-                {
-                    lock (ReferenceObjects)
-                        ReferenceObjects[i] = value;
-                }
-            }
-        }
-
-        private static Guid ParseGuidFromReference(string reference)
-        {
-            Guid id = default(Guid);
-            string[] referenceParts = reference.Split(Splitters);
-            int q = 0;
-            while (!Guid.TryParse(referenceParts[q], out id) && q < MaxParseTries)
-                q++;
-            return id;
-        }
-
-        public static Guid ExtractFromReferenceGuid(string reference)
-        {
-            string[] parts = reference.Split(Splitters);
-            Guid guid = Guid.Parse(parts[1]);
-            return guid;
-        }
-
-        public static bool IsIAvoidSerializedGuid(string reference)
-        {
-            lock (typesAvoidLocker)
-                if (typesAvoid == null)
-                {
-                    typesAvoid = new List<string>
-                    {
-                        EventParticle,
-                        EventPropertyParticle,
-                        EventTagParticle,
-                        EventTagContainerParticle,
-                        EntityParticle,
-                        SubscriptionParticle,
-                        SubscriptionTagParticle,
-                        SubscriptionParameterParticle,
-                        ViewTagParticle,
-                        ViewControlParticle,
-                        ActivityParticle,
-                        WorkflowTagParticle,
-                        AttributeParticle,
-                        CommandTagParticle,
-                        FopaParticle,
-                        QueryTagParticle,
-                        TransitionParticle,
-                        DialogTagParticle,
-                        ViewTagContainerParticle,
-                        DialogTagContainerParticle,
-                        QueryTagContainerParticle,
-                        CommandTagContainerParticle,
-                        WorkflowTagContainerParticle,
-                        SubscriptionTagContainerParticle,
-                        ViewFieldLovParticle,
-                        LinkParticle,
-                        ViewParameterParticle,
-                        ViewGraphControlSerieParticle,
-                        ViewGridForeignFilterParticle,
-                        WorkflowDialogEventParticle,
-                        // Package types
-                        ActionDataParticle,
-                        AdJobDataParticle,
-                        DeployPackageDataParticle,
-                        LanguageDataParticle,
-                        MenuItemDataParticle,
-                        RFMenuItemDataParticle,
-                        MenuResourceDataParticle,
-                        MenuResourceLanguageDataParticle,
-                        SecGroupDataParticle,
-                        ViewGroupDataParticle
-                    };
-                }
-            return typesAvoid.Exists(x => reference.StartsWith(x + Separator));
+            throw new System.NotImplementedException();
         }
 
         private static PartialReferences ReferencePartialOfApplication(string application)
@@ -376,47 +172,22 @@ namespace Mecalux.ITSW.EasyBServices.Model.JsonConverters
             }
             return references;
         }
-        public static string GetReferenceInternal(IBaseEntity entity)
+
+        public string GetReferenceInternal(IBaseEntity entity)
         {
             string result = string.Empty;
 
-            if (entity == null)
-            {
-            }
-            else if (!IsSplittedType(entity))
-            {
-                if (entity is IAvoidSerializedGuid avoidGuidEntity)
-                {
-                    Guid versionId = avoidGuidEntity.ParentSerializableEntityVersionId;
-                    result = string.Format(CultureInfo.InvariantCulture, "{0}{4}{1}{4}{{{2}}}{4}{3}", avoidGuidEntity.SerializationParticle, TypeParticle(avoidGuidEntity.ParentSerializableEntity), versionId, avoidGuidEntity.ReferencedName, Separator);
-                    lock (referencesByVersionId)
-                    {
-                        if (!referencesByVersionId.ContainsKey(versionId))
-                            referencesByVersionId[versionId] = new HashSet<string>();
-                        referencesByVersionId[versionId].Add(result);
-                    }
-                }
-                else
-                {
-                    if (entity is IPartiallyOverridableEntity overridable)
-                        result = overridable.OverriddenVersionId.ToString();
-                    else if (entity is IOverridableEntity overridableEntity)
-                        result = overridableEntity.OverriddenVersionId.ToString();
-                    else
-                        result = entity.Guid.ToString();
-                }
-            }
-            else
+            if (entity != null)
             {
                 string particle = TypeParticle(entity);
-                BaseEntity namedEntity = entity as BaseEntity;
+                NameEntity namedEntity = entity as NameEntity;
                 Guid fileGuid = GetParentGuid(namedEntity);
                 result = string.Format(CultureInfo.InvariantCulture, "{0}{3}{1}{3}{{{2}}}.{4}", particle, NormalizeName(namedEntity?.Name), fileGuid, Separator, FilesConfig.EasyBPartialExtensionFile);
             }
             return result;
         }
 
-        public static string NormalizeName(string input)
+        public string NormalizeName(string input)
         {
             string result = input?.Replace("?", "_nullable") ?? string.Empty;
             foreach (char c in System.IO.Path.GetInvalidFileNameChars())
@@ -424,29 +195,29 @@ namespace Mecalux.ITSW.EasyBServices.Model.JsonConverters
             return result;
         }
 
-        public static bool IsSplittedType(IBaseEntity entity)
+        private Guid GetParentGuid(NameEntity namedEntity)
         {
-            Type type = entity.GetType();
-            /*return typeof(Workflow).IsAssignableFrom(type) ||
-                 typeof(Event).IsAssignableFrom(type) ||
-                 typeof(Entity).IsAssignableFrom(type) ||
-                 typeof(WorkflowCommand).IsAssignableFrom(type) ||
-                 typeof(WorkflowUICommand).IsAssignableFrom(type) ||
-                 typeof(WorkflowQueryCommand).IsAssignableFrom(type) ||
-                 typeof(View).IsAssignableFrom(type) ||
-                 typeof(Record).IsAssignableFrom(type) ||
-                 typeof(RecordList).IsAssignableFrom(type) ||
-                 typeof(FieldType).IsAssignableFrom(type) ||
-                 typeof(Subscription).IsAssignableFrom(type) ||
-                 typeof(Report).IsAssignableFrom(type);*/
-            return false;
+            Guid result = namedEntity.Guid;
+            /*if (namedEntity is IPartiallyOverridableEntity overridable && overridable.IsPartiallyOverridden)
+                result = overridable.OverriddenVersionId.Value;
+            else if (namedEntity is IOverridableEntity overridableEntity && overridableEntity.IsOverridden)
+                result = overridableEntity.OverriddenVersionId.Value;
+            else if (namedEntity.ParentEntity != null && namedEntity.ParentEntity.ParentEntity != null && HasParentTagContainer(namedEntity))
+                result = namedEntity.ParentEntity.ParentEntity.Guid;*/
+            return result;
         }
 
-        private static string TypeParticle(IBaseEntity entity)
+        private string TypeParticle(IBaseEntity entity)
         {
-            /*if (entity != null)
+            if (entity != null)
             {
-                if (typeof(Workflow).IsAssignableFrom(entity.GetType()) ||
+
+                if (typeof(FieldType).IsAssignableFrom(entity.GetType()))
+                    return FieldTypeParticle;
+                if (typeof(Record).IsAssignableFrom(entity.GetType()))
+                    return RecordParticle;
+
+                /*if (typeof(Workflow).IsAssignableFrom(entity.GetType()) ||
                     typeof(WorkflowTagContainer).IsAssignableFrom(entity.GetType()))
                     return WorkflowParticle;
                 if (typeof(WorkflowUICommand).IsAssignableFrom(entity.GetType()) ||
@@ -468,10 +239,6 @@ namespace Mecalux.ITSW.EasyBServices.Model.JsonConverters
                     return EventParticle;
                 if (typeof(EventProperty).IsAssignableFrom(entity.GetType()))
                     return EventPropertyParticle;
-                if (typeof(FieldType).IsAssignableFrom(entity.GetType()))
-                    return FieldTypeParticle;
-                if (typeof(Record).IsAssignableFrom(entity.GetType()))
-                    return RecordParticle;
                 if (typeof(RecordList).IsAssignableFrom(entity.GetType()))
                     return ListParticle;
                 if (typeof(Report).IsAssignableFrom(entity.GetType()))
@@ -482,20 +249,10 @@ namespace Mecalux.ITSW.EasyBServices.Model.JsonConverters
                 if (typeof(WorkflowDialogActivityEvent).IsAssignableFrom(entity.GetType()))
                     return WorkflowDialogEventParticle;
                 if (typeof(WorkflowActivity).IsAssignableFrom(entity.GetType()))
-                    return ActivityParticle;
-            }*/
+                    return ActivityParticle;*/
+            }
             return string.Empty;
         }
-
-        private static Guid GetParentGuid(BaseEntity namedEntity)
-        {
-            Guid result = namedEntity.Guid;
-            if (namedEntity is IPartiallyOverridableEntity overridable && overridable.IsPartiallyOverridden)
-                result = overridable.OverriddenVersionId.Value;
-            else if (namedEntity is IOverridableEntity overridableEntity && overridableEntity.IsOverridden)
-                result = overridableEntity.OverriddenVersionId.Value;
-            return result;
-        }
-        #endregion Methods
+        #endregion
     }
 }

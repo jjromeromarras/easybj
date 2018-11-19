@@ -11,10 +11,8 @@ namespace Mecalux.ITSW.EasyBServices.Model
 
         private List<ApplicationTag> applicationTags;
 
-        private Version firstVersionLoaded;
-
         #endregion Fields
-
+        
         #region Constructors
 
         public ApplicationTagContainer(Application application, Version version)
@@ -95,5 +93,7 @@ namespace Mecalux.ITSW.EasyBServices.Model
             }
         }
         #endregion
+
+
     }
 }

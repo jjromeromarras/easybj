@@ -6,14 +6,31 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mecalux.ITSW.EasyBServices", "Mecalux.ITSW.EasyBServices\Mecalux.ITSW.EasyBServices.csproj", "{3CD8E278-23BF-43E0-A754-949A55377BCE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mecalux.ITSW.EasyBServices.RepositoryManager", "Mecalux.ITSW.EasyBServices.RepositoryManager\Mecalux.ITSW.EasyBServices.RepositoryManager.csproj", "{F0E9D7B4-EA20-428E-AD9A-5ED4E644A30E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB} = {4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}
+		{E4D976F1-01F1-408C-A947-2279CF1B19CC} = {E4D976F1-01F1-408C-A947-2279CF1B19CC}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mecalux.ITSW.EasyBServices.StoreRepositoryManager", "Mecalux.ITSW.EasyBServices.StoreRepositoryManager\Mecalux.ITSW.EasyBServices.StoreRepositoryManager.csproj", "{6E64570E-7DCD-40AA-B57F-A408B7969334}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB} = {4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}
+		{E4D976F1-01F1-408C-A947-2279CF1B19CC} = {E4D976F1-01F1-408C-A947-2279CF1B19CC}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mecalux.ITSW.EasyBServices.Model", "Mecalux.ITSW.EasyBServices.Model\Mecalux.ITSW.EasyBServices.Model.csproj", "{E4D976F1-01F1-408C-A947-2279CF1B19CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mecalux.ITSW.EasyBServices.Base", "Mecalux.ITSW.EasyBServices.Base\Mecalux.ITSW.EasyBServices.Base.csproj", "{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mecalux.ITSW.EasyBServices.License", "Mecalux.ITSW.EasyBServices.License\Mecalux.ITSW.EasyBServices.License.csproj", "{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{EE5CB227-6866-48D8-A7CF-8A8C5CAA93EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mecalux.ITSW.EasyBService.Test", "Mecalux.ITSW.EasyBService.Test\Mecalux.ITSW.EasyBService.Test.csproj", "{EA939C51-6A42-4A3A-AFAB-BE8235BDFF12}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB} = {4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{682CAF27-6D25-4CCB-96A6-6B6F0FB33CD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,12 +114,32 @@ Global
 		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}.Release|x86.ActiveCfg = Release|Any CPU
 		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0}.Release|x86.Build.0 = Release|Any CPU
+		{EA939C51-6A42-4A3A-AFAB-BE8235BDFF12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA939C51-6A42-4A3A-AFAB-BE8235BDFF12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA939C51-6A42-4A3A-AFAB-BE8235BDFF12}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{EA939C51-6A42-4A3A-AFAB-BE8235BDFF12}.Debug|x86.Build.0 = Debug|Any CPU
+		{EA939C51-6A42-4A3A-AFAB-BE8235BDFF12}.LocalizationMode|Any CPU.ActiveCfg = Release|Any CPU
+		{EA939C51-6A42-4A3A-AFAB-BE8235BDFF12}.LocalizationMode|Any CPU.Build.0 = Release|Any CPU
+		{EA939C51-6A42-4A3A-AFAB-BE8235BDFF12}.LocalizationMode|x86.ActiveCfg = Release|Any CPU
+		{EA939C51-6A42-4A3A-AFAB-BE8235BDFF12}.LocalizationMode|x86.Build.0 = Release|Any CPU
+		{EA939C51-6A42-4A3A-AFAB-BE8235BDFF12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA939C51-6A42-4A3A-AFAB-BE8235BDFF12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA939C51-6A42-4A3A-AFAB-BE8235BDFF12}.Release|x86.ActiveCfg = Release|Any CPU
+		{EA939C51-6A42-4A3A-AFAB-BE8235BDFF12}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F0E9D7B4-EA20-428E-AD9A-5ED4E644A30E} = {682CAF27-6D25-4CCB-96A6-6B6F0FB33CD3}
+		{6E64570E-7DCD-40AA-B57F-A408B7969334} = {682CAF27-6D25-4CCB-96A6-6B6F0FB33CD3}
+		{E4D976F1-01F1-408C-A947-2279CF1B19CC} = {682CAF27-6D25-4CCB-96A6-6B6F0FB33CD3}
+		{4BCD3A1A-E7C6-411D-9093-67D2D9ADB9BB} = {682CAF27-6D25-4CCB-96A6-6B6F0FB33CD3}
+		{8B200ABC-DC79-4FD5-A4FD-52D7555DAFE0} = {682CAF27-6D25-4CCB-96A6-6B6F0FB33CD3}
+		{EA939C51-6A42-4A3A-AFAB-BE8235BDFF12} = {EE5CB227-6866-48D8-A7CF-8A8C5CAA93EE}
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {CC20765F-D585-4DEB-A08C-C3F2BEC44ED0}
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+		SolutionGuid = {CC20765F-D585-4DEB-A08C-C3F2BEC44ED0}
 	EndGlobalSection
 EndGlobal

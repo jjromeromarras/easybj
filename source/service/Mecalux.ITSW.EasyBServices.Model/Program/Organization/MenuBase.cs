@@ -53,7 +53,7 @@ namespace Mecalux.ITSW.EasyBServices.Model
 
         public string GetIdentifier()
         {
-            string result = Text?.Key ?? string.Empty;
+            string result = textInternal ?? string.Empty;
             if (this.ParentMenu != null)
                 result = string.Format(CultureInfo.CurrentCulture, "{0}{2}{1}", this.ParentMenu.GetIdentifier(), result, MenuParentSeparator);
             return result.ToLower();

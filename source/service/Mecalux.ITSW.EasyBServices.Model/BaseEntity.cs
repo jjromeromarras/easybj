@@ -15,8 +15,16 @@ namespace Mecalux.ITSW.EasyBServices.Model
         private string updatedBy;
         #endregion Fields
 
+        #region Constructor
+        public BaseEntity()
+        {
+            guid = Guid.NewGuid();
+            createDate = DateTime.Now;
+        }
+        #endregion
+
         #region Properties     
-       
+
         [JsonIgnore]
         public DateTime CreateDate
         {

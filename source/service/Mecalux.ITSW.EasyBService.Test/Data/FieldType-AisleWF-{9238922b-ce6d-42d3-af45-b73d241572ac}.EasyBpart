@@ -1,0 +1,16 @@
+{
+  "$id": "FieldType-AisleWF-{9238922b-ce6d-42d3-af45-b73d241572ac}.EasyBpart",
+  "$type": "Mecalux.ITSW.EasyBuilder.FieldType, Mecalux.ITSW.EasyBuilder.Model",
+  "CheckDigit": "Modulus43",
+  "CheckStatus": "Default",
+  "Description": "",
+  "EditionLengthMode": "AllowShorter",
+  "EntityStereotypeInternal": "a36b49e1-27bb-4c37-8bc9-7f83f34a9984",
+  "FillMode": "None",
+  "Guid": "9238922b-ce6d-42d3-af45-b73d241572ac",
+  "InputMask": "",
+  "Length": 0,
+  "Name": "AisleWF",
+  "Stereotype": "Record",
+  "TruncateType": "TruncateRight"
+}

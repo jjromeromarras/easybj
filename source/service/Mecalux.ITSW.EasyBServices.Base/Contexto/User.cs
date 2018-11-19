@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Mecalux.ITSW.EasyBServices.Base
-{  
+﻿namespace Mecalux.ITSW.EasyBServices.Base
+{
     public class User
     {
         #region Fields
@@ -32,8 +26,8 @@ namespace Mecalux.ITSW.EasyBServices.Base
         /// </summary>
         public string Domain
         {
-            get => this.domain; 
-            set => this.domain = value;
+            get { return this.domain; }
+            set { this.domain = value; }
         }
 
         /// <summary>
@@ -42,8 +36,8 @@ namespace Mecalux.ITSW.EasyBServices.Base
         /// </summary>
         public bool IsSingleSingOn
         {
-            get => this.isSingleSingOn; 
-            set => this.isSingleSingOn = value;
+            get { return this.isSingleSingOn; }
+            set { this.isSingleSingOn = value; }
         }
 
         
@@ -58,14 +52,14 @@ namespace Mecalux.ITSW.EasyBServices.Base
                     result = name;
                 return result;
             }
-            set => name = value;
+            set { name = value; }
         }
 
 
         public string Password
         {
-            get => password; 
-            set => password = value;
+            get { return password; }
+            set { password = value; }
         }
 
         #endregion Properties

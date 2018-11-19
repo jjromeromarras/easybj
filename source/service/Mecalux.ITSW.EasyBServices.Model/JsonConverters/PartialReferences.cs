@@ -1,19 +1,15 @@
-﻿using Mecalux.ITSW.EasyBServices.Model.Interfaz;
-using Newtonsoft.Json.Serialization;
+﻿using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Mecalux.ITSW.EasyBServices.Model.JsonConverters
+namespace Mecalux.ITSW.EasyBServices.Model
 {
     public class PartialReferences
     {
         #region Fields
 
-        //public IEnumerable<ApplicationTagContainer> LocalAndParentsApplicationTagContainers;
+        public IEnumerable<ApplicationTagContainer> LocalAndParentsApplicationTagContainers;
         private readonly ConcurrentDictionary<Type, IList<JsonProperty>> orderedProperties = new ConcurrentDictionary<Type, IList<JsonProperty>>();
         private readonly ConcurrentDictionary<int, object> referenceObjects = new ConcurrentDictionary<int, object>();
         private readonly ConcurrentDictionary<Guid, IBaseEntity> references = new ConcurrentDictionary<Guid, IBaseEntity>();
@@ -24,7 +20,7 @@ namespace Mecalux.ITSW.EasyBServices.Model.JsonConverters
 
         #region Properties
 
-        //public ApplicationTagContainer ApplicationTagContainer { set; get; }
+        public ApplicationTagContainer ApplicationTagContainer { set; get; }
         public ConcurrentDictionary<Type, IList<JsonProperty>> OrderedProperties { get { return orderedProperties; } }
         public ConcurrentDictionary<int, object> ReferenceObjects { get { return referenceObjects; } }
         public ConcurrentDictionary<Guid, IBaseEntity> References { get { return references; } }

@@ -51,8 +51,8 @@ namespace Mecalux.ITSW.EasyBServices.Model
 
         public int Precision
         {
-            get => precision; 
-            set => precision = value
+            get => precision;
+            set => precision = value;
         }
 
         #endregion Properties

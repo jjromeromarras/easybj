@@ -1,6 +1,5 @@
-﻿using Mecalux.ITSW.EasyBServices.Model.Enum;
-
-namespace Mecalux.ITSW.EasyBServices.Model.Interfaz
+﻿
+namespace Mecalux.ITSW.EasyBServices.Model
 {
     public interface IInheritableEntity: IBaseEntity
     {

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Mecalux.ITSW.EasyBServices.Model</RootNamespace>
     <AssemblyName>Mecalux.ITSW.EasyBServices.Model</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -47,11 +47,22 @@
   <ItemGroup>
     <Compile Include="CheckEntity.cs" />
     <Compile Include="Enum\Category.cs" />
+    <Compile Include="Enum\CheckDigit.cs" />
     <Compile Include="Enum\CheckStatus.cs" />
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Enum\ConfirmationModes.cs" />
+    <Compile Include="Enum\EditionLengthMode.cs" />
+    <Compile Include="Enum\FillMode.cs" />
+    <Compile Include="Enum\GuidPrefix.cs" />
     <Compile Include="Enum\InheritanceType.cs" />
     <Compile Include="Enum\MenuOrderType.cs" />
+    <Compile Include="Enum\PropertyDataType.cs" />
+    <Compile Include="Enum\RecordType.cs" />
+    <Compile Include="Enum\Stereotype.cs" />
+    <Compile Include="Enum\TruncateType.cs" />
+    <Compile Include="Enum\WorkflowCommandType.cs" />
+    <Compile Include="Enum\WorkflowFormalParameterType.cs" />
+    <Compile Include="Enum\WorkflowInOutMode.cs" />
     <Compile Include="Extension\CommonEntityExtension.cs" />
     <Compile Include="Helper\NameEntityHelper.cs" />
     <Compile Include="Helper\VersionHelper.cs" />
@@ -59,24 +70,55 @@
     <Compile Include="Interfaz\IBaseEntity.cs" />
     <Compile Include="Interfaz\ICommonEntity.cs" />
     <Compile Include="Interfaz\IInheritableEntity.cs" />
+    <Compile Include="Interfaz\IInternalReference.cs" />
     <Compile Include="Interfaz\IOverridableEntity.cs" />
     <Compile Include="Interfaz\IPartiallyOverridableEntity.cs" />
-    <Compile Include="JsonConverters\GuidReferenceResolver.cs" />
-    <Compile Include="JsonConverters\PartialReferences.cs" />
+    <Compile Include="JsonConverters\Converters\EntityJsonConverter.cs" />
+    <Compile Include="JsonConverters\Converters\FieldTypeJsonConverter.cs" />
+    <Compile Include="JsonConverters\Converters\EasyBJsonConverter.cs" />
+    <Compile Include="JsonConverters\Converters\HelperJsonConverter.cs" />
+    <Compile Include="JsonConverters\Converters\RecordJsonConverter.cs" />
+    <Compile Include="JsonConverters\Converters\RecordListJsonConverter.cs" />
+    <Compile Include="JsonConverters\SaverJson.cs" />
     <Compile Include="NameEntity.cs" />
     <Compile Include="Program\Application\Application.cs" />
     <Compile Include="Program\Application\ApplicationTag.cs" />
     <Compile Include="Program\Application\Company.cs" />
     <Compile Include="Program\Application\Contact.cs" />
+    <Compile Include="Program\Application\Entity.cs" />
+    <Compile Include="Program\Application\FieldRecord.cs" />
+    <Compile Include="Program\Application\FieldType.cs" />
+    <Compile Include="Program\Application\Property.cs" />
+    <Compile Include="Program\Application\Record.cs" />
+    <Compile Include="Program\Application\RecordList.cs" />
+    <Compile Include="Program\Application\RelantionsShips\ManyToMany.cs" />
+    <Compile Include="Program\Application\RelantionsShips\OneToMany.cs" />
+    <Compile Include="Program\Application\RelantionsShips\Relationship.cs" />
     <Compile Include="Program\Application\View\Action\Action.cs" />
+    <Compile Include="Program\Application\View\Validator\CodeValidator.cs" />
+    <Compile Include="Program\Application\View\Validator\NumericValidator.cs" />
+    <Compile Include="Program\Application\View\Validator\RegExValidator.cs" />
+    <Compile Include="Program\Application\View\Validator\StringValidator.cs" />
+    <Compile Include="Program\Application\View\Validator\Validator.cs" />
     <Compile Include="Program\Application\View\ViewGroup.cs" />
+    <Compile Include="Program\Application\Workflow\WorflowCommand.cs" />
+    <Compile Include="Program\Application\Workflow\WorkflowAttribute.cs" />
+    <Compile Include="Program\Application\Workflow\WorkflowBasic.cs" />
+    <Compile Include="Program\Application\Workflow\WorkflowFormalParameter.cs" />
     <Compile Include="Program\Application\WorkstationJob.cs" />
     <Compile Include="Program\Containers\AdJobContainer.cs" />
     <Compile Include="Program\Containers\ApplicationTagContainer.cs" />
+    <Compile Include="Program\Containers\EntityContainer.cs" />
+    <Compile Include="Program\Containers\FieldTypeContainer.cs" />
     <Compile Include="Program\Containers\GlobalSearchContainer.cs" />
     <Compile Include="Program\Containers\MenuItemContainer.cs" />
+    <Compile Include="Program\Containers\RecordContainer.cs" />
+    <Compile Include="Program\Containers\RecordListContainer.cs" />
+    <Compile Include="Program\Containers\RelationshipContainer.cs" />
+    <Compile Include="Program\Containers\ResourceContainer.cs" />
     <Compile Include="Program\Containers\RFMenuItemContainer.cs" />
     <Compile Include="Program\Containers\SecGroupContainer.cs" />
+    <Compile Include="Program\Containers\ValidatorContainer.cs" />
     <Compile Include="Program\Containers\ViewGroupContainer.cs" />
     <Compile Include="Program\Containers\WorkstationJobContainer.cs" />
     <Compile Include="Program\Organization\AdJob.cs" />

@@ -1,11 +1,10 @@
 ﻿using Mecalux.ITSW.EasyBService.Model;
-using Mecalux.ITSW.EasyBServices.Model.Enum;
 using Newtonsoft.Json;
 using System;
 
 namespace Mecalux.ITSW.EasyBServices.Model
 {
-    public class Action: BaseEntity
+    public class Action: NameEntity
     {
         #region Fields
 

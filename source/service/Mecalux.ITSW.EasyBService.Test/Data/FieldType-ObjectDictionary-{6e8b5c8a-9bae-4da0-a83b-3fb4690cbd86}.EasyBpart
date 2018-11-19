@@ -1,0 +1,16 @@
+{
+  "$id": "FieldType-ObjectDictionary-{6e8b5c8a-9bae-4da0-a83b-3fb4690cbd86}.EasyBpart",
+  "$type": "Mecalux.ITSW.EasyBuilder.FieldType, Mecalux.ITSW.EasyBuilder.Model",
+  "CheckDigit": "Modulus43",
+  "CheckStatus": "Default",
+  "Description": "string->object dictionary",
+  "EditionLengthMode": "AllowShorter",
+  "EntityStereotypeInternal": "4740ce9f-bdfe-4ce6-b485-05b93cb9de57",
+  "FillMode": "None",
+  "Guid": "6e8b5c8a-9bae-4da0-a83b-3fb4690cbd86",
+  "InputMask": "",
+  "Length": 0,
+  "Name": "ObjectDictionary",
+  "Stereotype": "ObjectDictionary",
+  "TruncateType": "TruncateRight"
+}

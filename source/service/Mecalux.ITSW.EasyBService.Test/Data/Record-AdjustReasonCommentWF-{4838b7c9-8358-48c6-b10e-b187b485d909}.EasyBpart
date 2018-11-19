@@ -1,0 +1,42 @@
+{
+  "$id": "Record-AdjustReasonCommentWF-{4838b7c9-8358-48c6-b10e-b187b485d909}.EasyBpart",
+  "$type": "Mecalux.ITSW.EasyBuilder.Record, Mecalux.ITSW.EasyBuilder.Model",
+  "AutoUpdateLength": false,
+  "CheckStatus": "Default",
+  "Description": "User comment and Reason for stock process (Adjust, Picking, Count, Reception ...)",
+  "FieldRecordsInternal": {
+    "$type": "System.Collections.Generic.List`1[[Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model]], mscorlib",
+    "$values": [
+      {
+        "$id": "45977f53-a7b2-4c35-95a7-794a095f4783",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-string-{e4660b14-dd69-4f56-8465-2e3100e8569b}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "45977f53-a7b2-4c35-95a7-794a095f4783",
+        "Length": 0,
+        "Name": "Comment",
+        "Start": 0
+      },
+      {
+        "$id": "d40657ad-71bf-474a-87b5-eb5a9cdb3ec7",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-ReasonWF-{84e469e1-43f0-4405-9772-ada200776a98}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "d40657ad-71bf-474a-87b5-eb5a9cdb3ec7",
+        "Length": 0,
+        "Name": "Reason",
+        "Start": 0
+      }
+    ]
+  },
+  "Guid": "4838b7c9-8358-48c6-b10e-b187b485d909",
+  "Name": "AdjustReasonCommentWF",
+  "RecordType": "FixedRecord",
+  "Separator": ""
+}

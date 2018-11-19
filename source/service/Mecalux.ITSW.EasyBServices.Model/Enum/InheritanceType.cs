@@ -1,4 +1,4 @@
-﻿namespace Mecalux.ITSW.EasyBServices.Model.Enum
+﻿namespace Mecalux.ITSW.EasyBServices.Model
 {
     public enum InheritanceType
     {

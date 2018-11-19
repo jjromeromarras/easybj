@@ -1,5 +1,4 @@
-﻿using Mecalux.ITSW.EasyBServices.Model.Enum;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Drawing;
 

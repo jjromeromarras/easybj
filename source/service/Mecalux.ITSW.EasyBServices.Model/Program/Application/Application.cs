@@ -17,6 +17,8 @@ namespace Mecalux.ITSW.EasyBServices.Model
         private ViewGroupContainer viewgroupContainer;
         private GlobalSearchContainer globalsearchcontainer;
         private WorkstationJobContainer workstationJobContainer;
+        private ValidatorContainer validatorContainer;
+        private EntityContainer entityContainer;
         private List<Guid> dependingApplications;
         private List<Guid> dependingApplicationsIndirect;
         private Nullable<DateTime> activationDate;
@@ -24,6 +26,9 @@ namespace Mecalux.ITSW.EasyBServices.Model
         private DateTime updateDate;
         private Contact contact;
         private Company company;
+        private RecordContainer recordContainer;
+        private FieldTypeContainer fieldTypeContainer;
+        private RecordListContainer recordListContainer;
         #endregion
 
         #region Constructors
@@ -51,7 +56,6 @@ namespace Mecalux.ITSW.EasyBServices.Model
         public Application()
             : base()
         {
-
             company = new Company();
             contact = new Contact();
             dependingApplications = new List<Guid>();
@@ -62,6 +66,11 @@ namespace Mecalux.ITSW.EasyBServices.Model
             globalsearchcontainer = new GlobalSearchContainer();
             viewgroupContainer = new ViewGroupContainer();
             workstationJobContainer = new WorkstationJobContainer();
+            validatorContainer = new ValidatorContainer();
+            fieldTypeContainer = new FieldTypeContainer();
+            recordContainer = new RecordContainer();
+            recordListContainer = new RecordListContainer();
+            entityContainer = new EntityContainer();
             UpdateDate = DateTime.UtcNow.ToLocalTime();
             ActivationDate = DateTime.MinValue;
             CheckStatus = CheckStatus.New;
@@ -124,6 +133,16 @@ namespace Mecalux.ITSW.EasyBServices.Model
             }
         }
 
+        public ValidatorContainer ValidatorContainer
+        {
+            get
+            {
+                if (this.validatorContainer == null)
+                    this.validatorContainer = new ValidatorContainer();
+                return this.validatorContainer;
+            }
+        }
+
         public MenuItemContainer MenuItemContainer
         {
             get
@@ -151,6 +170,16 @@ namespace Mecalux.ITSW.EasyBServices.Model
                 if (this.workstationJobContainer == null)
                     this.workstationJobContainer = new WorkstationJobContainer();
                 return this.workstationJobContainer;
+            }
+        }
+
+        public EntityContainer EntityContainer
+        {
+            get
+            {
+                if (this.entityContainer == null)
+                    this.entityContainer = new EntityContainer();
+                return this.entityContainer;
             }
         }
 
@@ -210,6 +239,39 @@ namespace Mecalux.ITSW.EasyBServices.Model
                 return dependingApplications;
             }
             set => dependingApplications = value;
+        }
+
+        [JsonIgnore]
+        public FieldTypeContainer FieldTypeContainer
+        {
+            get
+            {
+                if (this.fieldTypeContainer == null)
+                    this.fieldTypeContainer = new FieldTypeContainer();
+                return fieldTypeContainer;
+            }
+        }
+
+        [JsonIgnore]
+        public RecordContainer RecordContainer
+        {
+            get
+            {
+                if (this.recordContainer == null)
+                    this.recordContainer = new RecordContainer();
+                return recordContainer;
+            }
+        }
+
+        [JsonIgnore]
+        public RecordListContainer RecordListContainer
+        {
+            get
+            {
+                if (this.recordListContainer == null)
+                    this.recordListContainer = new RecordListContainer();
+                return recordListContainer;
+            }
         }
         #endregion
 
