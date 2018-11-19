@@ -43,6 +43,11 @@ import { FieldTypeService } from '../services/fieldtypes/fieldtype.services';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from '../services/login/login.services';
 import { TraceServices } from '../services/trace/trace.services';
+import { DialogsComponent } from '../component/dialogs/dialogs.component';
+import { DialogsService } from '../services/dialogs/dialogs.services';
+import { RecordComponent } from '../component/record/record.component';
+import { RecordService } from '../services/records/record.service';
+import { RecordsComponent } from '../component/record/records.component';
 
 
 @NgModule({
@@ -75,13 +80,17 @@ import { TraceServices } from '../services/trace/trace.services';
     NewsComponent,
     BaseGridComponent,
     FieldTypesComponent,
-    FieldTypeComponent
+    FieldTypeComponent,
+    DialogsComponent,
+    RecordComponent,
+    RecordsComponent
   ],
   imports: [
     BrowserModule, DevExtremeModule, BrowserAnimationsModule, HttpClientModule, AgmCoreModule,
     APP_ROUTER, FormsModule
   ],
-  providers: [Config, ErrorHandlerService, BroadcasterService, ViewGroupService, ApplicationService, FieldTypeService, LoginService, TraceServices],
+  providers: [Config, ErrorHandlerService, BroadcasterService, ViewGroupService, RecordService, 
+    ApplicationService, FieldTypeService, LoginService, TraceServices, DialogsService],
   bootstrap: [EasyBComponent]
 })
 export class MainModule { }

@@ -59,8 +59,12 @@ select:hover, select:focus {
 
 button,
 button.btn{
-    border-radius: 0px; 
+    height: 40px;
+    width: 100px;
+    border-radius: 0px;
     font-size: 12px;
+    margin-top: 10px;
+    margin-right: 10px;
 }
 
 button:hover,
@@ -72,6 +76,7 @@ button:active,
 button.btn:active{
     background: #ec5e11;
 }
+
 
 input:-moz-placeholder,
 textarea:-moz-placeholder {
@@ -125,6 +130,10 @@ th .toolbarth{
     color: blue;
 }
 
+/**************************
+ * TREE STYLES
+ **************************/
+
 .dx-treeview {
     font-size: 12px;
 }
@@ -132,3 +141,222 @@ th .toolbarth{
 .dx-treeview-node .dx-treeview-node-is-leaf{
     height: 25px;
 }
+
+/**************************
+ * GRID STYLES
+ **************************/
+
+.dx-datagrid-headers .dx-checkbox-indeterminate .dx-checkbox-icon:before{
+    color: #fff;
+    background: none;
+}
+.dx-datagrid a, .dx-datagrid td{
+    font-size: 12px !important;
+}
+.dx-datagrid-headers .dx-datagrid-content .dx-datagrid-table .dx-row.dx-header-row > td{
+    background: #aaaaaa;
+    color: #fff;
+    border-left: 2px solid #ddd;
+    font-weight: bold;
+    text-align: left !important;
+}
+
+.dx-datagrid-headers .dx-datagrid-content .dx-datagrid-table .dx-row.dx-header-row > td .dx-select-checkbox {
+    display: none;
+}
+.dx-datagrid td.isactivecolumn,
+.dx-datagrid td.notesandattachscolumn {
+    width: 20px;
+    border: 0px !important;
+    padding: 7px 0px !important;
+}
+.dx-datagrid-focus-overlay{
+    display: none;
+}
+.dx-datagrid .dx-datagrid-content .dx-datagrid-table .dx-row .dx-command-select {
+    width: 40px;
+    min-width: 40px;
+    border: 0px !important;
+    text-align: center !important;
+}
+
+.dx-datagrid-headers .dx-datagrid-content .dx-datagrid-table .dx-datagrid-filter-row > td input,
+.dx-datagrid-headers .dx-datagrid-content .dx-datagrid-table .dx-datagrid-filter-row > td input:hover,
+.dx-datagrid-headers .dx-datagrid-content .dx-datgrid-table .dx-datagrid-filter-row > td input:focus{
+    border: 0px !important;
+}
+.dx-datagrid-content .dx-datagrid-table .dx-row > td,
+.dx-datagrid-content .dx-datagrid-table .dx-row.dx-selection > td{
+    background: #fff;
+    border: 0px;
+    border-bottom: 2px solid #ddd !important;
+    -webkit-transition: all 0.15s;
+    -moz-transition: all 0.15s;
+    -ms-transition: all 0.15s;
+    -o-transition: all 0.15s;
+    transition: all 0.15s;
+    white-space: nowrap;
+    text-align: left !important;
+}
+.dx-datagrid .dx-datagrid-content .dx-datagrid-table .dx-row .dx-command-select{
+    border-bottom: 2px solid #ddd !important;
+}
+.dx-datagrid-content .dx-datagrid-table .dx-row:nth-child(2n) > td{
+    background: #f1f1f1;
+}
+.dx-datagrid-content .dx-datagrid-table .dx-row.dx-freespace-row  > td{
+    display: none !important;
+}
+.dx-datagrid-content .dx-datagrid-table .dx-row.dx-datagrid-filter-row:hover > td,
+.dx-datagrid-content .dx-datagrid-table .dx-row.dx-datagrid-filter-row > td{
+    background: none;
+}
+.dx-datagrid-rowsview .dx-row{
+    border-left: 3px solid transparent;
+}
+.dx-datagrid-rowsview .dx-selection{
+    border-left: 3px solid #ec5e11;
+}
+.dx-datagrid-content .dx-datagrid-table .dx-row:hover > td,
+.dx-datagrid-rowsview .dx-selection.dx-row:hover:not(.dx-row-lines)>td{
+    background: #b9d8f4;
+    cursor: pointer;
+}
+.dx-datagrid-rowsview .dx-select-checkboxes-hidden > tbody > tr > td > .dx-select-checkbox{
+    display: inline-block !important;
+}
+.dx-datagrid-content .dx-datagrid-table .dx-checkbox-icon,
+.dx-datagrid-content .dx-datagrid-table .dx-checkbox-icon:hover {
+    border: 1px solid #aaa;
+    border-radius: 0px;
+    background: none;
+}
+.dx-datagrid-headers .dx-datagrid-content .dx-datagrid-table .dx-datagrid-filter-row > td input,
+.dx-datagrid-headers .dx-datagrid-content .dx-datagrid-table .dx-datagrid-filter-row > td input:hover,
+.dx-datagrid-headers .dx-datagrid-content .dx-datgrid-table .dx-datagrid-filter-row > td input:focus {
+    background: #ccc;
+    font-family: 'Segoe UI', 'Helvetica Neue', 'Droid Sans', Arial, Tahoma, Geneva, Sans-serif !important;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -ms-box-shadow: none;
+    -o-box-shadow: none;
+    box-shadow: none;
+    outline: 0px;
+    border: 0px !important;
+    text-align: left !important;
+    padding: 7px 5px 7px 25px;
+}
+.dx-datagrid-headers .dx-datagrid-content .dx-datagrid-table .dx-datagrid-filter-row > td .dx-selectbox input{
+    padding: 7px 5px;
+}
+.dx-datagrid-headers .dx-datagrid-content .dx-datagrid-table .dx-datagrid-filter-row > td.dx-focused input {
+    background: #b9d8f4;    
+}
+.dx-datagrid-content .dx-datagrid-table .dx-row .dx-checkbox-checked .dx-checkbox-icon{
+    color: #ec5e11;
+}
+.dx-datagrid-rowsview .dx-datagrid-table .dx-freespace-row td{
+    background: #ddd;
+}
+.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-lines)>td,
+.dx-datagrid-rowsview .dx-selection.dx-row:hover:not(.dx-row-lines)>td,
+.dx-datagrid-rowsview .dx-selection.dx-row:not(.dx-row-lines)>td.dx-focused{
+    background: #fbe9df;
+}
+
+/*****************************
+ * GRID HEIGHT
+ *****************************/
+ .dx-datagrid-rowsview.dx-datagrid-nowrap,
+ .grid-content .viewlistgridclass.dx-widget{
+     height: 68vh !important;
+ }
+ @media (max-height: 900px){
+     .dx-datagrid-rowsview.dx-datagrid-nowrap{
+         height: 64vh !important;
+     }
+ }
+ @media (max-height: 800px){
+     .dx-datagrid-rowsview.dx-datagrid-nowrap{
+         height: 60vh !important;
+     }
+ }
+ @media (max-height: 700px){
+     .dx-datagrid-rowsview.dx-datagrid-nowrap{
+         height: 54vh !important;
+     }
+ }
+ @media (max-height: 600px){
+     .dx-datagrid-rowsview.dx-datagrid-nowrap{
+         height: 45vh !important;
+     }
+ }
+ 
+ /*****************************
+  * GRID PAGINATION
+  *****************************/
+ .dx-datagrid-pager .dx-pages .dx-info {
+     display: inline-block !important;
+ }
+ .dx-datagrid-pager .dx-texteditor-container{
+     height: 34px;
+ }
+ .dx-datagrid-pager .dx-selectbox .dx-texteditor-input{
+     height: 20px;
+ }
+ .dx-datagrid-pager .dx-dropdowneditor-input-wrapper{
+     border: 1px solid #5d5d5d;
+     height: 34px;
+ }
+ .dx-datagrid-pager .dx-texteditor.dx-state-hover,
+ .dx-datagrid-pager .dx-state-hover .dx-dropdowneditor-input-wrapper{
+     box-shadow: none;
+     outline: 0px;
+     border-radius: 0px;
+ }
+ .dx-datagrid-pager .dx-texteditor,
+ .dx-datagrid-pager .dx-texteditor.dx-state-hover{
+     border: 0px;	
+ }
+ .dx-datagrid-pager .dx-state-hover .dx-dropdowneditor-input-wrapper{
+     border: 1px solid #368ee0;
+ }
+ .dx-datagrid-pager .dx-navigate-button{
+     -webkit-transition: all .3s ease-out;
+     -moz-transition: all .3s ease-out;
+     -ms-transition: all .3s ease-out;
+     -o-transition: all .3s ease-out;
+     transition: all .3s ease-out;
+ }
+ .dx-datagrid-pager .dx-navigate-button.dx-button-disable,
+ .dx-datagrid-pager .dx-navigate-button.dx-button-disable:hover{
+     color: #999;
+ }
+ .dx-datagrid-pager .dx-navigate-button:hover{
+     color: #368ee0;
+ }
+ .dx-datagrid-pager .dx-pages .dx-info{
+     display: inline-block !important;
+ }
+ .dx-datagrid-pager .dx-numberbox{
+     width: 70px !important;
+     position: relative;
+ }
+ .dx-datagrid-pager .dx-light-pages .dx-info,
+ .dx-datagrid-pager .dx-light-pages .dx-pages-count{
+     position: absolute;
+     bottom: 19px;
+ }
+ .dx-datagrid-pager .dx-light-pages .dx-info{
+     right: 55px;
+ }
+ .dx-datagrid-pager .dx-light-pages .dx-pages-count{
+     right: 40px;
+ }
+ .dx-datagrid-pager .dx-numberbox .dx-info-text,
+ .dx-datagrid-pager .dx-numberbox .dx-pages-count{
+     position: absolute;
+     top: 0px;
+     left: 0px;
+     z-index: 10;
+ }

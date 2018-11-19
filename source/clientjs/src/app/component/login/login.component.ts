@@ -56,9 +56,9 @@ export class LoginComponent {
     // PRIVATE METHODS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private setFocus() {
-        if (this.renderer != null && this.element != null && this.element.nativeElement != null) {
-            this.renderer.invokeElementMethod(this.element.nativeElement.querySelector('input'), 'focus');
-        }
+        //if (this.renderer != null && this.element != null && this.element.nativeElement != null) {
+          //  this.renderer.invokeElementMethod(this.element.nativeElement.querySelector('input'), 'focus');
+       // }
     }
 
     private setLogin(data: any) {

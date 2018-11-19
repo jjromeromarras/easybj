@@ -2,7 +2,7 @@
     [animationEnabled]="true" [swipeEnabled]="false" (onSelectionChanged)='onSelectionChanged($event)'>
     <div *dxTemplate="let page of 'title'">
         <span>{{page.title}}</span>
-        <img *ngIf="page.type!='News'" (click)='onCloseTab(page)' src="ApplicationResources\img\close.png">
+        <img *ngIf="page.type!='News'" style="height: 15px;  width: 15px;    float: right;    margin-left: 20;" (click)='onCloseTab(page)' src="ApplicationResources\img\close.png">
     </div>
     <div *dxTemplate="let page of 'item'">
         <div *ngIf="page.type=='News'" class="tabpanel-item">
