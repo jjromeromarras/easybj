@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     [JsonObject]
     public class Application: SignedEntity
@@ -17,10 +17,12 @@ namespace Mecalux.ITSW.EasyBServices.Model
         private ViewGroupContainer viewgroupContainer;
         private GlobalSearchContainer globalsearchcontainer;
         private WorkstationJobContainer workstationJobContainer;
+        private WorkflowCommandContainer workflowCommandContainer;
         private ValidatorContainer validatorContainer;
         private EntityContainer entityContainer;
         private List<Guid> dependingApplications;
         private List<Guid> dependingApplicationsIndirect;
+        private WorkflowUICommandContainer workflowUICommandContainer;
         private Nullable<DateTime> activationDate;
         private Nullable<DateTime> compilationDate;
         private DateTime updateDate;
@@ -71,6 +73,8 @@ namespace Mecalux.ITSW.EasyBServices.Model
             recordContainer = new RecordContainer();
             recordListContainer = new RecordListContainer();
             entityContainer = new EntityContainer();
+            workflowCommandContainer = new WorkflowCommandContainer();
+            workflowUICommandContainer = new WorkflowUICommandContainer();
             UpdateDate = DateTime.UtcNow.ToLocalTime();
             ActivationDate = DateTime.MinValue;
             CheckStatus = CheckStatus.New;
@@ -173,6 +177,25 @@ namespace Mecalux.ITSW.EasyBServices.Model
             }
         }
 
+        public WorkflowCommandContainer WorkflowCommandContainer
+        {
+            get
+            {
+                if (this.workflowCommandContainer == null)
+                    this.workflowCommandContainer = new WorkflowCommandContainer();
+                return this.workflowCommandContainer;
+            }
+        }
+
+        public WorkflowUICommandContainer WorkflowUICommandContainer
+        {
+            get
+            {
+                if (this.workflowUICommandContainer == null)
+                    this.workflowUICommandContainer = new WorkflowUICommandContainer();
+                return this.workflowUICommandContainer;
+            }
+        }
         public EntityContainer EntityContainer
         {
             get

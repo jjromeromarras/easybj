@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     public static class HelperJsonConverter
     {
@@ -15,8 +15,12 @@ namespace Mecalux.ITSW.EasyBServices.Model
         public const string EntityParticle = "Entity";
         public const string ListParticle = "List";
         public const string FieldTypeParticle = "FieldType";
+        public const string DialogParticle = "Dialog";
         public const string RecordParticle = "Record";
-
+        public const string CommandParticle = "Command";
+        public const string FopaParticle = "FOPA";
+        public const string DialogFormatParticle = "DialogFormat";
+        public const string DialogListParticle = "DialogList";
         public const char Separator = '-';
 
         /* public const string ActionDataParticle = "ActionData";
@@ -26,7 +30,7 @@ namespace Mecalux.ITSW.EasyBServices.Model
          public const string ActivityParticle = "Activity";
          public const string AdJobDataParticle = "AdJobData";
          public const string AttributeParticle = "Attribute";
-         public const string CommandParticle = "Command";
+         
          public const string CommandTagContainerParticle = "CommandTagContainer";
          public const string CommandTagParticle = "CommandTag";
          public const string DeployPackageDataParticle = "DeployPackageData";
@@ -39,7 +43,7 @@ namespace Mecalux.ITSW.EasyBServices.Model
          public const string EventPropertyParticle = "EventProperty";
          public const string EventTagContainerParticle = "EventTagContainer";
          public const string EventTagParticle = "EventTag";
-         public const string FopaParticle = "FOPA";
+         
          public const string LanguageDataParticle = "LanguageData";
          public const string LinkParameterParticle = "LinkParameter";
          public const string LinkParticle = "Link";
@@ -237,12 +241,41 @@ namespace Mecalux.ITSW.EasyBServices.Model
                 string particle = TypeParticle(entity);
                 NameEntity namedEntity = entity as NameEntity;
                 Guid fileGuid = namedEntity.Guid;
-                result = string.Format(CultureInfo.InvariantCulture, "{0}{3}{1}{3}{{{2}}}.{4}", particle, NormalizeName(namedEntity?.Name), fileGuid, Separator, FilesConfig.EasyBPartialExtensionFile);
+                if (IsSplittedType(entity))
+                {
+                    if (entity is IAvoidSerializedGuid avoidGuidEntity)
+                    {
+                        Guid versionId = avoidGuidEntity.ParentSerializableEntityVersionId;
+                        result = string.Format(CultureInfo.InvariantCulture, "{0}{4}{1}{4}{{{2}}}{4}{3}", avoidGuidEntity.SerializationParticle, TypeParticle(avoidGuidEntity.ParentSerializableEntity), versionId, avoidGuidEntity.ReferencedName, Separator);
+
+                    }
+                    else
+                    {
+                     //   if (entity is IPartiallyOverridableEntity overridable)
+                       //     result = overridable.OverriddenVersionId.ToString();
+                        //else if (entity is IOverridableEntity overridableEntity)
+                          //  result = overridableEntity.OverriddenVersionId.ToString();
+                        //else
+                            result = entity.Guid.ToString();
+                    }                    
+                }
+                else
+                {
+                    result = string.Format(CultureInfo.InvariantCulture, "{0}{3}{1}{3}{{{2}}}.{4}", particle, NormalizeName(namedEntity?.Name), fileGuid, Separator, FilesConfig.EasyBPartialExtensionFile);
+                }
             }
             return result;
         }
 
-       
+        public static bool IsSplittedType(IBaseEntity entity)
+        {
+            Type type = entity.GetType();
+            return typeof(WorkflowFormalParameter).IsAssignableFrom(type) ||
+                    typeof(WorkflowUICommandList).IsAssignableFrom(type) ||
+                    typeof(WorkflowUICommandFormat).IsAssignableFrom(type);
+                    
+                 
+        }
         public static string NormalizeName(string input)
         {
             string result = input?.Replace("?", "_nullable") ?? string.Empty;
@@ -265,6 +298,12 @@ namespace Mecalux.ITSW.EasyBServices.Model
                     return ListParticle;
                 if (typeof(Entity).IsAssignableFrom(entity.GetType()))
                     return EntityParticle;
+                if (typeof(WorkflowCommand).IsAssignableFrom(entity.GetType()))
+                    return CommandParticle;
+                if (typeof(WorkflowFormalParameter).IsAssignableFrom(entity.GetType()))
+                    return FopaParticle;
+                if (typeof(WorkflowUICommand).IsAssignableFrom(entity.GetType()))
+                    return DialogParticle;
 
 
                 /*if (typeof(Workflow).IsAssignableFrom(entity.GetType()) ||
@@ -279,9 +318,6 @@ namespace Mecalux.ITSW.EasyBServices.Model
                 if (typeof(View).IsAssignableFrom(entity.GetType()) ||
                     typeof(ViewTagContainer).IsAssignableFrom(entity.GetType()))
                     return ViewParticle;
-                if (typeof(WorkflowCommand).IsAssignableFrom(entity.GetType()) ||
-                    typeof(CommandTagContainer).IsAssignableFrom(entity.GetType()))
-                    return CommandParticle;
                 if (typeof(Event).IsAssignableFrom(entity.GetType()) ||
                     typeof(EventTagContainer).IsAssignableFrom(entity.GetType()))
                     return EventParticle;

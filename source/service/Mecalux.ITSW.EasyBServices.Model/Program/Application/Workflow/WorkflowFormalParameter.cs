@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
-    public class WorkflowFormalParameter: NameEntity
+    public class WorkflowFormalParameter: NameEntity, IAvoidSerializedGuid
     {
         #region Fields
 
-        private WorkflowAttribute attribute;
+        private string attribute;
         private string description;
         private Guid entityStereotypeInternal;
         private int index;
@@ -15,7 +15,7 @@ namespace Mecalux.ITSW.EasyBServices.Model
         private WorkflowInOutMode mode;
         private Stereotype stereotype;
         private WorkflowFormalParameterType workflowFormalParameterType;
-
+        private CheckEntity parententity;
         #endregion
 
         #region Constructors    
@@ -84,11 +84,27 @@ namespace Mecalux.ITSW.EasyBServices.Model
             set { workflowFormalParameterType =  value; }
         }
 
-        public WorkflowAttribute Attribute
+        public string Attribute
         {
             get => attribute;
             set => attribute = value;
         }
+
+        public CheckEntity ParentSerializableEntity
+        {
+            get => parententity;
+            set => parententity = value;
+        }
+
+        public Guid ParentSerializableEntityVersionId => parententity!=null ? parententity.VersionId: Guid.Empty;
+
+        public string SerializationParticle => HelperJsonConverter.FopaParticle;
+
+        public string ReferencedName
+        {
+            get { return this.Name; }
+        }
+
         #endregion
     }
 }

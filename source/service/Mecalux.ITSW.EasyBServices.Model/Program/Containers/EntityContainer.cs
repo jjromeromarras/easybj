@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     
     public class EntityContainer: BaseEntity
@@ -55,7 +55,7 @@ namespace Mecalux.ITSW.EasyBServices.Model
             {
                 if (element == null)
                     throw new ArgumentNullException("element", "Entity can not be null");
-
+                
                 this.entities.Add(element);
                 // TODO BASE DE DATOS
             }

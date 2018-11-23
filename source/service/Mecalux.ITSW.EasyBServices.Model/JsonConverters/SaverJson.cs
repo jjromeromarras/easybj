@@ -1,5 +1,4 @@
-﻿using Mecalux.ITSW.EasyBServices.Base.Files;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -10,8 +9,9 @@ using System.IO;
 using System.Text;
 using System.Linq;
 using System.Threading.Tasks;
+using Mecalux.ITSW.EasyBServices.Base.Files;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     public class SaverJson
     {
@@ -20,7 +20,8 @@ namespace Mecalux.ITSW.EasyBServices.Model
         public const string RecordsFolder = "Records";
         public const string ListsFolder = "Lists";
         public const string EntitiesFolder = "Entities";
-
+        public const string CommandsFolder = "Commands";
+        public const string DialogsFolder = "Dialogs";
         private List<string> pendingApplicationsInternal;
 
         private static List<JsonConverter> writeConverters;
@@ -64,7 +65,7 @@ namespace Mecalux.ITSW.EasyBServices.Model
             }
         }
         #endregion
-
+                
         #region Export Methods 
         private List<JsonConverter> WriteConverters
         {
@@ -78,7 +79,9 @@ namespace Mecalux.ITSW.EasyBServices.Model
                         new RecordJsonConverter(),
                         new RecordListJsonConverter(),
                         new StringEnumConverter(),
-                        new EntityJsonConverter()
+                        new WorkflowCommandJsonConverter(),
+                        new EntityJsonConverter(),
+                        new WorkflowUICommandJsonConverter()
                     };
                 }
                 return writeConverters;
@@ -152,7 +155,8 @@ namespace Mecalux.ITSW.EasyBServices.Model
             SerializeCollection(combinedPath, lastFolderName, application.RecordContainer.RecordsInternal, RecordsFolder, "Records");
             SerializeCollection(combinedPath, lastFolderName, application.RecordListContainer.RecordListsInternal, ListsFolder, "Lists");
             SerializeCollection(combinedPath, lastFolderName, application.EntityContainer.EntityListsInternal, EntitiesFolder, "Entities");
-
+            SerializeCollection(combinedPath, lastFolderName, application.WorkflowCommandContainer.WorkflowCommandsInternal, CommandsFolder, "Commands");
+            SerializeCollection(combinedPath, lastFolderName, application.WorkflowUICommandContainer.WorkflowUICommandsInternal, DialogsFolder, "Dialogs");
 
             /*            using (ResultManager.Create($"Serialize 'Resources' file ({application.ResourceContainer} resources)"))
                             SerializeElement(combinedPath, ResourcesFileName, lastFolderName, "Resources", application.ResourceContainer);
@@ -303,7 +307,9 @@ namespace Mecalux.ITSW.EasyBServices.Model
                         new RecordListJsonConverter(),
                         new FieldTypeJsonConverter(),
                         new EntityJsonConverter(),
-                        new RecordJsonConverter()
+                        new RecordJsonConverter(),
+                        new WorkflowCommandJsonConverter(),
+                        new WorkflowUICommandJsonConverter()
 
                         /*new ValidatorCreationConverter(),
                         new RelationshipCreationConverter(),

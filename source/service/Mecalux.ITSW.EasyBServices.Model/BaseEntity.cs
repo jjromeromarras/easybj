@@ -1,8 +1,7 @@
-﻿using Mecalux.ITSW.EasyBServices.Model.Interfaz;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     [JsonObject]
     public abstract class BaseEntity: IBaseEntity

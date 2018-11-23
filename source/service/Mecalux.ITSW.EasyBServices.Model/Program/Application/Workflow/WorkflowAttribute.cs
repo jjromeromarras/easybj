@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     public class WorkflowAttribute: NameEntity
     {
@@ -15,7 +15,7 @@ namespace Mecalux.ITSW.EasyBServices.Model
 
         #region Constructors
 
-        protected WorkflowAttribute()
+        public WorkflowAttribute()
             : base()
         {
             persist = true;

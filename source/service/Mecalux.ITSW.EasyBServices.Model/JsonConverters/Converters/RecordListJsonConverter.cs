@@ -2,7 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     public class RecordListJsonConverter : EasyBJsonConverter<RecordList>
     {
@@ -48,7 +48,8 @@ namespace Mecalux.ITSW.EasyBServices.Model
                 target.Files = jObject["Files"].Value<int>();
                 target.Guid = Guid.Parse(jObject["Guid"].Value<string>());
                 target.Name = jObject["Name"].Value<string>();
-                target.Record = jObject["Record"]["$ref"].Value<string>();
+                if(jObject["Record"].HasValues)
+                    target.Record = jObject["Record"]["$ref"].Value<string>();
             }
             return target;
         }

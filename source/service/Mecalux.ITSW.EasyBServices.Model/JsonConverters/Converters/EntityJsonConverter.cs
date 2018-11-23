@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     public class EntityJsonConverter: EasyBJsonConverter<Entity>
     {
@@ -84,33 +84,34 @@ namespace Mecalux.ITSW.EasyBServices.Model
                 target.PluralName = jObject["PluralName"]["$ref"].Value<string>();
                 target.SingularName = jObject["SingularName"]["$ref"].Value<string>();
 
-                foreach (var flchild in jObject["PropertiesInternal"]["$values"])
-                {
-                    Property f = new Property();
-                    f.Name = flchild["Name"].Value<string>();
-                    f.Guid = Guid.Parse(flchild["Guid"].Value<string>());
-                    f.ColumnName = flchild["Name"].Value<string>();
-                    f.DataType = (PropertyDataType)Enum.Parse(typeof(PropertyDataType), flchild["DataType"].Value<string>());
-                    f.DefaultValue = flchild["DefaultValue"].Value<string>();
-                    f.Guid = Guid.Parse(flchild["Guid"].Value<string>());
-                    f.Help = flchild["Help"].Value<string>();
-                    f.IsActiveProperty = flchild["IsActiveProperty"].Value<bool>();
-                    f.IsCustomField = flchild["IsCustomField"].Value<bool>();
-                    f.IsDataWarehouse = flchild["IsDataWarehouse"].Value<bool>();
-                    f.IsIndex = flchild["IsIndex"].Value<bool>();
-                    f.IsPrimaryKey = flchild["IsPrimaryKey"].Value<bool>();
-                    f.IsReadOnly = flchild["IsReadOnly"].Value<bool>();
-                    f.IsRequiered = flchild["IsRequiered"].Value<bool>();
-                    f.IsVisible = flchild["IsVisible"].Value<bool>();
-                    f.Lenght = flchild["Lenght"].Value<int>();
-                    f.Precision = flchild["Precision"].Value<int>();
-                    if (flchild["Title"].HasValues)
-                        f.Title = flchild["Title"]["$ref"].Value<string>();
-                    if (flchild["Validator"].HasValues)
-                        f.Validator = flchild["Validator"]["$ref"].Value<string>();
+                if (jObject["PropertiesInternal"]["$values"].HasValues)
+                    foreach (var flchild in jObject["PropertiesInternal"]["$values"])
+                    {
+                        Property f = new Property();
+                        f.Name = flchild["Name"].Value<string>();
+                        f.Guid = Guid.Parse(flchild["Guid"].Value<string>());
+                        f.ColumnName = flchild["Name"].Value<string>();
+                        f.DataType = (PropertyDataType)Enum.Parse(typeof(PropertyDataType), flchild["DataType"].Value<string>());
+                        f.DefaultValue = flchild["DefaultValue"].Value<string>();
+                        f.Guid = Guid.Parse(flchild["Guid"].Value<string>());
+                        f.Help = flchild["Help"].Value<string>();
+                        f.IsActiveProperty = flchild["IsActiveProperty"].Value<bool>();
+                        f.IsCustomField = flchild["IsCustomField"].Value<bool>();
+                        f.IsDataWarehouse = flchild["IsDataWarehouse"].Value<bool>();
+                        f.IsIndex = flchild["IsIndex"].Value<bool>();
+                        f.IsPrimaryKey = flchild["IsPrimaryKey"].Value<bool>();
+                        f.IsReadOnly = flchild["IsReadOnly"].Value<bool>();
+                        f.IsRequiered = flchild["IsRequiered"].Value<bool>();
+                        f.IsVisible = flchild["IsVisible"].Value<bool>();
+                        f.Lenght = flchild["Lenght"].Value<int>();
+                        f.Precision = flchild["Precision"].Value<int>();
+                        if (flchild["Title"].HasValues)
+                            f.Title = flchild["Title"]["$ref"].Value<string>();
+                        if (flchild["Validator"].HasValues)
+                            f.Validator = flchild["Validator"]["$ref"].Value<string>();
 
-                    target.AddProperty(f);
-                }
+                        target.AddProperty(f);
+                    }
             }
             return target;
         }

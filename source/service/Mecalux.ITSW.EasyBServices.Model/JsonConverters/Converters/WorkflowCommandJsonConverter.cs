@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     public class WorkflowCommandJsonConverter: EasyBJsonConverter<WorkflowCommand>
     {
@@ -25,16 +25,7 @@ namespace Mecalux.ITSW.EasyBServices.Model
                     HelperJsonConverter.WritePropertyType<WorkflowCommand>(writer, serializer, obj);
                     HelperJsonConverter.WritePropertyObjectsArray("FormalParametersInternal", typeof(List<WorkflowFormalParameter>), obj.FormalParametersInternal, (objchild) =>
                     {
-                        HelperJsonConverter.WritePropertyObject<WorkflowAttribute>("Attribute", objchild.Attribute, (objatr) => {
-                            HelperJsonConverter.WritePropertyValue("Description", objatr.Description, writer, serializer);
-                            HelperJsonConverter.WritePropertyValue("EntityStereotypeInternal", objatr.EntityStereotypeInternal, writer, serializer);
-                            HelperJsonConverter.WritePropertyValue("InitialValue", objatr.InitialValue, writer, serializer);
-                            HelperJsonConverter.WritePropertyValue("Length", objatr.Length, writer, serializer);
-                            HelperJsonConverter.WritePropertyValue("Persist", objatr.Persist, writer, serializer);
-                            HelperJsonConverter.WritePropertyValue("Stereotype", objatr.Stereotype, writer, serializer);                            
-                        }, writer, serializer);
-
-                        //WritePropertyValue("At", objchild.Attribute, writer, serializer);
+                        HelperJsonConverter.WritePropertyReference("Attribute", objchild.Attribute, writer, serializer);
                         HelperJsonConverter.WritePropertyValue("Description", objchild.Description, writer, serializer);
                         HelperJsonConverter.WritePropertyValue("EntityStereotypeInternal", objchild.EntityStereotypeInternal, writer, serializer);
                         HelperJsonConverter.WritePropertyValue("Index", objchild.Index, writer, serializer);
@@ -58,34 +49,41 @@ namespace Mecalux.ITSW.EasyBServices.Model
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            if (reader.TokenType == JsonToken.Null)
+           if (reader.TokenType == JsonToken.Null)
                 return null;
 
             JObject jObject = JObject.Load(reader);
-            Record target = default(Record);
+            WorkflowCommand target = default(WorkflowCommand);
             if (jObject != null)
             {
                 target = Create(objectType);
-                target.AutoUpdateLength = jObject["AutoUpdateLength"].Value<bool>();
                 target.CheckStatus = (CheckStatus)Enum.Parse(typeof(CheckStatus), jObject["CheckStatus"].Value<string>());
                 target.Description = jObject["Description"].Value<string>();
-                target.Guid = Guid.Parse(jObject["Guid"].Value<string>());
-                target.RecordType = (RecordType)Enum.Parse(typeof(RecordType), jObject["RecordType"].Value<string>());
-                target.Separator = jObject["Separator"].Value<string>();
+                target.VersionId = Guid.Parse(jObject["VersionId"].Value<string>());
+                target.Guid = target.VersionId;
+                target.InternalCommandName = jObject["InternalCommandName"].Value<string>();
                 target.Name = jObject["Name"].Value<string>();
+                target.WorkflowCommandType = (WorkflowCommandType)Enum.Parse(typeof(WorkflowCommandType), jObject["WorkflowCommandType"].Value<string>());
 
-
-                foreach (var flchild in jObject["FieldRecordsInternal"]["$values"])
+                if (jObject["FormalParametersInternal"]["$values"].HasValues)
                 {
-                    FieldRecord f = new FieldRecord();
-                    f.Name = flchild["Name"].Value<string>();
-                    f.End = flchild["End"].Value<int>();
-                    f.Format = flchild["Format"].Value<string>();
-                    f.Length = flchild["Length"].Value<int>();
-                    f.Guid = Guid.Parse(flchild["Guid"].Value<string>());
-                    f.Start = flchild["Start"].Value<int>();
-                    f.FieldType = flchild["FieldType"]["$ref"].Value<string>();
-                    target.AddFieldRecord(f);
+                    foreach (var flchild in jObject["FormalParametersInternal"]["$values"])
+                    {
+                        WorkflowFormalParameter f = new WorkflowFormalParameter();
+                        f.Name = flchild["Name"].Value<string>();
+                        f.Description= flchild["Name"].Value<string>();
+                        f.EntityStereotypeInternal= Guid.Parse(flchild["EntityStereotypeInternal"].Value<string>());
+                        f.Index = flchild["Index"].Value<int>();
+                        f.IsEditableParameter = flchild["IsEditableParameter"].Value<Boolean>();
+                        f.IsRequiredParameter = flchild["IsRequiredParameter"].Value<Boolean>();
+                        f.Mode = (WorkflowInOutMode)Enum.Parse(typeof(WorkflowInOutMode), flchild["Mode"].Value<string>());
+                        f.Stereotype = (Stereotype)Enum.Parse(typeof(Stereotype), flchild["Stereotype"].Value<string>());
+                        f.WorkflowFormalParameterType = (WorkflowFormalParameterType)Enum.Parse(typeof(WorkflowFormalParameterType), flchild["WorkflowFormalParameterType"].Value<string>());
+                        if (flchild["Attribute"].HasValues)
+                            f.Attribute = flchild["Attribute"]["$ref"].Value<string>();
+
+                        target.AddFormaParameter(f);
+                    }
                 }
 
             }
@@ -94,3 +92,4 @@ namespace Mecalux.ITSW.EasyBServices.Model
         #endregion Methods
     }
 }
+

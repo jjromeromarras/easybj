@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Globalization;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     public abstract class MenuBase: NameEntity
     {

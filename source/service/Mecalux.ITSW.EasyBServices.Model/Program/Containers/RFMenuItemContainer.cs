@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     public class RFMenuItemContainer: BaseEntity
     {

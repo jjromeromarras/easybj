@@ -1,4 +1,4 @@
-﻿namespace Mecalux.ITSW.EasyBServices.Model
+﻿namespace Mecalux.ITSW.EasyB.Model
 {
     public interface IInternalReference
     {

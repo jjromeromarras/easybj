@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     public class RecordJsonConverter : EasyBJsonConverter<Record>
     {
@@ -65,19 +65,19 @@ namespace Mecalux.ITSW.EasyBServices.Model
                 target.Separator = jObject["Separator"].Value<string>();
                 target.Name = jObject["Name"].Value<string>();
 
-
-                foreach (var flchild in jObject["FieldRecordsInternal"]["$values"])
-                {
-                    FieldRecord f = new FieldRecord();
-                    f.Name = flchild["Name"].Value<string>();
-                    f.End = flchild["End"].Value<int>();
-                    f.Format = flchild["Format"].Value<string>();
-                    f.Length = flchild["Length"].Value<int>();
-                    f.Guid = Guid.Parse(flchild["Guid"].Value<string>());
-                    f.Start = flchild["Start"].Value<int>();
-                    f.FieldType = flchild["FieldType"]["$ref"].Value<string>();
-                    target.AddFieldRecord(f);
-                }
+                if (jObject["FieldRecordsInternal"]["$values"].HasValues)
+                    foreach (var flchild in jObject["FieldRecordsInternal"]["$values"])
+                    {
+                        FieldRecord f = new FieldRecord();
+                        f.Name = flchild["Name"].Value<string>();
+                        f.End = flchild["End"].Value<int>();
+                        f.Format = flchild["Format"].Value<string>();
+                        f.Length = flchild["Length"].Value<int>();
+                        f.Guid = Guid.Parse(flchild["Guid"].Value<string>());
+                        f.Start = flchild["Start"].Value<int>();
+                        f.FieldType = flchild["FieldType"]["$ref"].Value<string>();
+                        target.AddFieldRecord(f);
+                    }
 
             }
             return target;

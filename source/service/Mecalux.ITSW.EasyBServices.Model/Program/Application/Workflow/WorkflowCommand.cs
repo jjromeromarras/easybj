@@ -1,6 +1,6 @@
 ﻿using System;
-
-namespace Mecalux.ITSW.EasyBServices.Model
+using System.Linq;
+namespace Mecalux.ITSW.EasyB.Model
 {
     public class WorkflowCommand : WorkflowBasic
     {
@@ -44,6 +44,14 @@ namespace Mecalux.ITSW.EasyBServices.Model
         {
             get => workflowCommandType;
             set => workflowCommandType = value;
+        }
+        #endregion
+
+        #region Methods
+        public void AddFormaParameter(WorkflowFormalParameter obj)
+        {
+            obj.ParentSerializableEntity = this;
+            this.FormalParametersInternal.Add(obj);
         }
         #endregion
     }

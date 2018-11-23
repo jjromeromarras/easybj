@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using System;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     public class Action: NameEntity
     {

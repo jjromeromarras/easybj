@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     [JsonObject]
     public class FieldTypeContainer: BaseEntity

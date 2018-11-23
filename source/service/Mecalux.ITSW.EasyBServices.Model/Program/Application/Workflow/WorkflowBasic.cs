@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     public abstract class WorkflowBasic: CheckEntity
     {
@@ -34,7 +34,7 @@ namespace Mecalux.ITSW.EasyBServices.Model
             set { description = value; }
         }
 
-        public IEnumerable<WorkflowFormalParameter> FormalParametersInternal
+        public List<WorkflowFormalParameter> FormalParametersInternal
         {
             get
             {
@@ -42,7 +42,7 @@ namespace Mecalux.ITSW.EasyBServices.Model
                 {
                     int result = e1.Name.CompareTo(e2.Name);
                     if (result == 0 && e1.Attribute != null && e2.Attribute != null)
-                        result = e1.Attribute.Name.CompareTo(e2.Attribute.Name);
+                        result = e1.Attribute.CompareTo(e2.Attribute);
                     return result;
                 });
                 return workflowFormalParameters;

@@ -1,7 +1,7 @@
 ﻿using Mecalux.ITSW.EasyBServices.Base;
 using System;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     public static class CommonEntityExtension
     {

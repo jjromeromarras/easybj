@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Mecalux.ITSW.EasyBServices.Model
+namespace Mecalux.ITSW.EasyB.Model
 {
     [JsonObject]
     public class AdJobFrequency : BaseEntity

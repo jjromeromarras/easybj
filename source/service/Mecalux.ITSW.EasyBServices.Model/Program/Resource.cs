@@ -1,4 +1,4 @@
-﻿using Mecalux.ITSW.EasyBServices.Model;
+﻿using Mecalux.ITSW.EasyB.Model;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
