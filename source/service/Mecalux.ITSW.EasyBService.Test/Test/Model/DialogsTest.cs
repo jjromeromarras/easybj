@@ -19,38 +19,46 @@ namespace Mecalux.ITSW.EasyBService.Test
             saver.SerializeObject(@".\Data\DialogsTest05SaverJSON.EasyBpart", obj);
             Assert.IsTrue(File.Exists(@".\Data\DialogsTest05SaverJSON.EasyBpart"));
 
-            /*WorkflowCommand imprecord = saver.ImportPart<WorkflowCommand>(@".\Data\DialogsTest05SaverJSON.EasyBpart");
+            WorkflowUICommand imprecord = saver.ImportPart<WorkflowUICommand>(@".\Data\DialogsTest05SaverJSON.EasyBpart");
 
             Assert.AreEqual(imprecord.VersionId, obj.VersionId);
             Assert.AreEqual(imprecord.Name, obj.Name);
             Assert.AreEqual(imprecord.CheckStatus, obj.CheckStatus);
             Assert.AreEqual(imprecord.Description, obj.Description);
-            Assert.AreEqual(imprecord.WorkflowCommandType, obj.WorkflowCommandType);
             Assert.AreEqual(imprecord.FormalParametersInternal.Count, obj.FormalParametersInternal.Count);
-            Assert.AreEqual(imprecord.FormalParametersInternal.ElementAt(0).Name, obj.FormalParametersInternal.ElementAt(0).Name);*/
+            Assert.AreEqual(imprecord.FormalParametersInternal.ElementAt(0).Name, obj.FormalParametersInternal.ElementAt(0).Name);
+
+            Assert.AreEqual(imprecord.OptionsInternal.Count, obj.OptionsInternal.Count);
+            Assert.AreEqual(imprecord.OptionsInternal.ElementAt(0), obj.OptionsInternal.ElementAt(0));
+
+            Assert.AreEqual(imprecord.ListsInternal.Count(), obj.ListsInternal.Count());
+            Assert.AreEqual(imprecord.ListsInternal.ElementAt(0).Name, obj.ListsInternal.ElementAt(0).Name);
+            Assert.AreEqual(imprecord.FormatsInternal.Count(), obj.FormatsInternal.Count());
+            Assert.AreEqual(imprecord.FormatsInternal.ElementAt(0).Height, obj.FormatsInternal.ElementAt(0).Height);
+
         }
 
-       /* [TestMethod]
-        public void DialogsTestTest06SaverJSON()
-        {
+         [TestMethod]
+         public void DialogsTestTest06SaverJSON()
+         {
 
-            WorkflowCommand obj = CreateObject();
-            ApplicationTag apptag = new ApplicationTag();
-            Application app = new Application();
-            app.Name = "APP_WorkflowCommandTest06";
-            app.WorkflowCommandContainer.Add(obj);
-            apptag.Entity = app;
+             WorkflowUICommand obj = CreateObject();
+             ApplicationTag apptag = new ApplicationTag();
+             Application app = new Application();
+             app.Name = "APP_WorkflowUICommandTest06";
+             app.WorkflowUICommandContainer.Add(obj);
+             apptag.Entity = app;
 
-            SaverJson saver = new SaverJson();
-            saver.ExportApplicationTag(@".\Data\", apptag);
+             SaverJson saver = new SaverJson();
+             saver.ExportApplicationTag(@".\Data\", apptag);
 
-            Assert.IsTrue(Directory.Exists(@".\Data\APP_WorkflowCommandTest06\Commands"));
+             Assert.IsTrue(Directory.Exists(@".\Data\APP_WorkflowUICommandTest06\Dialogs"));
 
-            var fileCount = (from file in Directory.EnumerateFiles(@".\Data\APP_WorkflowCommandTest06\Commands", "*.EasyBpart", SearchOption.AllDirectories)
-                             select file).Count();
+             var fileCount = (from file in Directory.EnumerateFiles(@".\Data\APP_WorkflowUICommandTest06\Dialogs", "*.EasyBpart", SearchOption.AllDirectories)
+                              select file).Count();
 
-            Assert.IsTrue(fileCount == 1);
-        }*/
+             Assert.IsTrue(fileCount == 1);
+         }
         #endregion
 
         #region Aux

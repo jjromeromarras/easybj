@@ -52,6 +52,7 @@
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Enum\ConfirmationModes.cs" />
     <Compile Include="Enum\EditionLengthMode.cs" />
+    <Compile Include="Enum\EventPropertyDataType.cs" />
     <Compile Include="Enum\FillMode.cs" />
     <Compile Include="Enum\GuidPrefix.cs" />
     <Compile Include="Enum\InheritanceType.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Interfaz\IInheritableEntity.cs" />
     <Compile Include="Interfaz\IInternalReference.cs" />
     <Compile Include="JsonConverters\Converters\EntityJsonConverter.cs" />
+    <Compile Include="JsonConverters\Converters\EventJsonConverter.cs" />
     <Compile Include="JsonConverters\Converters\FieldTypeJsonConverter.cs" />
     <Compile Include="JsonConverters\Converters\EasyBJsonConverter.cs" />
     <Compile Include="JsonConverters\Converters\HelperJsonConverter.cs" />
@@ -90,6 +92,8 @@
     <Compile Include="Program\Application\Company.cs" />
     <Compile Include="Program\Application\Contact.cs" />
     <Compile Include="Program\Application\Entity.cs" />
+    <Compile Include="Program\Application\Event.cs" />
+    <Compile Include="Program\Application\EventProperty.cs" />
     <Compile Include="Program\Application\FieldRecord.cs" />
     <Compile Include="Program\Application\FieldType.cs" />
     <Compile Include="Program\Application\Property.cs" />
@@ -116,6 +120,7 @@
     <Compile Include="Program\Containers\AdJobContainer.cs" />
     <Compile Include="Program\Containers\ApplicationTagContainer.cs" />
     <Compile Include="Program\Containers\EntityContainer.cs" />
+    <Compile Include="Program\Containers\EventContainer.cs" />
     <Compile Include="Program\Containers\FieldTypeContainer.cs" />
     <Compile Include="Program\Containers\GlobalSearchContainer.cs" />
     <Compile Include="Program\Containers\MenuItemContainer.cs" />

@@ -31,6 +31,7 @@ namespace Mecalux.ITSW.EasyB.Model
         private RecordContainer recordContainer;
         private FieldTypeContainer fieldTypeContainer;
         private RecordListContainer recordListContainer;
+        private EventContainer eventContainer;
         #endregion
 
         #region Constructors
@@ -75,6 +76,7 @@ namespace Mecalux.ITSW.EasyB.Model
             entityContainer = new EntityContainer();
             workflowCommandContainer = new WorkflowCommandContainer();
             workflowUICommandContainer = new WorkflowUICommandContainer();
+            eventContainer = new EventContainer();
             UpdateDate = DateTime.UtcNow.ToLocalTime();
             ActivationDate = DateTime.MinValue;
             CheckStatus = CheckStatus.New;
@@ -174,6 +176,16 @@ namespace Mecalux.ITSW.EasyB.Model
                 if (this.workstationJobContainer == null)
                     this.workstationJobContainer = new WorkstationJobContainer();
                 return this.workstationJobContainer;
+            }
+        }
+
+        public EventContainer EventContainer
+        {
+            get
+            {
+                if (this.eventContainer == null)
+                    this.eventContainer = new EventContainer();
+                return this.eventContainer;
             }
         }
 

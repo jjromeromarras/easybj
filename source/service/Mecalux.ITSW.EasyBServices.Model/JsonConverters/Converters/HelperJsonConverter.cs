@@ -21,6 +21,8 @@ namespace Mecalux.ITSW.EasyB.Model
         public const string FopaParticle = "FOPA";
         public const string DialogFormatParticle = "DialogFormat";
         public const string DialogListParticle = "DialogList";
+        public const string EventPropertyParticle = "EventProperty";
+        public const string EventParticle = "Event";
         public const char Separator = '-';
 
         /* public const string ActionDataParticle = "ActionData";
@@ -39,7 +41,7 @@ namespace Mecalux.ITSW.EasyB.Model
          public const string DialogParticle = "Dialog";
          public const string DialogTagContainerParticle = "DialogTagContainer";
          public const string DialogTagParticle = "DialogTag";
-         public const string EventParticle = "Event";
+         
          public const string EventPropertyParticle = "EventProperty";
          public const string EventTagContainerParticle = "EventTagContainer";
          public const string EventTagParticle = "EventTag";
@@ -272,7 +274,8 @@ namespace Mecalux.ITSW.EasyB.Model
             Type type = entity.GetType();
             return typeof(WorkflowFormalParameter).IsAssignableFrom(type) ||
                     typeof(WorkflowUICommandList).IsAssignableFrom(type) ||
-                    typeof(WorkflowUICommandFormat).IsAssignableFrom(type);
+                    typeof(WorkflowUICommandFormat).IsAssignableFrom(type) ||
+                    typeof(EventProperty).IsAssignableFrom(type);
                     
                  
         }
@@ -304,36 +307,9 @@ namespace Mecalux.ITSW.EasyB.Model
                     return FopaParticle;
                 if (typeof(WorkflowUICommand).IsAssignableFrom(entity.GetType()))
                     return DialogParticle;
-
-
-                /*if (typeof(Workflow).IsAssignableFrom(entity.GetType()) ||
-                    typeof(WorkflowTagContainer).IsAssignableFrom(entity.GetType()))
-                    return WorkflowParticle;
-                if (typeof(WorkflowUICommand).IsAssignableFrom(entity.GetType()) ||
-                    typeof(WorkflowUICommandTagContainer).IsAssignableFrom(entity.GetType()))
-                    return DialogParticle;
-                if (typeof(WorkflowQueryCommand).IsAssignableFrom(entity.GetType()) ||
-                    typeof(WorkflowQueryCommandTagContainer).IsAssignableFrom(entity.GetType()))
-                    return QueryParticle;
-                if (typeof(View).IsAssignableFrom(entity.GetType()) ||
-                    typeof(ViewTagContainer).IsAssignableFrom(entity.GetType()))
-                    return ViewParticle;
-                if (typeof(Event).IsAssignableFrom(entity.GetType()) ||
-                    typeof(EventTagContainer).IsAssignableFrom(entity.GetType()))
+                if (typeof(Event).IsAssignableFrom(entity.GetType()))
                     return EventParticle;
-                if (typeof(EventProperty).IsAssignableFrom(entity.GetType()))
-                    return EventPropertyParticle;
-                if (typeof(RecordList).IsAssignableFrom(entity.GetType()))
-                    return ListParticle;
-                if (typeof(Report).IsAssignableFrom(entity.GetType()))
-                    return ReportParticle;
-                if (typeof(Subscription).IsAssignableFrom(entity.GetType()) ||
-                    typeof(SubscriptionTagContainer).IsAssignableFrom(entity.GetType()))
-                    return SubscriptionParticle;
-                if (typeof(WorkflowDialogActivityEvent).IsAssignableFrom(entity.GetType()))
-                    return WorkflowDialogEventParticle;
-                if (typeof(WorkflowActivity).IsAssignableFrom(entity.GetType()))
-                    return ActivityParticle;*/
+
             }
             return string.Empty;
         }

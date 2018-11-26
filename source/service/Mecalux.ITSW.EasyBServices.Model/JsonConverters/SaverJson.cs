@@ -22,6 +22,7 @@ namespace Mecalux.ITSW.EasyB.Model
         public const string EntitiesFolder = "Entities";
         public const string CommandsFolder = "Commands";
         public const string DialogsFolder = "Dialogs";
+        public const string EventsFolder = "Events";
         private List<string> pendingApplicationsInternal;
 
         private static List<JsonConverter> writeConverters;
@@ -81,7 +82,8 @@ namespace Mecalux.ITSW.EasyB.Model
                         new StringEnumConverter(),
                         new WorkflowCommandJsonConverter(),
                         new EntityJsonConverter(),
-                        new WorkflowUICommandJsonConverter()
+                        new WorkflowUICommandJsonConverter(),
+                        new EventJsonConverter()
                     };
                 }
                 return writeConverters;
@@ -157,6 +159,7 @@ namespace Mecalux.ITSW.EasyB.Model
             SerializeCollection(combinedPath, lastFolderName, application.EntityContainer.EntityListsInternal, EntitiesFolder, "Entities");
             SerializeCollection(combinedPath, lastFolderName, application.WorkflowCommandContainer.WorkflowCommandsInternal, CommandsFolder, "Commands");
             SerializeCollection(combinedPath, lastFolderName, application.WorkflowUICommandContainer.WorkflowUICommandsInternal, DialogsFolder, "Dialogs");
+            SerializeCollection(combinedPath, lastFolderName, application.EventContainer.EventsInternal, EventsFolder, "Events");
 
             /*            using (ResultManager.Create($"Serialize 'Resources' file ({application.ResourceContainer} resources)"))
                             SerializeElement(combinedPath, ResourcesFileName, lastFolderName, "Resources", application.ResourceContainer);
@@ -309,23 +312,9 @@ namespace Mecalux.ITSW.EasyB.Model
                         new EntityJsonConverter(),
                         new RecordJsonConverter(),
                         new WorkflowCommandJsonConverter(),
-                        new WorkflowUICommandJsonConverter()
-
-                        /*new ValidatorCreationConverter(),
-                        new RelationshipCreationConverter(),
-                        new WorkflowActivityCreationConverter(),
-                        new WorkflowBasicCreationConverter(),
-                        new PointConverter(),
-                        new ResourceLanguageConverter(),
-                        new EntityCreationConverter(),
-                        new ResourceCreationConverter(),
-                        new ViewCreationConverter(),
-                        new ViewGroupCreationConverter(),
-                        new ViewParameterCreationConverter(),
-                        new WorkflowFormalParameterCreationConverter(),
-                        new PropertyCreationConverter(),*/
-                        //new SubscriptionSerializeConverter(),
-                        //new WorkstationJobCreationConverter()
+                        new WorkflowUICommandJsonConverter(),
+                        new EventJsonConverter()
+                   
                     };
                 }
                 return readConverters;

@@ -91,17 +91,21 @@ namespace Mecalux.ITSW.EasyB.Model
                 return null;
 
             JObject jObject = JObject.Load(reader);
-            WorkflowCommand target = default(WorkflowCommand);
-           /* if (jObject != null)
+            WorkflowUICommand target = default(WorkflowUICommand);
+            if (jObject != null)
             {
                 target = Create(objectType);
                 target.CheckStatus = (CheckStatus)Enum.Parse(typeof(CheckStatus), jObject["CheckStatus"].Value<string>());
                 target.Description = jObject["Description"].Value<string>();
                 target.VersionId = Guid.Parse(jObject["VersionId"].Value<string>());
                 target.Guid = target.VersionId;
-                target.InternalCommandName = jObject["InternalCommandName"].Value<string>();
+                target.IsSelector = jObject["IsSelector"].Value<bool>();
                 target.Name = jObject["Name"].Value<string>();
-                target.WorkflowCommandType = (WorkflowCommandType)Enum.Parse(typeof(WorkflowCommandType), jObject["WorkflowCommandType"].Value<string>());
+                if (jObject["SelectorList"].HasValues)
+                    target.SelectorList = jObject["SelectorList"]["$ref"].Value<string>();
+                target.ShowPromptDefaultValue = jObject["ShowPromptDefaultValue"].Value<bool>();
+                target.WorkflowUICommandEditionKind = (WorkflowUICommandEditionKind)Enum.Parse(typeof(WorkflowUICommandEditionKind), jObject["WorkflowUICommandEditionKind"].Value<string>());
+                target.WorkflowUICommandPromptTypeInternal = (WorkflowUICommandPromptType)Enum.Parse(typeof(WorkflowUICommandPromptType), jObject["WorkflowUICommandPromptTypeInternal"].Value<string>());
 
                 if (jObject["FormalParametersInternal"]["$values"].HasValues)
                 {
@@ -109,7 +113,7 @@ namespace Mecalux.ITSW.EasyB.Model
                     {
                         WorkflowFormalParameter f = new WorkflowFormalParameter();
                         f.Name = flchild["Name"].Value<string>();
-                        f.Description = flchild["Name"].Value<string>();
+                        f.Description = flchild["Description"].Value<string>();
                         f.EntityStereotypeInternal = Guid.Parse(flchild["EntityStereotypeInternal"].Value<string>());
                         f.Index = flchild["Index"].Value<int>();
                         f.IsEditableParameter = flchild["IsEditableParameter"].Value<Boolean>();
@@ -120,11 +124,66 @@ namespace Mecalux.ITSW.EasyB.Model
                         if (flchild["Attribute"].HasValues)
                             f.Attribute = flchild["Attribute"]["$ref"].Value<string>();
 
-                        target.AddFormaParameter(f);
+                        target.AddWorkflowFormalParameter(f);
                     }
                 }
 
-            }*/
+                if (jObject["OptionsInternal"]["$values"].HasValues)
+                {
+                    foreach (var flchild in jObject["OptionsInternal"]["$values"])
+                    {
+                        target.OptionsInternal.Add(flchild.Value<string>());
+                    }
+                }
+
+                if (jObject["ListsInternal"]["$values"].HasValues)
+                {
+                    foreach (var flchild in jObject["ListsInternal"]["$values"])
+                    {
+                        WorkflowUICommandList l = new WorkflowUICommandList();
+                        l.DefaultValueParameterName = flchild["DefaultValueParameterName"].Value<string>();
+                        l.Name = flchild["Name"].Value<string>();
+                        l.NavigationAllowsNullSelection = flchild["NavigationAllowsNullSelection"].Value<bool>();
+                        if (flchild["NavigationNextOptionInternal"].HasValues)
+                            l.NavigationNextOptionInternal = flchild["NavigationNextOptionInternal"].Value<string>();
+                        l.NavigationNextPageOptionInternal = flchild["NavigationNextPageOptionInternal"].Value<string>();
+                        l.NavigationNullSelectionText = flchild["NavigationNullSelectionText"].Value<string>();
+                        l.NavigationOptionsExitsDialog = (WorkflowUICommandNavigationOptions)Enum.Parse(typeof(WorkflowUICommandNavigationOptions), flchild["NavigationOptionsExitsDialog"].Value<string>());
+                        if (flchild["NavigationPreviousOptionInternal"].HasValues)
+                            l.NavigationPreviousOptionInternal = flchild["NavigationPreviousOptionInternal"].Value<string>();
+                        l.NavigationPreviousPageOptionInternal = flchild["NavigationPreviousPageOptionInternal"].Value<string>();
+                        if (flchild["SelectedValueParameterName"].HasValues)
+                            l.SelectedValueParameterName = flchild["SelectedValueParameterName"]["$ref"].Value<string>();
+                        l.SelectOptionDisplayLabelText = flchild["SelectOptionDisplayLabelText"].Value<string>();
+                        l.SelectOptionDisplayProperty = flchild["SelectOptionDisplayProperty"].Value<string>();
+                        if (flchild["SelectOptionExitDialogOptionInternal"].HasValues)
+                            l.SelectOptionExitDialogOptionInternal = flchild["SelectOptionExitDialogOptionInternal"]["$ref"].Value<string>();
+                        l.SelectOptionExitsDialog = flchild["SelectOptionExitsDialog"].Value<bool>();
+                        if (flchild["SelectOptionInternal"].HasValues)
+                            l.SelectOptionInternal = flchild["SelectOptionInternal"].Value<string>();
+                        l.SelectOptionOnlyList = flchild["SelectOptionOnlyList"].Value<bool>();
+
+                        target.AddWorkflowUICommandList(l);
+                    }
+                }
+
+                if (jObject["FormatsInternal"]["$values"].HasValues)
+                {
+                    foreach (var flchild in jObject["FormatsInternal"]["$values"])
+                    {
+                        WorkflowUICommandFormat l = new WorkflowUICommandFormat();
+                        l.Height = flchild["Height"].Value<int>();
+                        l.Name = flchild["Name"].Value<string>();
+                        l.IsDefault = flchild["IsDefault"].Value<bool>();
+                        l.UIXml = flchild["UIXml"].Value<string>();
+                        l.Width = flchild["Width"].Value<int>();
+                        l.WorkflowUICommandFormatType = (WorkflowUICommandFormatType)Enum.Parse(typeof(WorkflowUICommandFormatType), flchild["WorkflowUICommandFormatType"].Value<string>());
+                        target.AddWorkflowUICommandFormat(l);
+                    }
+                }
+
+            }
+
             return target;
         }
         #endregion Methods
