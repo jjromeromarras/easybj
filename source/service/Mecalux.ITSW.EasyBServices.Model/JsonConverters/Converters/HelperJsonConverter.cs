@@ -23,6 +23,7 @@ namespace Mecalux.ITSW.EasyB.Model
         public const string DialogListParticle = "DialogList";
         public const string EventPropertyParticle = "EventProperty";
         public const string EventParticle = "Event";
+        public const string QueryParticle = "Query";
         public const char Separator = '-';
 
         /* public const string ActionDataParticle = "ActionData";
@@ -295,20 +296,22 @@ namespace Mecalux.ITSW.EasyB.Model
 
                 if (typeof(FieldType).IsAssignableFrom(entity.GetType()))
                     return FieldTypeParticle;
-                if (typeof(Record).IsAssignableFrom(entity.GetType()))
+                else if (typeof(Record).IsAssignableFrom(entity.GetType()))
                     return RecordParticle;
-                if (typeof(RecordList).IsAssignableFrom(entity.GetType()))
+                else if (typeof(RecordList).IsAssignableFrom(entity.GetType()))
                     return ListParticle;
-                if (typeof(Entity).IsAssignableFrom(entity.GetType()))
+                else if (typeof(Entity).IsAssignableFrom(entity.GetType()))
                     return EntityParticle;
-                if (typeof(WorkflowCommand).IsAssignableFrom(entity.GetType()))
+                else if (typeof(WorkflowCommand).IsAssignableFrom(entity.GetType()))
                     return CommandParticle;
-                if (typeof(WorkflowFormalParameter).IsAssignableFrom(entity.GetType()))
+                else if (typeof(WorkflowFormalParameter).IsAssignableFrom(entity.GetType()))
                     return FopaParticle;
-                if (typeof(WorkflowUICommand).IsAssignableFrom(entity.GetType()))
+                else if (typeof(WorkflowUICommand).IsAssignableFrom(entity.GetType()))
                     return DialogParticle;
-                if (typeof(Event).IsAssignableFrom(entity.GetType()))
+                else if (typeof(Event).IsAssignableFrom(entity.GetType()))
                     return EventParticle;
+                else if (typeof(WorkflowQueryCommand).IsAssignableFrom(entity.GetType()))
+                    return QueryParticle;
 
             }
             return string.Empty;

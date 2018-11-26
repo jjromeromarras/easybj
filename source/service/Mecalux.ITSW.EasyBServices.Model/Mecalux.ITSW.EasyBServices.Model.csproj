@@ -64,6 +64,7 @@
     <Compile Include="Enum\WorkflowCommandType.cs" />
     <Compile Include="Enum\WorkflowFormalParameterType.cs" />
     <Compile Include="Enum\WorkflowInOutMode.cs" />
+    <Compile Include="Enum\WorkflowQueryCommandType.cs" />
     <Compile Include="Enum\WorkflowUICommandEditionKind.cs" />
     <Compile Include="Enum\WorkflowUICommandFormatType.cs" />
     <Compile Include="Enum\WorkflowUICommandNavigationOptions.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="JsonConverters\Converters\RecordJsonConverter.cs" />
     <Compile Include="JsonConverters\Converters\RecordListJsonConverter.cs" />
     <Compile Include="JsonConverters\Converters\WorkflowCommandJsonConverter.cs" />
+    <Compile Include="JsonConverters\Converters\WorkflowQueryCommandJsonConverter.cs" />
     <Compile Include="JsonConverters\Converters\WorkflowUICommandJsonConverter.cs" />
     <Compile Include="JsonConverters\SaverJson.cs" />
     <Compile Include="NameEntity.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="Program\Application\Workflow\WorkflowAttribute.cs" />
     <Compile Include="Program\Application\Workflow\WorkflowBasic.cs" />
     <Compile Include="Program\Application\Workflow\WorkflowFormalParameter.cs" />
+    <Compile Include="Program\Application\Workflow\WorkflowQueryCommand.cs" />
     <Compile Include="Program\Application\Workflow\WorkflowUICommand.cs" />
     <Compile Include="Program\Application\Workflow\WorkflowUICommandFormat.cs" />
     <Compile Include="Program\Application\Workflow\WorkflowUICommandList.cs" />
@@ -133,6 +136,7 @@
     <Compile Include="Program\Containers\ValidatorContainer.cs" />
     <Compile Include="Program\Containers\ViewGroupContainer.cs" />
     <Compile Include="Program\Containers\WorkflowCommandContainer.cs" />
+    <Compile Include="Program\Containers\WorkflowQueryCommandContainer.cs" />
     <Compile Include="Program\Containers\WorkflowUICommandContainer.cs" />
     <Compile Include="Program\Containers\WorkstationJobContainer.cs" />
     <Compile Include="Program\Organization\AdJob.cs" />

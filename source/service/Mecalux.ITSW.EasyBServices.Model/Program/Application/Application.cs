@@ -23,6 +23,7 @@ namespace Mecalux.ITSW.EasyB.Model
         private List<Guid> dependingApplications;
         private List<Guid> dependingApplicationsIndirect;
         private WorkflowUICommandContainer workflowUICommandContainer;
+        private WorkflowQueryCommandContainer workflowQueryCommandContainer;
         private Nullable<DateTime> activationDate;
         private Nullable<DateTime> compilationDate;
         private DateTime updateDate;
@@ -77,6 +78,7 @@ namespace Mecalux.ITSW.EasyB.Model
             workflowCommandContainer = new WorkflowCommandContainer();
             workflowUICommandContainer = new WorkflowUICommandContainer();
             eventContainer = new EventContainer();
+            workflowQueryCommandContainer = new WorkflowQueryCommandContainer();
             UpdateDate = DateTime.UtcNow.ToLocalTime();
             ActivationDate = DateTime.MinValue;
             CheckStatus = CheckStatus.New;
@@ -208,6 +210,17 @@ namespace Mecalux.ITSW.EasyB.Model
                 return this.workflowUICommandContainer;
             }
         }
+
+        public WorkflowQueryCommandContainer WorkflowQueryCommandContainer
+        {
+            get
+            {
+                if (this.workflowQueryCommandContainer == null)
+                    this.workflowQueryCommandContainer = new WorkflowQueryCommandContainer();
+                return this.workflowQueryCommandContainer;
+            }
+        }
+
         public EntityContainer EntityContainer
         {
             get

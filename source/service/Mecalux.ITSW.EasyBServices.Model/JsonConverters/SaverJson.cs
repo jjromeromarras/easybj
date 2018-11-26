@@ -23,6 +23,7 @@ namespace Mecalux.ITSW.EasyB.Model
         public const string CommandsFolder = "Commands";
         public const string DialogsFolder = "Dialogs";
         public const string EventsFolder = "Events";
+        public const string QueriesFolder = "Queries";
         private List<string> pendingApplicationsInternal;
 
         private static List<JsonConverter> writeConverters;
@@ -83,7 +84,8 @@ namespace Mecalux.ITSW.EasyB.Model
                         new WorkflowCommandJsonConverter(),
                         new EntityJsonConverter(),
                         new WorkflowUICommandJsonConverter(),
-                        new EventJsonConverter()
+                        new EventJsonConverter(),
+                        new WorkflowQueryCommandJsonConverter()
                     };
                 }
                 return writeConverters;
@@ -160,58 +162,60 @@ namespace Mecalux.ITSW.EasyB.Model
             SerializeCollection(combinedPath, lastFolderName, application.WorkflowCommandContainer.WorkflowCommandsInternal, CommandsFolder, "Commands");
             SerializeCollection(combinedPath, lastFolderName, application.WorkflowUICommandContainer.WorkflowUICommandsInternal, DialogsFolder, "Dialogs");
             SerializeCollection(combinedPath, lastFolderName, application.EventContainer.EventsInternal, EventsFolder, "Events");
+            SerializeCollection(combinedPath, lastFolderName, application.WorkflowQueryCommandContainer.WorkflowQueryCommandsInternal, QueriesFolder, "Queries");
 
-            /*            using (ResultManager.Create($"Serialize 'Resources' file ({application.ResourceContainer} resources)"))
-                            SerializeElement(combinedPath, ResourcesFileName, lastFolderName, "Resources", application.ResourceContainer);
+            
+        /*            using (ResultManager.Create($"Serialize 'Resources' file ({application.ResourceContainer} resources)"))
+                        SerializeElement(combinedPath, ResourcesFileName, lastFolderName, "Resources", application.ResourceContainer);
 
-                        using (ResultManager.Create($"Serialize 'Application' file"))
-                            SerializeElement(combinedPath, ApplicationFileName, lastFolderName, "Application", entity);
-
-
-
-                        using (ResultManager.Create($"Serialize {application.WorkflowContainer.ChildWorkflowCommandsLastUsablesLocal.Count} 'Commands' files"))
-                            SerializeCollection(combinedPath, lastFolderName, application.WorkflowContainer.ChildWorkflowCommandsLastUsablesLocal, CommandsFolder, "Commands");
-
-                        using (ResultManager.Create($"Serialize {application.WorkflowContainer.ChildWorkflowUICommandsLastUsablesLocal.Count} 'Dialogs' files"))
-                            SerializeCollection(combinedPath, lastFolderName, application.WorkflowContainer.ChildWorkflowUICommandsLastUsablesLocal, DialogsFolder, "Dialogs");
-
-                        using (ResultManager.Create($"Serialize {application.WorkflowContainer.ChildWorkflowQueryCommandsLastUsablesLocal.Count} 'Queries' files"))
-                            SerializeCollection(combinedPath, lastFolderName, application.WorkflowContainer.ChildWorkflowQueryCommandsLastUsablesLocal, QueriesFolder, "Queries");
-
-                        using (ResultManager.Create($"Serialize {application.EventContainer.ChildEventsLastUsablesLocal.Count} 'Events' files"))
-                            SerializeCollection(combinedPath, lastFolderName, application.EventContainer.ChildEventsLastUsablesLocal, EventsFolder, "Events");
-
-                        using (ResultManager.Create($"Serialize {application.WorkflowContainer.ChildWorkflowsLastUsablesLocal.Count} 'Workflows' files"))
-                            SerializeCollection(combinedPath, lastFolderName, application.WorkflowContainer.ChildWorkflowsLastUsablesLocal, WorkflowsFolder, "Workflows");
-
-                        using (ResultManager.Create("Clear subscriptions of workflows"))
-                            foreach (var wf in application.WorkflowContainer.ChildWorkflowsLastUsablesLocal)
-                                wf.ClearSubscriptionsInternal();
-
-                        using (ResultManager.Create($"Serialize {application.SubscriptionContainer.ChildSubscriptionsLastUsablesLocal.Count} 'Subscriptions' files"))
-                            SerializeCollection(combinedPath, lastFolderName, application.SubscriptionContainer.ChildSubscriptionsLastUsablesLocal, SubscriptionsFolder, "Subscriptions");
-
-                        using (ResultManager.Create($"Serialize {application.ReportContainer.ReportsLocal.Count()} 'Reports' files"))
-                            SerializeCollection(combinedPath, lastFolderName, application.ReportContainer.ReportsLocal, ReportsFolder, "Reports");
+                    using (ResultManager.Create($"Serialize 'Application' file"))
+                        SerializeElement(combinedPath, ApplicationFileName, lastFolderName, "Application", entity);
 
 
-                        using (ResultManager.Create($"Serialize 'Relationships' file ({application.RelationshipContainer.Relationships.Count} relationships)"))
-                            SerializeElement(combinedPath, RelationshipsFileName, lastFolderName, "Relationships", application.RelationshipContainer);
 
-                        var views = application.ViewContainer.ChildViewsLastUsablesLocal.Where(v => v.DependsOtherView == null).ToList();
-                        using (ResultManager.Create($"Serialize {views.Count} 'Views' files"))
-                            SerializeCollection(combinedPath, lastFolderName, views, ViewsFolder, "Views");
+                    using (ResultManager.Create($"Serialize {application.WorkflowContainer.ChildWorkflowCommandsLastUsablesLocal.Count} 'Commands' files"))
+                        SerializeCollection(combinedPath, lastFolderName, application.WorkflowContainer.ChildWorkflowCommandsLastUsablesLocal, CommandsFolder, "Commands");
 
-                        using (ResultManager.Create("Show dialog of operation result"))
-                        {
-                            string message = Context.Localize("ApplicationExportProcess");
-                            var st = Stopwatch.StartNew();
-                            long size = DirectorySize(new DirectoryInfo(combinedPath));
-                            var calElapsed = st.ElapsedMilliseconds;
-                            Log.Info("ExportJsonToFolder of {0} was {1:N}ms and size was {2:N}; calculated in {3}ms.", lastFolderName, totalWatch.ElapsedMilliseconds, size.ToFileSize(), calElapsed);
-                            Context.SetWaitingCustom(string.Format(CultureInfo.CurrentCulture, "{0} ({1})", message, size.ToFileSize()));
-                        }*/
-        }
+                    using (ResultManager.Create($"Serialize {application.WorkflowContainer.ChildWorkflowUICommandsLastUsablesLocal.Count} 'Dialogs' files"))
+                        SerializeCollection(combinedPath, lastFolderName, application.WorkflowContainer.ChildWorkflowUICommandsLastUsablesLocal, DialogsFolder, "Dialogs");
+
+                    using (ResultManager.Create($"Serialize {application.WorkflowContainer.ChildWorkflowQueryCommandsLastUsablesLocal.Count} 'Queries' files"))
+                        SerializeCollection(combinedPath, lastFolderName, application.WorkflowContainer.ChildWorkflowQueryCommandsLastUsablesLocal, QueriesFolder, "Queries");
+
+                    using (ResultManager.Create($"Serialize {application.EventContainer.ChildEventsLastUsablesLocal.Count} 'Events' files"))
+                        SerializeCollection(combinedPath, lastFolderName, application.EventContainer.ChildEventsLastUsablesLocal, EventsFolder, "Events");
+
+                    using (ResultManager.Create($"Serialize {application.WorkflowContainer.ChildWorkflowsLastUsablesLocal.Count} 'Workflows' files"))
+                        SerializeCollection(combinedPath, lastFolderName, application.WorkflowContainer.ChildWorkflowsLastUsablesLocal, WorkflowsFolder, "Workflows");
+
+                    using (ResultManager.Create("Clear subscriptions of workflows"))
+                        foreach (var wf in application.WorkflowContainer.ChildWorkflowsLastUsablesLocal)
+                            wf.ClearSubscriptionsInternal();
+
+                    using (ResultManager.Create($"Serialize {application.SubscriptionContainer.ChildSubscriptionsLastUsablesLocal.Count} 'Subscriptions' files"))
+                        SerializeCollection(combinedPath, lastFolderName, application.SubscriptionContainer.ChildSubscriptionsLastUsablesLocal, SubscriptionsFolder, "Subscriptions");
+
+                    using (ResultManager.Create($"Serialize {application.ReportContainer.ReportsLocal.Count()} 'Reports' files"))
+                        SerializeCollection(combinedPath, lastFolderName, application.ReportContainer.ReportsLocal, ReportsFolder, "Reports");
+
+
+                    using (ResultManager.Create($"Serialize 'Relationships' file ({application.RelationshipContainer.Relationships.Count} relationships)"))
+                        SerializeElement(combinedPath, RelationshipsFileName, lastFolderName, "Relationships", application.RelationshipContainer);
+
+                    var views = application.ViewContainer.ChildViewsLastUsablesLocal.Where(v => v.DependsOtherView == null).ToList();
+                    using (ResultManager.Create($"Serialize {views.Count} 'Views' files"))
+                        SerializeCollection(combinedPath, lastFolderName, views, ViewsFolder, "Views");
+
+                    using (ResultManager.Create("Show dialog of operation result"))
+                    {
+                        string message = Context.Localize("ApplicationExportProcess");
+                        var st = Stopwatch.StartNew();
+                        long size = DirectorySize(new DirectoryInfo(combinedPath));
+                        var calElapsed = st.ElapsedMilliseconds;
+                        Log.Info("ExportJsonToFolder of {0} was {1:N}ms and size was {2:N}; calculated in {3}ms.", lastFolderName, totalWatch.ElapsedMilliseconds, size.ToFileSize(), calElapsed);
+                        Context.SetWaitingCustom(string.Format(CultureInfo.CurrentCulture, "{0} ({1})", message, size.ToFileSize()));
+                    }*/
+    }
 
 
         private void SerializeCollection(string combinedPath, string lastFolderName, IEnumerable<NameEntity> collection, string directory, string type)
@@ -313,7 +317,8 @@ namespace Mecalux.ITSW.EasyB.Model
                         new RecordJsonConverter(),
                         new WorkflowCommandJsonConverter(),
                         new WorkflowUICommandJsonConverter(),
-                        new EventJsonConverter()
+                        new EventJsonConverter(),
+                        new WorkflowQueryCommandJsonConverter()
                    
                     };
                 }

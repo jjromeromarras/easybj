@@ -50,5 +50,13 @@ namespace Mecalux.ITSW.EasyB.Model
             set { workflowFormalParameters = new List<WorkflowFormalParameter>(value); }
         }
         #endregion
+
+        #region Methods
+        public void AddFormaParameter(WorkflowFormalParameter obj)
+        {
+            obj.ParentSerializableEntity = this;
+            this.FormalParametersInternal.Add(obj);
+        }
+        #endregion
     }
 }
