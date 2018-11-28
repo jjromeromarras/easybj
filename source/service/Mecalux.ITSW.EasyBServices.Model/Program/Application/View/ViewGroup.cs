@@ -21,7 +21,5 @@ namespace Mecalux.ITSW.EasyB.Model
         }
 
         #endregion Constructors
-
-
     }
 }

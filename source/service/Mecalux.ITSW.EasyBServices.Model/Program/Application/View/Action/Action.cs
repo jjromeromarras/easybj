@@ -4,28 +4,21 @@ using System;
 
 namespace Mecalux.ITSW.EasyB.Model
 {
-    public class Action: NameEntity
+    public class Action: CheckEntity
     {
         #region Fields
 
         [NonSerialized]
 
-        private const string CodeFooter = "\t}";
-        private const string ConfirmationCodeMethodNameConst = "ConfirmationText";
-        private const string ConfirmationCodeParametersConst = "({0} View,\n  Dictionary<string, object> ViewParameters,\n  Dictionary<string, object> OrgParameters,\n  IQueryService Query, \n  CultureInfo Culture, \n  ref string ConfirmText, \n  ref ConfirmationMode ConfirmMode)";
-        private const string ConfirmationCodeReturnValueConst = "public static bool";
-        private const string VisibleConditionMethodNameConst = "ActiveCondition";
-        private const string VisibleConditionParametersConst = "({0} View,\n  Dictionary<string, object> ViewParameters,\n  Dictionary<string, object> OrgParameters,\n  IQueryService Query)";
-        private const string VisibleConditionReturnValueConst = "public static bool";
         private string confirmationCode;
         private ConfirmationModes confirmationMode;
-        private Resource confirmationText;
+        private string confirmationText;
         //private Image customImage;
         private string imageName;
         private string quickAccessKey;
         private int sequence;
-        private Resource title;
-        private Resource toolTip;        
+        private string title;
+        private string toolTip;        
         private bool? visible;
         private string visibleCondition;
         private bool visibleMultiRowSelected;

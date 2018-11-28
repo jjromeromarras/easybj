@@ -24,6 +24,7 @@ namespace Mecalux.ITSW.EasyB.Model
         public const string EventPropertyParticle = "EventProperty";
         public const string EventParticle = "Event";
         public const string QueryParticle = "Query";
+        public const string LinkParticle = "Link";
         public const char Separator = '-';
 
         /* public const string ActionDataParticle = "ActionData";
