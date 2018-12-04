@@ -1,0 +1,29 @@
+{
+  "$id": "Record-BoolWF-{9c5510f8-30fb-49d7-ba77-ce7f41ea47aa}.EasyBpart",
+  "$type": "Mecalux.ITSW.EasyBuilder.Record, Mecalux.ITSW.EasyBuilder.Model",
+  "AutoUpdateLength": false,
+  "CheckStatus": "Default",
+  "Description": "Descripción",
+  "FieldRecordsInternal": {
+    "$type": "System.Collections.Generic.List`1[[Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model]], mscorlib",
+    "$values": [
+      {
+        "$id": "4cbc8912-5b1e-4736-a213-3ea6433f641f",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-bool-{26bc8127-ac80-4e1f-a6d8-a11d1cbd2fac}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "4cbc8912-5b1e-4736-a213-3ea6433f641f",
+        "Length": 0,
+        "Name": "Value",
+        "Start": 0
+      }
+    ]
+  },
+  "Guid": "9c5510f8-30fb-49d7-ba77-ce7f41ea47aa",
+  "Name": "BoolWF",
+  "RecordType": "FixedRecord",
+  "Separator": ""
+}

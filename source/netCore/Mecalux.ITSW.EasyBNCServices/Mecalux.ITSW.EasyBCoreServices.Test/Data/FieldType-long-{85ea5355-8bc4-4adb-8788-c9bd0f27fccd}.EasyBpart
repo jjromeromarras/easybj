@@ -1,0 +1,16 @@
+{
+  "$id": "FieldType-long-{85ea5355-8bc4-4adb-8788-c9bd0f27fccd}.EasyBpart",
+  "$type": "Mecalux.ITSW.EasyBuilder.FieldType, Mecalux.ITSW.EasyBuilder.Model",
+  "CheckDigit": "Modulus43",
+  "CheckStatus": "Default",
+  "Description": "",
+  "EditionLengthMode": "AllowShorter",
+  "EntityStereotypeInternal": "4740ce9f-bdfe-4ce6-b485-05b93cb9de57",
+  "FillMode": "None",
+  "Guid": "85ea5355-8bc4-4adb-8788-c9bd0f27fccd",
+  "InputMask": "",
+  "Length": 0,
+  "Name": "long",
+  "Stereotype": "Integer",
+  "TruncateType": "TruncateRight"
+}

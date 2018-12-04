@@ -1,0 +1,16 @@
+{
+  "$id": "FieldType-date-{9c5bebba-ddf3-484c-8d9c-51b107d268f8}.EasyBpart",
+  "$type": "Mecalux.ITSW.EasyBuilder.FieldType, Mecalux.ITSW.EasyBuilder.Model",
+  "CheckDigit": "Modulus43",
+  "CheckStatus": "Default",
+  "Description": "",
+  "EditionLengthMode": "AllowShorter",
+  "EntityStereotypeInternal": "4740ce9f-bdfe-4ce6-b485-05b93cb9de57",
+  "FillMode": "None",
+  "Guid": "9c5bebba-ddf3-484c-8d9c-51b107d268f8",
+  "InputMask": "",
+  "Length": 0,
+  "Name": "date",
+  "Stereotype": "Date",
+  "TruncateType": "TruncateRight"
+}

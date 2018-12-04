@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>Mecalux.ITSW.EasyBCoreServices</AssemblyName>
+    <RootNamespace>Mecalux.ITSW.EasyBCoreServices</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
+  </ItemGroup>
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Mecalux.ITSW.EasyBNCServices.Base\Mecalux.ITSW.EasyBCoreServices.Base.csproj" />
+    <ProjectReference Include="..\Mecalux.ITSW.EasyBNCServices.Model\Mecalux.ITSW.EasyBCoreServices.Model.csproj" />
+  </ItemGroup>
+</Project>
