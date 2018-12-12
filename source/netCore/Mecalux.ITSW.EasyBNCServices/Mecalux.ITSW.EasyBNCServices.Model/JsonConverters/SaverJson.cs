@@ -85,7 +85,14 @@ namespace Mecalux.ITSW.EasyB.Model
                         new EntityJsonConverter(),
                         new WorkflowUICommandJsonConverter(),
                         new EventJsonConverter(),
-                        new WorkflowQueryCommandJsonConverter()
+                        new WorkflowQueryCommandJsonConverter(),
+                        new LinkJsonConverter(),
+                        new LovJsonConverter(),
+                        new ViewFieldJsonConverter(),
+                        new ViewFieldLovJsonConverter(),
+                        new ViewPageControlJSonConverter(),
+                        new ViewPanelJsonConverter(),
+                        new ViewPanelPageJsonConverter()                       
                     };
                 }
                 return writeConverters;
@@ -318,8 +325,16 @@ namespace Mecalux.ITSW.EasyB.Model
                         new WorkflowCommandJsonConverter(),
                         new WorkflowUICommandJsonConverter(),
                         new EventJsonConverter(),
-                        new WorkflowQueryCommandJsonConverter()
-                   
+                        new WorkflowQueryCommandJsonConverter(),
+                        new LinkJsonConverter(),
+                        new LovJsonConverter(),
+                        new ViewFieldJsonConverter(),
+                        new ViewFieldLovJsonConverter(),
+                        new ViewPageControlJSonConverter(),
+                        new ViewPanelJsonConverter(),
+                        new ViewPanelPageJsonConverter()
+
+
                     };
                 }
                 return readConverters;

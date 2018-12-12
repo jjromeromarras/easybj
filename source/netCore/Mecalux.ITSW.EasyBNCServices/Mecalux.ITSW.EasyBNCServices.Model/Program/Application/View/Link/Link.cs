@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Mecalux.ITSW.EasyB.Model
 {
-    public class Link : BaseEntity, IAvoidSerializedGuid
+    public class Link : NameEntity, IAvoidSerializedGuid
     {
         #region Fields
         private string expressionCode;
@@ -76,6 +76,14 @@ namespace Mecalux.ITSW.EasyB.Model
                 result += HelperJsonConverter.Separator + this.ParentSerializableEntity.Name;
                 return result;
             }
+        }
+        #endregion
+
+        #region Methods
+        public void AddLinkParameter(LinkParameter lp)
+        {
+            lp.ParentSerializableEntity = this.parentEntity;
+            linkParameters.Add(lp);
         }
         #endregion
     }

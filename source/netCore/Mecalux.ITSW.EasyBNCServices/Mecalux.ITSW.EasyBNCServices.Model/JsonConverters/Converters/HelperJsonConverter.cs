@@ -25,6 +25,13 @@ namespace Mecalux.ITSW.EasyB.Model
         public const string EventParticle = "Event";
         public const string QueryParticle = "Query";
         public const string LinkParticle = "Link";
+        public const string ViewParticle = "View";
+        public const string ViewControlParticle = "ViewControl";
+        public const string LovParticle = "LovElement";
+        public const string ViewFieldLovParticle = "ViewFieldLov";
+        public const string ViewGridForeignFilterParticle = "ViewGridForeignFilter";
+        public const string ViewGraphControlSerieParticle = "ViewGraphControlSerie";
+        public const string LinkParameterParticle = "LinkParameter";
         public const char Separator = '-';
 
         /* public const string ActionDataParticle = "ActionData";
@@ -157,6 +164,7 @@ namespace Mecalux.ITSW.EasyB.Model
             }
         }
 
+
         public static void WritePropertyObject<T>(string propertyName, T propertyObject, System.Action<T> serializeObject, JsonWriter writer, JsonSerializer serializer)
                 where T : IBaseEntity
         {
@@ -171,6 +179,13 @@ namespace Mecalux.ITSW.EasyB.Model
                 serializeObject.Invoke(propertyObject);
                 writer.WriteEnd();
             }
+        }
+
+        public static void WritePropertyObject<T>(string propertyName, T propertyObject, JsonWriter writer, JsonSerializer serializer)
+            where T : IBaseEntity
+        {
+            WritePropertyValue(propertyName, propertyObject, writer, serializer);
+            writer.WriteEnd();
         }
 
         public static void WritePropertyObjectsArray<T>(string propertyName, Type collectionType, IEnumerable<T> enumeration, System.Action<T> serializeObject, JsonWriter writer, JsonSerializer serializer)
@@ -277,6 +292,10 @@ namespace Mecalux.ITSW.EasyB.Model
             return typeof(WorkflowFormalParameter).IsAssignableFrom(type) ||
                     typeof(WorkflowUICommandList).IsAssignableFrom(type) ||
                     typeof(WorkflowUICommandFormat).IsAssignableFrom(type) ||
+                    typeof(ViewField).IsAssignableFrom(type) ||
+                    typeof(Lov).IsAssignableFrom(type) ||
+                    typeof(Link).IsAssignableFrom(type) ||
+                    typeof(ViewFieldLov).IsAssignableFrom(type) ||
                     typeof(EventProperty).IsAssignableFrom(type);
                     
                  
@@ -311,6 +330,11 @@ namespace Mecalux.ITSW.EasyB.Model
                     return DialogParticle;
                 else if (typeof(Event).IsAssignableFrom(entity.GetType()))
                     return EventParticle;
+                else if (typeof(View).IsAssignableFrom(entity.GetType()) ||
+                    typeof(ViewField).IsAssignableFrom(entity.GetType()) ||
+                    typeof(ViewPanel).IsAssignableFrom(entity.GetType()) 
+                    )
+                    return ViewParticle;
                 else if (typeof(WorkflowQueryCommand).IsAssignableFrom(entity.GetType()))
                     return QueryParticle;
 
