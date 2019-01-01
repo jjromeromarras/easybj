@@ -2,8 +2,8 @@
 using System.IO;
 using System.Linq;
 using Mecalux.ITSW.Core.Abstraction.Testing;
+using Mecalux.ITSW.EasyB.Model;
 using Mecalux.ITSW.EasyBServices.Base;
-using Mecalux.ITSW.EasyBServices.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Mecalux.ITSW.EasyBService.Test

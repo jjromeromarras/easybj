@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Mecalux.ITSW.EasyBServices.Model.Interfaz
+namespace Mecalux.ITSW.EasyB.Model
 {
     public interface IAvoidSerializedGuid: IBaseEntity
     {
         #region Data Members (4)
 
-        IBaseEntity ParentSerializableEntity { get; }
+        CheckEntity ParentSerializableEntity { get; set; }
 
         Guid ParentSerializableEntityVersionId { get; }
 

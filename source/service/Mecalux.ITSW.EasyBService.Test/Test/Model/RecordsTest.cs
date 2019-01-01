@@ -1,4 +1,4 @@
-﻿using Mecalux.ITSW.EasyBServices.Model;
+﻿using Mecalux.ITSW.EasyB.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;

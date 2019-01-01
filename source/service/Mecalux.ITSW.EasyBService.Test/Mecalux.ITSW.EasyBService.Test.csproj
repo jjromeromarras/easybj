@@ -52,8 +52,12 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Test\Model\EventTest.cs" />
     <Compile Include="Test\Model\FieldTypesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test\Model\DialogsTest.cs" />
+    <Compile Include="Test\Model\WorkflowQueryCommandTest.cs" />
+    <Compile Include="Test\Model\WorkflowCommandTest.cs" />
     <Compile Include="Test\Model\RecordListTest.cs" />
     <Compile Include="Test\Model\EntityTest.cs" />
     <Compile Include="Test\Model\RecordsTest.cs" />

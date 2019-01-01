@@ -1,4 +1,4 @@
-﻿using Mecalux.ITSW.EasyBServices.Model;
+﻿using Mecalux.ITSW.EasyB.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
@@ -44,7 +44,7 @@ namespace Mecalux.ITSW.EasyBService.Test
             SaverJson saver = new SaverJson();
             saver.ExportApplicationTag(@".\Data\", apptag);
 
-            Assert.IsTrue(Directory.Exists(@".\Data\APP_RecordListTest06\Records"));
+            Assert.IsTrue(Directory.Exists(@".\Data\APP_RecordListTest06\Lists"));
 
             var fileCount = (from file in Directory.EnumerateFiles(@".\Data\APP_RecordListTest06\Lists", "*.EasyBpart", SearchOption.AllDirectories)
                              select file).Count();

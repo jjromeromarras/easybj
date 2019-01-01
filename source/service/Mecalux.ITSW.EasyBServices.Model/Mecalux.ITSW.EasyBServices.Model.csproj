@@ -7,8 +7,8 @@
     <ProjectGuid>{E4D976F1-01F1-408C-A947-2279CF1B19CC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Mecalux.ITSW.EasyBServices.Model</RootNamespace>
-    <AssemblyName>Mecalux.ITSW.EasyBServices.Model</AssemblyName>
+    <RootNamespace>Mecalux.ITSW.EasyB.Model</RootNamespace>
+    <AssemblyName>Mecalux.ITSW.EasyBuilder.Model</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -52,17 +52,25 @@
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Enum\ConfirmationModes.cs" />
     <Compile Include="Enum\EditionLengthMode.cs" />
+    <Compile Include="Enum\EventPropertyDataType.cs" />
     <Compile Include="Enum\FillMode.cs" />
     <Compile Include="Enum\GuidPrefix.cs" />
     <Compile Include="Enum\InheritanceType.cs" />
     <Compile Include="Enum\MenuOrderType.cs" />
     <Compile Include="Enum\PropertyDataType.cs" />
+    <Compile Include="Enum\QueryTypeDWC.cs" />
     <Compile Include="Enum\RecordType.cs" />
+    <Compile Include="Enum\SideAction.cs" />
     <Compile Include="Enum\Stereotype.cs" />
     <Compile Include="Enum\TruncateType.cs" />
     <Compile Include="Enum\WorkflowCommandType.cs" />
     <Compile Include="Enum\WorkflowFormalParameterType.cs" />
     <Compile Include="Enum\WorkflowInOutMode.cs" />
+    <Compile Include="Enum\WorkflowQueryCommandType.cs" />
+    <Compile Include="Enum\WorkflowUICommandEditionKind.cs" />
+    <Compile Include="Enum\WorkflowUICommandFormatType.cs" />
+    <Compile Include="Enum\WorkflowUICommandNavigationOptions.cs" />
+    <Compile Include="Enum\WorkflowUICommandPromptType.cs" />
     <Compile Include="Extension\CommonEntityExtension.cs" />
     <Compile Include="Helper\NameEntityHelper.cs" />
     <Compile Include="Helper\VersionHelper.cs" />
@@ -71,14 +79,16 @@
     <Compile Include="Interfaz\ICommonEntity.cs" />
     <Compile Include="Interfaz\IInheritableEntity.cs" />
     <Compile Include="Interfaz\IInternalReference.cs" />
-    <Compile Include="Interfaz\IOverridableEntity.cs" />
-    <Compile Include="Interfaz\IPartiallyOverridableEntity.cs" />
     <Compile Include="JsonConverters\Converters\EntityJsonConverter.cs" />
+    <Compile Include="JsonConverters\Converters\EventJsonConverter.cs" />
     <Compile Include="JsonConverters\Converters\FieldTypeJsonConverter.cs" />
     <Compile Include="JsonConverters\Converters\EasyBJsonConverter.cs" />
     <Compile Include="JsonConverters\Converters\HelperJsonConverter.cs" />
     <Compile Include="JsonConverters\Converters\RecordJsonConverter.cs" />
     <Compile Include="JsonConverters\Converters\RecordListJsonConverter.cs" />
+    <Compile Include="JsonConverters\Converters\WorkflowCommandJsonConverter.cs" />
+    <Compile Include="JsonConverters\Converters\WorkflowQueryCommandJsonConverter.cs" />
+    <Compile Include="JsonConverters\Converters\WorkflowUICommandJsonConverter.cs" />
     <Compile Include="JsonConverters\SaverJson.cs" />
     <Compile Include="NameEntity.cs" />
     <Compile Include="Program\Application\Application.cs" />
@@ -86,6 +96,8 @@
     <Compile Include="Program\Application\Company.cs" />
     <Compile Include="Program\Application\Contact.cs" />
     <Compile Include="Program\Application\Entity.cs" />
+    <Compile Include="Program\Application\Event.cs" />
+    <Compile Include="Program\Application\EventProperty.cs" />
     <Compile Include="Program\Application\FieldRecord.cs" />
     <Compile Include="Program\Application\FieldType.cs" />
     <Compile Include="Program\Application\Property.cs" />
@@ -94,21 +106,45 @@
     <Compile Include="Program\Application\RelantionsShips\ManyToMany.cs" />
     <Compile Include="Program\Application\RelantionsShips\OneToMany.cs" />
     <Compile Include="Program\Application\RelantionsShips\Relationship.cs" />
+    <Compile Include="Program\Application\Report\Data\Deprecated\SerializableQuery.cs" />
+    <Compile Include="Program\Application\Report\Data\QueryParameter.cs" />
+    <Compile Include="Program\Application\Report\Data\ReportData.cs" />
+    <Compile Include="Program\Application\Report\Data\ReportQuery.cs" />
+    <Compile Include="Program\Application\Report\Report.cs" />
     <Compile Include="Program\Application\View\Action\Action.cs" />
+    <Compile Include="Program\Application\View\Action\ActionAttachNotes.cs" />
+    <Compile Include="Program\Application\View\Action\ActionAudit.cs" />
+    <Compile Include="Program\Application\View\Action\ActionCommand.cs" />
+    <Compile Include="Program\Application\View\Action\ActionCustom.cs" />
+    <Compile Include="Program\Application\View\Action\ActionExport.cs" />
+    <Compile Include="Program\Application\View\Action\ActionGroup.cs" />
+    <Compile Include="Program\Application\View\Action\ActionLink.cs" />
+    <Compile Include="Program\Application\View\Action\ActionLinkAssistant.cs" />
+    <Compile Include="Program\Application\View\Action\ActionMassiveUpdate.cs" />
+    <Compile Include="Program\Application\View\Action\ActionPrint.cs" />
+    <Compile Include="Program\Application\View\Action\ActionReport.cs" />
+    <Compile Include="Program\Application\View\Action\ActionViewList.cs" />
+    <Compile Include="Program\Application\View\Link\Link.cs" />
+    <Compile Include="Program\Application\View\Link\LinkParameter.cs" />
     <Compile Include="Program\Application\View\Validator\CodeValidator.cs" />
     <Compile Include="Program\Application\View\Validator\NumericValidator.cs" />
     <Compile Include="Program\Application\View\Validator\RegExValidator.cs" />
     <Compile Include="Program\Application\View\Validator\StringValidator.cs" />
     <Compile Include="Program\Application\View\Validator\Validator.cs" />
     <Compile Include="Program\Application\View\ViewGroup.cs" />
-    <Compile Include="Program\Application\Workflow\WorflowCommand.cs" />
+    <Compile Include="Program\Application\Workflow\WorkflowCommand.cs" />
     <Compile Include="Program\Application\Workflow\WorkflowAttribute.cs" />
     <Compile Include="Program\Application\Workflow\WorkflowBasic.cs" />
     <Compile Include="Program\Application\Workflow\WorkflowFormalParameter.cs" />
+    <Compile Include="Program\Application\Workflow\WorkflowQueryCommand.cs" />
+    <Compile Include="Program\Application\Workflow\WorkflowUICommand.cs" />
+    <Compile Include="Program\Application\Workflow\WorkflowUICommandFormat.cs" />
+    <Compile Include="Program\Application\Workflow\WorkflowUICommandList.cs" />
     <Compile Include="Program\Application\WorkstationJob.cs" />
     <Compile Include="Program\Containers\AdJobContainer.cs" />
     <Compile Include="Program\Containers\ApplicationTagContainer.cs" />
     <Compile Include="Program\Containers\EntityContainer.cs" />
+    <Compile Include="Program\Containers\EventContainer.cs" />
     <Compile Include="Program\Containers\FieldTypeContainer.cs" />
     <Compile Include="Program\Containers\GlobalSearchContainer.cs" />
     <Compile Include="Program\Containers\MenuItemContainer.cs" />
@@ -120,6 +156,9 @@
     <Compile Include="Program\Containers\SecGroupContainer.cs" />
     <Compile Include="Program\Containers\ValidatorContainer.cs" />
     <Compile Include="Program\Containers\ViewGroupContainer.cs" />
+    <Compile Include="Program\Containers\WorkflowCommandContainer.cs" />
+    <Compile Include="Program\Containers\WorkflowQueryCommandContainer.cs" />
+    <Compile Include="Program\Containers\WorkflowUICommandContainer.cs" />
     <Compile Include="Program\Containers\WorkstationJobContainer.cs" />
     <Compile Include="Program\Organization\AdJob.cs" />
     <Compile Include="Program\Organization\AdJobFrequency.cs" />
