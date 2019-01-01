@@ -67,7 +67,7 @@ export class DialogsComponent {
         const page = new PanelToolbar();
         page.title = 'Dialogs';
         page.sequence = 5;
-        page.type = eWorkAreaType.FieldTypes;
+        page.type = eWorkAreaType.Dialogs;
 
         const group = new GroupActionToolbar();
         group.title = 'Dialog';

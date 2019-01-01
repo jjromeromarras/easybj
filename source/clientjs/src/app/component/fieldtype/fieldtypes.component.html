@@ -1,4 +1,6 @@
-<app-fieldtype *ngIf='showFieldType' (close)='onCloseFieldType()' [title]='title' [selected]='selectedItem' [viewMode]='viewMode'></app-fieldtype>
+<div *ngIf='showFieldType==true'> 
+    <app-fieldtype  (close)='onCloseFieldType()' [title]='title' [selected]='selectedItem' [viewMode]='viewMode'></app-fieldtype>
+</div>
 <app-basegrid [colData]="colData" [datasource]='config.currentapp.fieltypes' [title]="dialogTitle" [message]="message" [showDialog]="showDialog"
     [dialogType]="dialogType" (selectionChange)='onSelectionChange($event)' (closeDialog)="onCloseDialog($event)" [type]="'FieldTypes'"
     [pages]="pages"></app-basegrid>

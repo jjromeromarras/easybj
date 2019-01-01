@@ -69,7 +69,7 @@ export class RecordsComponent {
         const page = new PanelToolbar();
         page.title = 'Records';
         page.sequence = 5;
-        page.type = eWorkAreaType.FieldTypes;
+        page.type = eWorkAreaType.Records;
 
         const group = new GroupActionToolbar();
         group.title = 'Record';

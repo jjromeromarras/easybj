@@ -1,4 +1,6 @@
-<app-viewgroup *ngIf='showviewgroup' (close)='onCloseViewGroup()' [title]='title' [selectedViewGroup]='selectedItem' [viewMode]='viewMode'></app-viewgroup>
+<div *ngIf='showviewgroup'>
+    <app-viewgroup  (close)='onCloseViewGroup()' [title]='title' [selectedViewGroup]='selectedItem' [viewMode]='viewMode'></app-viewgroup>
+</div>
 <app-basegrid [colData]="colData" [datasource]='config.currentapp.viewgroups' [title]="dialogTitle" [message]="message" [showDialog]="showDialog"
     [dialogType]="dialogType" (selectionChange)='onSelectionChange($event)' (closeDialog)="onCloseDialog($event)" [type]="'ViewGroups'"
     [pages]="pages"></app-basegrid>
