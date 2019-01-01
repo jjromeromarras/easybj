@@ -1,0 +1,16 @@
+{
+  "$id": "FieldType-AisleList-{0ae52206-7a2d-497a-af56-00f6f7e3eba6}.EasyBpart",
+  "$type": "Mecalux.ITSW.EasyBuilder.FieldType, Mecalux.ITSW.EasyBuilder.Model",
+  "CheckDigit": "Modulus43",
+  "CheckStatus": "Default",
+  "Description": "Aisle list",
+  "EditionLengthMode": "AllowShorter",
+  "EntityStereotypeInternal": "4f3283e6-9501-4a8e-b3bb-bc60d3ed3cea",
+  "FillMode": "None",
+  "Guid": "0ae52206-7a2d-497a-af56-00f6f7e3eba6",
+  "InputMask": "",
+  "Length": 0,
+  "Name": "AisleList",
+  "Stereotype": "List",
+  "TruncateType": "TruncateRight"
+}

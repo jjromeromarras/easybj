@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Mecalux.ITSW.EasyBNCServices.Model\Mecalux.ITSW.EasyBCoreServices.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Data\FieldType-AisleList-{0ae52206-7a2d-497a-af56-00f6f7e3eba6}.EasyBpart">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\FieldType-AisleWF-{9238922b-ce6d-42d3-af45-b73d241572ac}.EasyBpart">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\FieldType-date-{9c5bebba-ddf3-484c-8d9c-51b107d268f8}.EasyBpart">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\FieldType-long-{85ea5355-8bc4-4adb-8788-c9bd0f27fccd}.EasyBpart">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\FieldType-LongList-{2a355912-48c6-4b52-b532-6d0bf3a03e6e}.EasyBpart">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\FieldType-ObjectDictionary-{6e8b5c8a-9bae-4da0-a83b-3fb4690cbd86}.EasyBpart">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Record-AdjustReasonCommentWF-{4838b7c9-8358-48c6-b10e-b187b485d909}.EasyBpart">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Record-BoolWF-{9c5510f8-30fb-49d7-ba77-ce7f41ea47aa}.EasyBpart">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Record-CapturedLogisticAttributesWF-{49f2d10d-cb4f-48e3-972f-4ca474a629e1}.EasyBpart">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

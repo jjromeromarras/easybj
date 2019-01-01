@@ -1,0 +1,211 @@
+{
+  "$id": "Record-CapturedLogisticAttributesWF-{49f2d10d-cb4f-48e3-972f-4ca474a629e1}.EasyBpart",
+  "$type": "Mecalux.ITSW.EasyBuilder.Record, Mecalux.ITSW.EasyBuilder.Model",
+  "AutoUpdateLength": false,
+  "CheckStatus": "Default",
+  "Description": "Descripción",
+  "FieldRecordsInternal": {
+    "$type": "System.Collections.Generic.List`1[[Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model]], mscorlib",
+    "$values": [
+      {
+        "$id": "deb6af33-8029-4212-9c2c-bbb99aa790a2",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-date_nullable-{c2e1c67f-455a-4198-aaaa-7f112b36c87c}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "deb6af33-8029-4212-9c2c-bbb99aa790a2",
+        "Length": 0,
+        "Name": "BestBeforeDate",
+        "Start": 0
+      },
+      {
+        "$id": "43ab4e2a-8117-4517-8a59-7f189652f0bd",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-string-{e4660b14-dd69-4f56-8465-2e3100e8569b}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "43ab4e2a-8117-4517-8a59-7f189652f0bd",
+        "Length": 0,
+        "Name": "Colour",
+        "Start": 0
+      },
+      {
+        "$id": "ad80cf07-2826-4aee-bc8b-fa53e2cf8ebe",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-date_nullable-{c2e1c67f-455a-4198-aaaa-7f112b36c87c}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "ad80cf07-2826-4aee-bc8b-fa53e2cf8ebe",
+        "Length": 0,
+        "Name": "DaysOfLife",
+        "Start": 0
+      },
+      {
+        "$id": "2910a23d-c97c-4272-9204-d73f7fead696",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-date_nullable-{c2e1c67f-455a-4198-aaaa-7f112b36c87c}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "2910a23d-c97c-4272-9204-d73f7fead696",
+        "Length": 0,
+        "Name": "ExpirationDate",
+        "Start": 0
+      },
+      {
+        "$id": "7cc0e1c5-e44f-4087-8cc4-af8b80787347",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-StringList-{3671af47-91bb-4be7-87fc-4f8a971cbb32}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "7cc0e1c5-e44f-4087-8cc4-af8b80787347",
+        "Length": 0,
+        "Name": "InexactLots",
+        "Start": 0
+      },
+      {
+        "$id": "53518fab-eef2-432e-9373-e180a548d82d",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-string-{e4660b14-dd69-4f56-8465-2e3100e8569b}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "53518fab-eef2-432e-9373-e180a548d82d",
+        "Length": 0,
+        "Name": "LotCode",
+        "Start": 0
+      },
+      {
+        "$id": "a1ae9115-975f-4912-a7be-34ccb8f88c09",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-string-{e4660b14-dd69-4f56-8465-2e3100e8569b}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "a1ae9115-975f-4912-a7be-34ccb8f88c09",
+        "Length": 0,
+        "Name": "PostProductionTreatment",
+        "Start": 0
+      },
+      {
+        "$id": "0cd664f0-bca9-4bb0-9bc1-0727358fb59d",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-date_nullable-{c2e1c67f-455a-4198-aaaa-7f112b36c87c}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "0cd664f0-bca9-4bb0-9bc1-0727358fb59d",
+        "Length": 0,
+        "Name": "ProductionDate",
+        "Start": 0
+      },
+      {
+        "$id": "df150abc-94e5-434b-9d48-9dbbb58a0135",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-string-{e4660b14-dd69-4f56-8465-2e3100e8569b}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "df150abc-94e5-434b-9d48-9dbbb58a0135",
+        "Length": 0,
+        "Name": "ProductionMethod",
+        "Start": 0
+      },
+      {
+        "$id": "9447aab2-08fc-406f-86b4-066865d0becf",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-string-{e4660b14-dd69-4f56-8465-2e3100e8569b}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "9447aab2-08fc-406f-86b4-066865d0becf",
+        "Length": 0,
+        "Name": "Quality",
+        "Start": 0
+      },
+      {
+        "$id": "81de58f3-90bb-4663-974f-b6dd1abd7073",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-StringList-{3671af47-91bb-4be7-87fc-4f8a971cbb32}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "81de58f3-90bb-4663-974f-b6dd1abd7073",
+        "Length": 0,
+        "Name": "Serials",
+        "Start": 0
+      },
+      {
+        "$id": "5274db4f-5f4c-4104-bce6-95a90d7e8f3d",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-string-{e4660b14-dd69-4f56-8465-2e3100e8569b}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "5274db4f-5f4c-4104-bce6-95a90d7e8f3d",
+        "Length": 0,
+        "Name": "Size",
+        "Start": 0
+      },
+      {
+        "$id": "25f821a2-7b64-47dd-ab4f-04a4d25d1593",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-string-{e4660b14-dd69-4f56-8465-2e3100e8569b}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "25f821a2-7b64-47dd-ab4f-04a4d25d1593",
+        "Length": 0,
+        "Name": "Source",
+        "Start": 0
+      },
+      {
+        "$id": "86226cd3-58cd-4b0b-a75b-1646030317cc",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-string-{e4660b14-dd69-4f56-8465-2e3100e8569b}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "86226cd3-58cd-4b0b-a75b-1646030317cc",
+        "Length": 0,
+        "Name": "Version",
+        "Start": 0
+      },
+      {
+        "$id": "ca9fffb9-ca44-4562-98cd-fa0cfd2d9e81",
+        "$type": "Mecalux.ITSW.EasyBuilder.FieldRecord, Mecalux.ITSW.EasyBuilder.Model",
+        "End": 0,
+        "FieldType": {
+          "$ref": "FieldType-decimal_nullable-{234548d8-f05b-43ac-bcab-0b534ff51163}.EasyBpart"
+        },
+        "Format": "",
+        "Guid": "ca9fffb9-ca44-4562-98cd-fa0cfd2d9e81",
+        "Length": 0,
+        "Name": "Weight",
+        "Start": 0
+      }
+    ]
+  },
+  "Guid": "49f2d10d-cb4f-48e3-972f-4ca474a629e1",
+  "Name": "CapturedLogisticAttributesWF",
+  "RecordType": "FixedRecord",
+  "Separator": ""
+}

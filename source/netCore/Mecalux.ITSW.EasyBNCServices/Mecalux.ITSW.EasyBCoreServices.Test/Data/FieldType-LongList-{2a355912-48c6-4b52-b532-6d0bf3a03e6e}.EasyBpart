@@ -1,0 +1,16 @@
+{
+  "$id": "FieldType-LongList-{2a355912-48c6-4b52-b532-6d0bf3a03e6e}.EasyBpart",
+  "$type": "Mecalux.ITSW.EasyBuilder.FieldType, Mecalux.ITSW.EasyBuilder.Model",
+  "CheckDigit": "Modulus43",
+  "CheckStatus": "Default",
+  "Description": "List of LongWF",
+  "EditionLengthMode": "AllowShorter",
+  "EntityStereotypeInternal": "27652b25-d880-4343-a926-dfcf676a4b46",
+  "FillMode": "Blank",
+  "Guid": "2a355912-48c6-4b52-b532-6d0bf3a03e6e",
+  "InputMask": "",
+  "Length": 0,
+  "Name": "LongList",
+  "Stereotype": "List",
+  "TruncateType": "TruncateRight"
+}

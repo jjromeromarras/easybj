@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mecalux.ITSW.EasyBCoreServices", "Mecalux.ITSW.EasyBNCServices\Mecalux.ITSW.EasyBCoreServices.csproj", "{0007539E-8B2E-4C34-8374-5240CCC18A79}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mecalux.ITSW.EasyBCoreServices.Base", "Mecalux.ITSW.EasyBNCServices.Base\Mecalux.ITSW.EasyBCoreServices.Base.csproj", "{3500E6F9-3F5C-4E8E-809F-B311F44878A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mecalux.ITSW.EasyBCoreServices.Model", "Mecalux.ITSW.EasyBNCServices.Model\Mecalux.ITSW.EasyBCoreServices.Model.csproj", "{6137B063-7869-4316-B457-81C89C98B8D0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{25B1238B-F4E7-4372-925C-226BED5AEE85}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{2EB2699D-0605-478A-9CFC-E70D9366ACFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mecalux.ITSW.EasyBCoreServices.Test", "Mecalux.ITSW.EasyBCoreServices.Test\Mecalux.ITSW.EasyBCoreServices.Test.csproj", "{7F5B840D-D603-4F5A-9980-8EEF86AC51CB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0007539E-8B2E-4C34-8374-5240CCC18A79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0007539E-8B2E-4C34-8374-5240CCC18A79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0007539E-8B2E-4C34-8374-5240CCC18A79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0007539E-8B2E-4C34-8374-5240CCC18A79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3500E6F9-3F5C-4E8E-809F-B311F44878A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3500E6F9-3F5C-4E8E-809F-B311F44878A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3500E6F9-3F5C-4E8E-809F-B311F44878A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3500E6F9-3F5C-4E8E-809F-B311F44878A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6137B063-7869-4316-B457-81C89C98B8D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6137B063-7869-4316-B457-81C89C98B8D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6137B063-7869-4316-B457-81C89C98B8D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6137B063-7869-4316-B457-81C89C98B8D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F5B840D-D603-4F5A-9980-8EEF86AC51CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F5B840D-D603-4F5A-9980-8EEF86AC51CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F5B840D-D603-4F5A-9980-8EEF86AC51CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F5B840D-D603-4F5A-9980-8EEF86AC51CB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3500E6F9-3F5C-4E8E-809F-B311F44878A8} = {25B1238B-F4E7-4372-925C-226BED5AEE85}
+		{6137B063-7869-4316-B457-81C89C98B8D0} = {25B1238B-F4E7-4372-925C-226BED5AEE85}
+		{7F5B840D-D603-4F5A-9980-8EEF86AC51CB} = {2EB2699D-0605-478A-9CFC-E70D9366ACFB}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4DB497F7-6D62-42C1-B080-B151CD0F58EB}
+	EndGlobalSection
+EndGlobal
