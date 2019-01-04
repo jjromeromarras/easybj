@@ -18,6 +18,7 @@ import { ViewGroup } from './views/viewgroups';
 import { BindData } from './objstr';
 import { Subscription } from './subscription/subscription';
 import { List } from './list/list';
+import { Dialog } from './dialogs/dialogs';
 
 
 export class Application extends BaseEntity {
@@ -40,6 +41,7 @@ export class Application extends BaseEntity {
     resources: Array<Resource>;
     rfmenuitems: Array<RFMenuItem>;
     secgroups: Array<SecGroup>;
+    dialogs: Array<Dialog>;
     subcriptions: Array<Subscription>;
     validators: Array<Validator>;
     versionId: string;
@@ -69,7 +71,7 @@ export class Application extends BaseEntity {
         this.validators = new Array<Validator>();
         this.viewgroups = new Array<ViewGroup>();
         this.lists = new Array<List>();
-
+        this.dialogs = new Array<Dialog>();
         //// BIND DATA
         this.imagesFolder = new BindData();
         this.description = new BindData();
