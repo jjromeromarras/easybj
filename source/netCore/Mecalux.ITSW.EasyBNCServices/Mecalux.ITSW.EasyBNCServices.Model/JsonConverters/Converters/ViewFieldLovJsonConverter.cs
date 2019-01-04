@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Mecalux.ITSW.EasyB.Model
 {
@@ -68,9 +67,9 @@ namespace Mecalux.ITSW.EasyB.Model
                 if (jObject["DependantViewFieldLOV"].HasValues)
                     target.DependantViewFieldLOV = jObject["DependantViewFieldLOV"]["$ref"].Value<string>();
                 if (jObject["DisplayProperty"].HasValues)
-                    target.DependantViewFieldLOV = jObject["DisplayProperty"]["$ref"].Value<string>();
+                    target.DisplayProperty= jObject["DisplayProperty"]["$ref"].Value<string>();
                 if (jObject["EntityInternal"].HasValues)
-                    target.DependantViewFieldLOV = jObject["EntityInternal"]["$ref"].Value<string>();
+                    target.EntityInternal = jObject["EntityInternal"]["$ref"].Value<string>();
 
                 if (jObject["InLineLink"].HasValues)
                 {

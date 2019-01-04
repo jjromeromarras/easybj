@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Mecalux.ITSW.EasyB.Model
 {
@@ -35,6 +36,16 @@ namespace Mecalux.ITSW.EasyB.Model
                 return fields;
             }
             set { fields = new List<ViewField>(value); }
+        }
+        #endregion
+
+        #region Methods
+        protected void AddViewfield(ViewField element)
+        {
+            if (element == null)
+                throw new ArgumentNullException("element", "Element can not be null");
+
+            this.fields.Add(element);
         }
         #endregion
     }

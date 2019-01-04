@@ -48,6 +48,18 @@ namespace Mecalux.ITSW.EasyBCoreServices.Test
             Assert.Equal(impobj.DrillDownLink.TargetViewProperty, obj.DrillDownLink.TargetViewProperty);
 
             Assert.NotNull(impobj.Lov);
+            Assert.Equal(impobj.Lov.EntityInternal, obj.Lov.EntityInternal);
+            Assert.Equal(impobj.Lov.DisplayProperty, obj.Lov.DisplayProperty);
+            Assert.Equal(impobj.Lov.DependantProperty, obj.Lov.DependantProperty);
+            Assert.Equal(impobj.Lov.DependantViewFieldLOV, obj.Lov.DependantViewFieldLOV);
+            Assert.Equal(impobj.Lov.ValueProperty, obj.Lov.ValueProperty);
+            Assert.Equal(impobj.Lov.SqlOrderBy, obj.Lov.SqlOrderBy);
+            Assert.Equal(impobj.Lov.SqlWhere, obj.Lov.SqlWhere);
+
+            Assert.NotNull(impobj.Lov.InLineLink);
+            Assert.Equal(impobj.Lov.InLineLink.TargetViewProperty, obj.Lov.InLineLink.TargetViewProperty);
+            Assert.Equal(impobj.Lov.InLineLink.TargetViewInternal, obj.Lov.InLineLink.TargetViewInternal);
+            Assert.Equal(impobj.Lov.InLineLink.ExpressionCode, obj.Lov.InLineLink.ExpressionCode);
 
         }
         #endregion
@@ -88,6 +100,7 @@ namespace Mecalux.ITSW.EasyBCoreServices.Test
             obj.Lov.EntityInternal = "Entity-AccountType-{e27b5580-1c07-4a7a-9fcc-e03e921f0b0d}.EasyBpart";
             obj.Lov.CreateInLineLink();
             obj.Lov.InLineLink.TargetViewInternal = "View-AccountTypeInLineViewEdit-{8602d3d0-75cc-4c75-8868-b3dcaf6ccfba}.EasyBpart";
+            obj.Lov.InLineLink.ExpressionCode = "Where a = 1";
             obj.Lov.ShowPropertiesInternal.Add(Guid.Parse("7d4c8f88-ca8e-459e-9e07-503f87c6f3e4"));
             obj.Lov.SqlOrderBy = "Code ASC";
             obj.Lov.SqlWhere = "IsActive";

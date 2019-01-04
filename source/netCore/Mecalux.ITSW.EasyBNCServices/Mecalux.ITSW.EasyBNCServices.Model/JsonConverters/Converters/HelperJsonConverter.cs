@@ -293,6 +293,7 @@ namespace Mecalux.ITSW.EasyB.Model
                     typeof(WorkflowUICommandList).IsAssignableFrom(type) ||
                     typeof(WorkflowUICommandFormat).IsAssignableFrom(type) ||
                     typeof(ViewField).IsAssignableFrom(type) ||
+                    typeof(ViewGrid).IsAssignableFrom(type) ||
                     typeof(Lov).IsAssignableFrom(type) ||
                     typeof(Link).IsAssignableFrom(type) ||
                     typeof(LinkParameter).IsAssignableFrom(type) ||

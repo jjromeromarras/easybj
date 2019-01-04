@@ -68,5 +68,17 @@ namespace Mecalux.ITSW.EasyB.Model
         }
 
         #endregion Properties
+
+        #region Methods
+        public void AddVF(ViewField element)
+        {
+            if (element == null)
+                throw new ArgumentNullException("element", "Element can not be null");
+
+            element.ParentEntity = this;
+
+            this.AddViewfield(element);
+        }
+        #endregion
     }
 }

@@ -13,7 +13,7 @@ namespace Mecalux.ITSW.EasyB.Model
         private Action action;
         private ActionViewList internalParentTreeElement;
         private SideAction sideAction;
-
+        private CheckEntity parentEntity;
         #endregion Fields
 
         #region Constructors
@@ -40,19 +40,41 @@ namespace Mecalux.ITSW.EasyB.Model
         #endregion Constructors
 
         #region Properties
-
         public Action Action
         {
             get { return action; }
             set { action = value; }
         }
 
-        private SideAction SideActionInternal
+        public SideAction SideAction
         {
             get { return sideAction; }
             set { sideAction = value; }
         }
 
+        public CheckEntity ParentEntity
+        {
+            get { return parentEntity; }
+            set { parentEntity = value; }
+        }
+
+        public int Sequence
+        {
+            get
+            {
+                int i = 1;
+                if (action != null)
+                    i = action.Sequence;
+                return i;
+            }
+            set
+            {
+                if (action != null)
+                    action.Sequence = value;
+            }
+        }
         #endregion Properties
+
+       
     }
 }

@@ -92,7 +92,8 @@ namespace Mecalux.ITSW.EasyB.Model
                         new ViewFieldLovJsonConverter(),
                         new ViewPageControlJSonConverter(),
                         new ViewPanelJsonConverter(),
-                        new ViewPanelPageJsonConverter()                       
+                        new ViewPanelPageJsonConverter(),
+                        new ViewGridJsonConverter()
                     };
                 }
                 return writeConverters;
@@ -332,7 +333,8 @@ namespace Mecalux.ITSW.EasyB.Model
                         new ViewFieldLovJsonConverter(),
                         new ViewPageControlJSonConverter(),
                         new ViewPanelJsonConverter(),
-                        new ViewPanelPageJsonConverter()
+                        new ViewPanelPageJsonConverter(),
+                        new ViewGridJsonConverter(),
 
 
                     };

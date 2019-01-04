@@ -20,8 +20,7 @@ namespace Mecalux.ITSW.EasyB.Model
             ViewField obj = value as ViewField;
             if (obj != null)
             {
-                writer.WriteStartObject();
-                {
+                
                     HelperJsonConverter.WritePropertyValue("$id", HelperJsonConverter.GetReferenceInternal(obj), writer, serializer);
                     HelperJsonConverter.WritePropertyType<ViewField>(writer, serializer, obj);
                     HelperJsonConverter.WritePropertyValue("AllowAdvancedSearch", obj.AllowAdvancedSearch, writer, serializer);
@@ -62,7 +61,7 @@ namespace Mecalux.ITSW.EasyB.Model
                     HelperJsonConverter.WritePropertyValue("ViewFieldType", obj.ViewFieldType, writer, serializer);
                     HelperJsonConverter.WritePropertyValue("VisibilityCondition", obj.VisibilityCondition, writer, serializer);
 
-                }
+                
 
             }
 
