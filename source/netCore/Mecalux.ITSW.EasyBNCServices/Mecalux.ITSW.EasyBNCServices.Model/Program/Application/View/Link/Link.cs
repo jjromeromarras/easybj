@@ -73,7 +73,7 @@ namespace Mecalux.ITSW.EasyB.Model
                     result = avoidParent.ReferencedName ;
                 if (targetViewInternal != null)
                     result += HelperJsonConverter.Separator + targetViewInternal;
-                result += HelperJsonConverter.Separator + this.ParentSerializableEntity.Name;
+               
                 return result;
             }
         }

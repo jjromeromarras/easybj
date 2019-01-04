@@ -45,48 +45,23 @@ namespace Mecalux.ITSW.EasyB.Model
 
             JObject jObject = JObject.Load(reader);
             Link target = default(Link);
-            /*if (jObject != null)
+            if (jObject != null)
             {
                 target = Create(objectType);
-                target.CheckStatus = (CheckStatus)Enum.Parse(typeof(CheckStatus), jObject["CheckStatus"].Value<string>());
-                target.Description = jObject["Description"].Value<string>();
-                target.TableName = jObject["TableName"].Value<string>();
-                target.FromMetadata = jObject["FromMetadata"].Value<bool>();
-                target.Guid = Guid.Parse(jObject["Guid"].Value<string>());
-                target.IsDataWarehouse = jObject["IsDataWarehouse"].Value<bool>();
-                target.Name = jObject["Name"].Value<string>();
-                target.PluralName = jObject["PluralName"]["$ref"].Value<string>();
-                target.SingularName = jObject["SingularName"]["$ref"].Value<string>();
+                target.ExpressionCode = jObject["ExpressionCode"].Value<string>();
+                target.TargetViewInternal = jObject["TargetViewInternal"].Value<string>();
+                if (jObject["TargetViewProperty"].HasValues)
+                    target.TargetViewProperty = jObject["TargetViewProperty"]["$ref"].Value<string>();
 
-                if (jObject["PropertiesInternal"]["$values"].HasValues)
-                    foreach (var flchild in jObject["PropertiesInternal"]["$values"])
+                if (jObject["LinkParametersInternal"]["$values"].HasValues)
+                    foreach (var flchild in jObject["LinkParametersInternal"]["$values"])
                     {
-                        Property f = new Property();
-                        f.Name = flchild["Name"].Value<string>();
-                        f.Guid = Guid.Parse(flchild["Guid"].Value<string>());
-                        f.ColumnName = flchild["Name"].Value<string>();
-                        f.DataType = (PropertyDataType)Enum.Parse(typeof(PropertyDataType), flchild["DataType"].Value<string>());
-                        f.DefaultValue = flchild["DefaultValue"].Value<string>();
-                        f.Guid = Guid.Parse(flchild["Guid"].Value<string>());
-                        f.Help = flchild["Help"].Value<string>();
-                        f.IsActiveProperty = flchild["IsActiveProperty"].Value<bool>();
-                        f.IsCustomField = flchild["IsCustomField"].Value<bool>();
-                        f.IsDataWarehouse = flchild["IsDataWarehouse"].Value<bool>();
-                        f.IsIndex = flchild["IsIndex"].Value<bool>();
-                        f.IsPrimaryKey = flchild["IsPrimaryKey"].Value<bool>();
-                        f.IsReadOnly = flchild["IsReadOnly"].Value<bool>();
-                        f.IsRequiered = flchild["IsRequiered"].Value<bool>();
-                        f.IsVisible = flchild["IsVisible"].Value<bool>();
-                        f.Lenght = flchild["Lenght"].Value<int>();
-                        f.Precision = flchild["Precision"].Value<int>();
-                        if (flchild["Title"].HasValues)
-                            f.Title = flchild["Title"]["$ref"].Value<string>();
-                        if (flchild["Validator"].HasValues)
-                            f.Validator = flchild["Validator"]["$ref"].Value<string>();
-
-                        target.AddProperty(f);
+                        LinkParameter f = new LinkParameter();
+                        f.Expression = flchild["Expression"].Value<string>();
+                        f.ViewParameterInternal = flchild["ViewParameterInternal"].Value<string>();
+                        target.AddLinkParameter(f);
                     }
-            }*/
+            }
             return target;
         }
 

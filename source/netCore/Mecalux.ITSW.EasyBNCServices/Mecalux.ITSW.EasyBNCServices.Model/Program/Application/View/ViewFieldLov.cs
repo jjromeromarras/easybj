@@ -158,6 +158,12 @@ namespace Mecalux.ITSW.EasyB.Model
             this.inLineLink = new Link();
             this.inLineLink.ParentSerializableEntity = this.parentEntity;
         }
+
+        public void AddInLineLink(Link link)
+        {
+            this.inLineLink = link;
+            this.inLineLink.ParentSerializableEntity = this.parentEntity;
+        }
         #endregion
     }
 }

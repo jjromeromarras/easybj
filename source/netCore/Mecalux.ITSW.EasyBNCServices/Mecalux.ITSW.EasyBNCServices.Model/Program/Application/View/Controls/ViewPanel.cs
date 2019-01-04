@@ -71,6 +71,7 @@ namespace Mecalux.ITSW.EasyB.Model
             if (element == null)
                 throw new ArgumentNullException("element", "Element can not be null");
             element.ParentEntity = this.ParentEntity;
+            element.VersionId = this.ParentSerializableEntityVersionId;
         }
         #endregion
     }

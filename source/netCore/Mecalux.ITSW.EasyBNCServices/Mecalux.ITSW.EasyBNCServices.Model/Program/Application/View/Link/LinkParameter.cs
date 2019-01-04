@@ -2,7 +2,7 @@
 
 namespace Mecalux.ITSW.EasyB.Model
 {
-    public class LinkParameter: BaseEntity, IAvoidSerializedGuid
+    public class LinkParameter: NameEntity, IAvoidSerializedGuid
     {
         #region Fields
 

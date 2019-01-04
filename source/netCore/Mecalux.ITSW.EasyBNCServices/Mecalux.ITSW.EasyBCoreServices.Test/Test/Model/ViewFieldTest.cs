@@ -1,8 +1,6 @@
 ﻿using Mecalux.ITSW.EasyB.Model;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using Xunit;
 
 namespace Mecalux.ITSW.EasyBCoreServices.Test
@@ -19,7 +17,37 @@ namespace Mecalux.ITSW.EasyBCoreServices.Test
             saver.SerializeObject(@".\Data\ViewField05SaverJSON.EasyBpart", obj);
             Assert.True(File.Exists(@".\Data\ViewField05SaverJSON.EasyBpart"));
 
-            //Entity impobj = saver.ImportPart<Entity>(@".\Data\EntityTest05SaverJSON.EasyBpart");           
+            ViewField impobj = saver.ImportPart<ViewField>(@".\Data\ViewField05SaverJSON.EasyBpart");
+
+            Assert.Equal(impobj.Name, obj.Name);
+            Assert.Equal(impobj.AllowAdvancedSearch, obj.AllowAdvancedSearch);
+            Assert.Equal(impobj.AllowEdit, obj.AllowEdit);
+            Assert.Equal(impobj.AllowMultiEdit, obj.AllowMultiEdit);
+            Assert.Equal(impobj.AllowSearch, obj.AllowSearch);
+            Assert.Equal(impobj.ColSpan, obj.ColSpan);
+            Assert.Equal(impobj.IsVisible, obj.IsVisible);
+            Assert.Equal(impobj.IsVisibleOnCreation, obj.IsVisibleOnCreation);
+            Assert.Equal(impobj.RowSpan, obj.RowSpan);
+            Assert.Equal(impobj.ShowInCollapsedGrid, obj.ShowInCollapsedGrid);
+            Assert.Equal(impobj.ShowInExpandedGrid, obj.ShowInExpandedGrid);
+            Assert.Equal(impobj.ImageNameFalse, obj.ImageNameFalse);
+            Assert.Equal(impobj.ImageNameTrue, obj.ImageNameTrue);
+            Assert.Equal(impobj.ImageFalseMode, obj.ImageFalseMode);
+            Assert.Equal(impobj.IsRequired, obj.IsRequired);
+            Assert.Equal(impobj.Sequence, obj.Sequence);
+            Assert.Equal(impobj.SearchResource, obj.SearchResource);
+            Assert.Equal(impobj.ViewAdvancedSearch, obj.ViewAdvancedSearch);
+            Assert.Equal(impobj.Validator, obj.Validator);
+            Assert.Equal(impobj.Title, obj.Title);
+            Assert.Equal(impobj.Tooltip, obj.Tooltip);
+            Assert.Equal(impobj.Property, obj.Property);
+
+            Assert.NotNull(impobj.DrillDownLink);
+            Assert.Equal(impobj.DrillDownLink.LinkParametersInternal.Count, obj.DrillDownLink.LinkParametersInternal.Count);
+            Assert.Equal(impobj.DrillDownLink.TargetViewInternal, obj.DrillDownLink.TargetViewInternal);
+            Assert.Equal(impobj.DrillDownLink.TargetViewProperty, obj.DrillDownLink.TargetViewProperty);
+
+            Assert.NotNull(impobj.Lov);
 
         }
         #endregion
@@ -28,9 +56,11 @@ namespace Mecalux.ITSW.EasyBCoreServices.Test
         private ViewField CreateEntity()
         {
             ViewEdit view = new ViewEdit();
+            view.VersionId = Guid.Parse("8602d3d0-75cc-4c75-8868-b3dcaf6ccfba");
             ViewPanel vp = new ViewPanel();
-            vp.VersionId = Guid.Parse("8602d3d0-75cc-4c75-8868-b3dcaf6ccfba");
+            
             view.AddViewPanel(vp);
+
             ViewField obj = new ViewField();
             vp.Add(obj);
 
@@ -48,6 +78,10 @@ namespace Mecalux.ITSW.EasyBCoreServices.Test
             obj.CreateDrillDownLink();
             obj.DrillDownLink.TargetViewInternal = "View-ProductsVList-{522967ec-c5bd-440c-a930-17d270eaa721}.EasyBpart";
             obj.DrillDownLink.TargetViewProperty = "ca467839-09dd-4f55-9d51-ed4ddd323db8";
+            LinkParameter lp = new LinkParameter();
+            lp.Expression = "Prueba";
+            lp.ViewParameterInternal = "Codigo";
+            obj.DrillDownLink.AddLinkParameter(lp);
 
             obj.CreateViewFielLov();
             obj.Lov.DisplayProperty = "14017e77 - 39ff - 4141 - bc7e - 41e1198534dc";

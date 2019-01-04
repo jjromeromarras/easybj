@@ -253,6 +253,7 @@ namespace Mecalux.ITSW.EasyB.Model
             set { viewFieldType = value; }
         }
 
+
         #endregion Properties
 
         #region Methods
@@ -282,9 +283,21 @@ namespace Mecalux.ITSW.EasyB.Model
             this.lov.ParentSerializableEntity = this;
         }
 
+        public void AddViewFielLov(ViewFieldLov lov)
+        {
+            this.lov = lov;
+            this.lov.ParentSerializableEntity = this;
+        }
+
         public void CreateDrillDownLink()
         {
             this.drillDownLink = new Link();
+            this.drillDownLink.ParentSerializableEntity = this;
+        }
+
+        public void AddDrillDownLink(Link link)
+        {
+            this.drillDownLink = link;
             this.drillDownLink.ParentSerializableEntity = this;
         }
         #endregion

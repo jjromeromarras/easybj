@@ -74,52 +74,73 @@ namespace Mecalux.ITSW.EasyB.Model
                 return null;
 
             JObject jObject = JObject.Load(reader);
-            ViewPageControl target = default(ViewPageControl);
-            /*if (jObject != null)
+            ViewField target = default(ViewField);
+            if (jObject != null)
             {
                 target = Create(objectType);
-                target.CheckStatus = (CheckStatus)Enum.Parse(typeof(CheckStatus), jObject["CheckStatus"].Value<string>());
-                target.Description = jObject["Description"].Value<string>();
-                target.TableName = jObject["TableName"].Value<string>();
-                target.FromMetadata = jObject["FromMetadata"].Value<bool>();
-                target.Guid = Guid.Parse(jObject["Guid"].Value<string>());
-                target.IsDataWarehouse = jObject["IsDataWarehouse"].Value<bool>();
+                target.AllowAdvancedSearch = jObject["AllowAdvancedSearch"].Value<bool>();
+                target.AllowEdit = jObject["AllowEdit"].Value<bool>();
+                target.AllowMassiveUpdate = jObject["AllowMassiveUpdate"].Value<bool>();
+                target.AllowMultiEdit = jObject["AllowMultiEdit"].Value<bool>();
+                target.AllowSearch = jObject["AllowSearch"].Value<bool>();
+                target.ColSpan = jObject["ColSpan"].Value<int>();
+                target.DefaultValueCode = jObject["DefaultValueCode"].Value<string>();
+
+                if (jObject["DrillDownLink"].HasValues)
+                {
+                    Link obj = jObject["DrillDownLink"].ToObject<Link>(serializer);
+                    if (obj != null)
+                        target.AddDrillDownLink(obj);
+                }
+
+                target.EditableCondition = jObject["EditableCondition"].Value<string>();
+                target.ImageFalseMode = (ViewFieldImageMode)Enum.Parse(typeof(ViewFieldImageMode), jObject["ImageFalseMode"].Value<string>());
+                target.ImageNameFalse = jObject["ImageNameFalse"].Value<string>();
+                target.ImageNameTrue = jObject["ImageNameTrue"].Value<string>();
+                target.ImageTrueMode = (ViewFieldImageMode)Enum.Parse(typeof(ViewFieldImageMode), jObject["ImageTrueMode"].Value<string>());
+                target.IsRequired = jObject["IsRequired"].Value<bool>();
+                target.IsVisible = jObject["IsVisible"].Value<bool>();
+                target.IsVisibleOnCreation = jObject["IsVisibleOnCreation"].Value<bool>();
+
+                if (jObject["Lov"].HasValues)
+                {
+                    ViewFieldLov obj = jObject["Lov"].ToObject<ViewFieldLov>(serializer);
+                    if (obj != null)
+                        target.AddViewFielLov(obj);
+                }
+
                 target.Name = jObject["Name"].Value<string>();
-                target.PluralName = jObject["PluralName"]["$ref"].Value<string>();
-                target.SingularName = jObject["SingularName"]["$ref"].Value<string>();
+                if (jObject["Property"].HasValues)
+                    target.Property = jObject["Property"]["$ref"].Value<string>();
 
-                if (jObject["PropertiesInternal"]["$values"].HasValues)
-                    foreach (var flchild in jObject["PropertiesInternal"]["$values"])
-                    {
-                        Property f = new Property();
-                        f.Name = flchild["Name"].Value<string>();
-                        f.Guid = Guid.Parse(flchild["Guid"].Value<string>());
-                        f.ColumnName = flchild["Name"].Value<string>();
-                        f.DataType = (PropertyDataType)Enum.Parse(typeof(PropertyDataType), flchild["DataType"].Value<string>());
-                        f.DefaultValue = flchild["DefaultValue"].Value<string>();
-                        f.Guid = Guid.Parse(flchild["Guid"].Value<string>());
-                        f.Help = flchild["Help"].Value<string>();
-                        f.IsActiveProperty = flchild["IsActiveProperty"].Value<bool>();
-                        f.IsCustomField = flchild["IsCustomField"].Value<bool>();
-                        f.IsDataWarehouse = flchild["IsDataWarehouse"].Value<bool>();
-                        f.IsIndex = flchild["IsIndex"].Value<bool>();
-                        f.IsPrimaryKey = flchild["IsPrimaryKey"].Value<bool>();
-                        f.IsReadOnly = flchild["IsReadOnly"].Value<bool>();
-                        f.IsRequiered = flchild["IsRequiered"].Value<bool>();
-                        f.IsVisible = flchild["IsVisible"].Value<bool>();
-                        f.Lenght = flchild["Lenght"].Value<int>();
-                        f.Precision = flchild["Precision"].Value<int>();
-                        if (flchild["Title"].HasValues)
-                            f.Title = flchild["Title"]["$ref"].Value<string>();
-                        if (flchild["Validator"].HasValues)
-                            f.Validator = flchild["Validator"]["$ref"].Value<string>();
-
-                        target.AddProperty(f);
-                    }
-            }*/
+                target.ReEvaluateVisibilityOnChange = jObject["ReEvaluateVisibilityOnChange"].Value<bool>();
+                target.RequiredCondition = jObject["RequiredCondition"].Value<string>();
+                target.RowSpan = jObject["RowSpan"].Value<int>();
+                target.SearchResource = jObject["SearchResource"].Value<bool>();
+                target.Sequence = jObject["Sequence"].Value<int>();
+                target.ShowInCollapsedGrid = jObject["ShowInCollapsedGrid"].Value<bool>();
+                target.ShowInExpandedGrid = jObject["ShowInExpandedGrid"].Value<bool>();
+                if (jObject["Title"].HasValues)
+                    target.Title = jObject["Title"]["$ref"].Value<string>();
+                if (jObject["Tooltip"].HasValues)
+                    target.Tooltip = jObject["Tooltip"]["$ref"].Value<string>();
+                target.UseValueExpressionCode = jObject["UseValueExpressionCode"].Value<bool>();
+                if (jObject["Validator"].HasValues)
+                    target.Tooltip = jObject["Validator"]["$ref"].Value<string>();
+                target.ValidatorCode = jObject["ValidatorCode"].Value<string>();
+                if (jObject["ValidatorText"].HasValues)
+                    target.Tooltip = jObject["ValidatorText"]["$ref"].Value<string>();
+                target.ValueExpressionCode = jObject["ValueExpressionCode"].Value<string>();
+                if (jObject["ViewAdvancedSearch"].HasValues)
+                    target.Tooltip = jObject["ViewAdvancedSearch"]["$ref"].Value<string>();
+                target.ViewAdvancedSearchCode = jObject["ViewAdvancedSearchCode"].Value<string>();
+                target.ViewFieldType = (ViewFieldType)Enum.Parse(typeof(ViewFieldType), jObject["ViewFieldType"].Value<string>());
+                target.VisibilityCondition = jObject["VisibilityCondition"].Value<string>();
+            }
             return target;
         }
 
         #endregion Methods
     }
 }
+

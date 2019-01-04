@@ -295,6 +295,7 @@ namespace Mecalux.ITSW.EasyB.Model
                     typeof(ViewField).IsAssignableFrom(type) ||
                     typeof(Lov).IsAssignableFrom(type) ||
                     typeof(Link).IsAssignableFrom(type) ||
+                    typeof(LinkParameter).IsAssignableFrom(type) ||
                     typeof(ViewFieldLov).IsAssignableFrom(type) ||
                     typeof(EventProperty).IsAssignableFrom(type);
                     
